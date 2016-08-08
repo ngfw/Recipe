@@ -12,6 +12,7 @@ $favIcon = Recipe::getFavicon("http://youtube.com/");
 echo $favIcon; 
 // outputs: <img src="http://www.google.com/s2/favicons?domain=youtube.com/"  />
 ```
+<img src="http://www.google.com/s2/favicons?domain=youtube.com/"  />
 
 Getting remote website Favicon with HTML attributes:
 ```
@@ -25,6 +26,8 @@ echo $favIcon;
 //outputs: <img src="http://www.google.com/s2/favicons?domain=youtube.com/" class="favImg" />
             
 ```
+<img src="http://www.google.com/s2/favicons?domain=youtube.com/" class="favImg" />
+
 
 ###QRcode
 Generating QR code
@@ -33,6 +36,7 @@ $QRcode = Recipe::getQRcode("ngfw Recipe");
 echo $QRcode;  
 //outputs: <img src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=ngfw+Recipe"  />
 ```
+<img src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=ngfw+Recipe"  />
 
 Generating QR code and adding HTML attributes:
 ```
