@@ -18,7 +18,7 @@ Getting remote website Favicon and adding some HTML attributes:
 $favIcon = Recipe::getFavicon(
           "http://youtube.com/", 
           array(
-            "class" => "favImg",
+            "class" => "favImg"
           )
 );
 echo $favIcon; 
