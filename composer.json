@@ -1,0 +1,23 @@
+{
+    "name": "ngfw/recipe",
+    "description": "Small Collection of useful PHP functions",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nick G",
+            "email": "gejadze@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "ngfw\\": "src/ngfw/"
+        }
+    }
+}
