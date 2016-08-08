@@ -54,9 +54,41 @@ echo $QRcode;
 <img src="http://chart.apis.google.com/chart?chs=350x350&cht=qr&chl=ngfw+Recipe" class="QRCode" />
 
 
-### Getting file extension
+###File extension
 ```
 $ext = Recipe::getFileExtension(__FILE__); // replace '__FILE__' with your filename
 echo $ext; 
 //outputs: php
 ```
+
+###Gravatar
+Getting Gravatar:
+```
+$Gravatar = Recipe::getGravatar("gejadze@gmail.com");
+echo $Gravatar;
+// outputs: <img src="http://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=mm&size=80&rating=g" width="80px" height="80px"  />
+```
+
+![https://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=mm&size=80&rating=g](https://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=mm&size=80&rating=g)
+
+Getting Gravatar with HTML attributes:
+```
+$Gravatar = Recipe::getGravatar(
+    "gejadze@gmail.com",
+    $size = 200,
+    $default = 'monsterid',
+    $rating = 'x',
+    $attributes = array(
+        "class" => "Gravatar"
+    )
+);
+ehco $Gravatar;
+//Outputs: <img src="http://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=monsterid&size=200&rating=x" width="200px" height="200px" class="Gravatar" />'
+```
+![NG Gravatar](http://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=monsterid&size=200&rating=x)
+
+
+
+
+
+
