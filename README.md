@@ -5,10 +5,10 @@
 ---
 
 
-Quick Start:
-
+Getting Remote website Favicon:
 ```
-$> git clone https://github.com/ngfw/Recipe.git .
+$favIcon = Recipe::getFavicon("http://youtube.com/");
 
-$> composer install
+echo $favIcon; // outputs: <img src="http://www.google.com/s2/favicons?domain=youtube.com/"  />
 ```
+
