@@ -52,3 +52,11 @@ echo $QRcode;
 // outputs: <img src="http://chart.apis.google.com/chart?chs=350x350&cht=qr&chl=ngfw+Recipe" class="QRCode" />
 ```
 <img src="http://chart.apis.google.com/chart?chs=350x350&cht=qr&chl=ngfw+Recipe" class="QRCode" />
+
+
+### Getting file extension
+```
+$ext = Recipe::getFileExtension(__FILE__); // replace '__FILE__' with your filename
+echo $ext; 
+//outputs: php
+```
