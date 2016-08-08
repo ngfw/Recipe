@@ -7,6 +7,8 @@
 
 Quick Start:
 
-```$> git clone https://github.com/ngfw/Recipe.git .
+```
+$> git clone https://github.com/ngfw/Recipe.git .
 
-$> composer install```
+$> composer install
+```
