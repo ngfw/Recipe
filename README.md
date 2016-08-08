@@ -4,7 +4,7 @@
 
 ---
 
-
+###Favicon
 Getting remote website Favicon:
 ```
 $favIcon = Recipe::getFavicon("http://youtube.com/");
