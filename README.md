@@ -135,6 +135,28 @@ var_dump($rssArray);
 // Outputs feed as an array
 ```
 
+### Object to Array
+```php
+$obj = new stdClass;
+$obj->foo = 'bar';
+$obj->baz = 'qux';
+$array = \ngfw\Recipe::objectToArray($obj);
+var_dump($array);
+/**
+outputs:
+array(2) {
+  ["foo"]=>
+  string(3) "bar"
+  ["baz"]=>
+  string(3) "qux"
+}
+*/
+```
+
+### 
+
+
+
 
 
 #### More examples coming soon...
