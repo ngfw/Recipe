@@ -97,30 +97,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             $Gravatar 
         );
     }
-    public function test_getTwitterShareCount()
-    {
 
-    }
-    public function test_getFacebookShareCount()
-    {
-
-    }
-    public function test_getFacebookLikesCount()
-    {
-
-    }
-    public function test_getGooglePlusShareCount()
-    {
-
-    }
-    public function test_getPinterestShareCount()
-    {
-
-    }
-    public function test_getLinkedInShareCount()
-    {
-
-    }
     public function test_createLinkTag()
     {
 
