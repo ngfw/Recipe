@@ -104,8 +104,8 @@ class Recipe
             $linkTag = '<a href="' . $link . '"';
         endif;
         $attr = "";
-        if (!isset($attributes['title'])):
-            $linkTag .= ' title="' . str_replace('"', '', strip_tags($text)) . '"';
+        if (!isset($attributes['title']) and !empty($text)):
+            $linkTag .= ' title="' . str_replace('"', '', strip_tags($text)) . '" ';
         endif;
         if (empty($text)):
             $text = $link;
@@ -187,7 +187,7 @@ class Recipe
             return $array;
         }
 
-        $object = new stdClass();
+        $object = new \stdClass();
         if (is_array($array) && count($array) > 0) {
             foreach ($array as $name => $value) {
                 $object->$name = self::arrayToObject($value);
