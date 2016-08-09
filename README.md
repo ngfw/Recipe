@@ -6,7 +6,7 @@
 
 ###Favicon
 Getting remote website Favicon:
-```
+```php
 $favIcon = \ngfw\Recipe::getFavicon("http://youtube.com/");
 
 echo $favIcon; 
@@ -15,7 +15,7 @@ echo $favIcon;
 <img src="http://www.google.com/s2/favicons?domain=youtube.com/"  />
 
 Getting remote website Favicon with HTML attributes:
-```
+```php
 $favIcon = \ngfw\Recipe::getFavicon(
           "http://youtube.com/", 
           array(
@@ -31,7 +31,7 @@ echo $favIcon;
 
 ###QRcode
 Generating QR code
-```
+```php
 $QRcode = \ngfw\Recipe::getQRcode("ngfw Recipe");
 echo $QRcode;  
 //outputs: <img src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=ngfw+Recipe"  />
@@ -39,7 +39,7 @@ echo $QRcode;
 <img src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=ngfw+Recipe"  />
 
 Generating QR code and adding HTML attributes:
-```
+```php
 $QRcode = \ngfw\Recipe::getQRcode(
     "ngfw Recipe",
     $width = 350, 
@@ -55,7 +55,7 @@ echo $QRcode;
 
 
 ###File extension
-```
+```php
 $ext = \ngfw\Recipe::getFileExtension(__FILE__); // replace '__FILE__' with your filename
 echo $ext; 
 //outputs: php
@@ -63,7 +63,7 @@ echo $ext;
 
 ###Gravatar
 Getting Gravatar:
-```
+```php
 $Gravatar = \ngfw\Recipe::getGravatar("gejadze@gmail.com");
 echo $Gravatar;
 // outputs: <img src="http://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=mm&size=80&rating=g" width="80px" height="80px"  />
@@ -72,7 +72,7 @@ echo $Gravatar;
 ![https://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=mm&size=80&rating=g](https://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=mm&size=80&rating=g)
 
 Getting Gravatar with HTML attributes:
-```
+```php
 $Gravatar = \ngfw\Recipe::getGravatar(
     "gejadze@gmail.com",
     $size = 200,
@@ -91,21 +91,21 @@ ehco $Gravatar;
 
 ###Creating Link Tags
 Simple Link:
-```
+```php
 $linkTags = \ngfw\Recipe::createLinkTag("google.com");
 echo $linkTags;   
 //outputs: <a href="google.com">google.com</a>
 ```
 
 Link with title:
-```
+```php
 $linkTags = \ngfw\Recipe::createLinkTag("google.com", "Visit Google");
 echo $linkTags;   
 //outputs: <a href="google.com" title="Visit Google" >Visit Google</a>
 ```
 
 Link with title and HTML attributes:
-```
+```php
 $linkTags = \ngfw\Recipe::createLinkTag("google.com", "Visit Google", array(
     "class" => "outgoingLink"
 ));
