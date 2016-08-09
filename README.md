@@ -229,9 +229,17 @@ echo $randomPass;
 // outputs 10 random character string 
 ```
 ###Simple Encode
-
+```php
+$encodedString = Recipe::simpleEncode("php recipe");
+echo $encodedString;
+// outputs: qcnVhqjKxpuilw==
+```
 ###Simple Decode
-
+```php
+$decodedString = Recipe::simpleDecode("qcnVhqjKxpuilw==");
+echo $decodedString;
+// outputs: php recipe
+```
 ###Detect HTTPS
 
 ###Detect AJAX
