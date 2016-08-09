@@ -213,36 +213,47 @@ $obj = \ngfw\Recipe::arrayToObject($array);
 ```
 ###HEX to RGB
 ```php
-$rgb = Recipe::hex2rgb("#FFF");
+$rgb = \ngfw\Recipe::hex2rgb("#FFF");
 echo $rgb;
 // outputs: rgb(255, 255, 255)
 ```
 ###RGB to HEX
 ```php
-$hex = Recipe::rgb2hex("rgb(123,123,123)");
+$hex = \ngfw\Recipe::rgb2hex("rgb(123,123,123)");
 // outputs: #7b7b7b
 ```
 ###Generate Random Password
 ```php
-$randomPass = Recipe::generateRandomPassword(10);
+$randomPass = \ngfw\Recipe::generateRandomPassword(10);
 echo $randomPass;
 // outputs 10 random character string 
 ```
 ###Simple Encode
 ```php
-$encodedString = Recipe::simpleEncode("php recipe");
+$encodedString = \ngfw\Recipe::simpleEncode("php recipe");
 echo $encodedString;
 // outputs: qcnVhqjKxpuilw==
 ```
 ###Simple Decode
 ```php
-$decodedString = Recipe::simpleDecode("qcnVhqjKxpuilw==");
+$decodedString = \ngfw\Recipe::simpleDecode("qcnVhqjKxpuilw==");
 echo $decodedString;
 // outputs: php recipe
 ```
 ###Detect HTTPS
-
+This method checks for `$_SERVER['HTTPS']`
+```php
+$isHttps = \ngfw\Recipe::isHttps();
+var_dump($isHttps);
+// outputs bool
+```
 ###Detect AJAX
+This method checks for `$_SERVER['HTTP_X_REQUESTED_WITH']`
+```php
+$isAjax = \ngfw\Recipe::isAjax();
+var_dump($isAjax);
+// outputs bool
+```
 
 ###Check if number is odd
 
