@@ -3,15 +3,15 @@
 
 
 ---
-* [Favicon](#Favicon)
-* [QRcode](#QRcode)
-* [File extension](#File extension)
-* [Gravatar](#Gravatar)
-* [Creating Link Tags](#Creating Link Tags)
-* [Validate email address](#Validate email address)
-* [Validate URL](#Validate URL)
-* [RSS Reader](#RSS Reader)
-* [Object to Array](#Object to Array)
+* [Favicon](#favicon)
+* [QRcode](#qrcode)
+* [File extension](#file-extension)
+* [Gravatar](#gravatar)
+* [Creating Link Tags](#creating-link-tags)
+* [Validate email address](#validate-email-address)
+* [Validate URL](#validate-url)
+* [RSS Reader](#rss-reader)
+* [Object to Array](#object-to-array)
 
 
 ---
