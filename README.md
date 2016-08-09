@@ -142,15 +142,15 @@ $obj->foo = 'bar';
 $obj->baz = 'qux';
 $array = \ngfw\Recipe::objectToArray($obj);
 var_dump($array);
-/**
-outputs:
-array(2) {
-  ["foo"]=>
-  string(3) "bar"
-  ["baz"]=>
-  string(3) "qux"
-}
-*/
+
+// outputs:
+// array(2) {
+//   ["foo"]=>
+//   string(3) "bar"
+//   ["baz"]=>
+//   string(3) "qux"
+// }
+
 ```
 
 ### 
