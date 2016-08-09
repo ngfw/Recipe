@@ -196,12 +196,91 @@ var_dump($array);
 
 ```
 
-### 
+###Array to Object
+```php
+$array = array(
+    "foo" => "bar",
+    "baz" => "qux",
+);
+$obj = \ngfw\Recipe::arrayToObject($array);
+// outputs:
+// object(stdClass)#15 (2) {
+//   ["foo"]=>
+//   string(3) "bar"
+//   ["baz"]=>
+//   string(3) "qux"
+// }
+```
+###HEX to RGB
+```php
+$rgb = Recipe::hex2rgb("#FFF");
+echo $rgb;
+// outputs: rgb(255, 255, 255)
+```
+###RGB to HEX
+```php
+$hex = Recipe::rgb2hex("rgb(123,123,123)");
+// outputs: #7b7b7b
+```
+###Generate Random Password
+```php
+$randomPass = Recipe::generateRandomPassword(10);
+echo $randomPass;
+// outputs random 10 character long string 
+```
+###Simple Encode
 
+###Simple Decode
 
+###Detect HTTPS
 
+###Detect AJAX
 
+###Check if number is odd
 
-#### More examples coming soon...
+###Check if number is even
+
+###Get Current URL
+
+###Get Client IP
+
+###Detect Mobile
+
+###Get Browser
+
+###Get Client Location
+
+###Number To Word conversion
+
+###Seconds To Text
+
+###Minutes To Text
+
+###Hours To Text
+
+###Shorten String
+
+###CURL
+
+###Expand Short URL
+
+###Get Alexa Rank
+
+###Get Google PageRank
+
+###Get Tiny URL
+
+###Get Keyword Suggestions From Google
+
+###WIKI Search
+
+###notification
+
+###Auto Embed
+
+###Make Clickable Links
+
+###Debug
+
 
 
