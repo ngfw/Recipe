@@ -113,6 +113,30 @@ echo $linkTags;
 //outputs: <a href="google.com" title="Visit Google" class="outgoingLink">Visit Google</a>
 ```
 
+
+### Validate email address
+```php
+$isValid = \ngfw\Recipe::validateEmail("user@gmail.com");
+var_dump($isValid);
+// outputs: true (bool)
+```
+
+### Validate URL
+```php
+$isValid = \ngfw\Recipe::validateURL("http://github.com/");
+var_dump($isValid);
+// outputs: true (bool)
+```
+
+### RSS Reader
+```php
+$rssArray = \ngfw\Recipe::rssReader("https://github.com/ngfw/Recipe/commits/master.atom");
+var_dump($rssArray);
+// Outputs feed as an array
+```
+
+
+
 #### More examples coming soon...
 
 
