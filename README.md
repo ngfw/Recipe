@@ -3,6 +3,7 @@
 
 
 ---
+Table of Contents
 * [Favicon](#favicon)
 * [QRcode](#qrcode)
 * [File extension](#file-extension)
@@ -12,7 +13,37 @@
 * [Validate URL](#validate-url)
 * [RSS Reader](#rss-reader)
 * [Object to Array](#object-to-array)
-
+* [Array to Object](#array-to-object)
+* [HEX to RGB](#hex-to-rgb)
+* [RGB to HEX](#rgb-to-hex)
+* [Generate Random Password](#generate-random-password)
+* [Simple Encode](#simple-encode)
+* [Simple Decode](#simple-decode)
+* [Detect HTTPS](#detect-https)
+* [Detect AJAX](#detect-ajax)
+* [Check if number is odd](#check-if-number-is-odd)
+* [Check if number is even](#check-if-number-is-even)
+* [Get Current URL](#get-current-url)
+* [Get Client IP](#get-client-ip)
+* [Detect Mobile](#detect-mobile)
+* [Get Browser](#get-browser)
+* [Get Client Location](#get-client-location)
+* [Number To Word conversion](#number-to-word-conversion)
+* [Seconds To Text](#seconds-to-text)
+* [Minutes To Text](#minutes-to-text)
+* [Hours To Text](#hours-to-text)
+* [Shorten String](#shorten-string)
+* [CURL](#curl)
+* [Expand Short URL](#expand-short-url)
+* [Get Alexa Rank](#ge-alexa-rank)
+* [Get Google PageRank](#get-google-pagerank)
+* [Get Tiny URL](#get-tiny-url)
+* [Get Keyword Suggestions From Google](#get-keyword-suggestions-from-google)
+* [WIKI Search](#wiki-search)
+* [notification](#notification)
+* [Auto Embed](#auto-embed)
+* [Make Clickable Links](#make-clickable-links)
+* [Debug](#debug)
 
 ---
 
