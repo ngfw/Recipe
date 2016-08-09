@@ -3,6 +3,18 @@
 
 
 ---
+* [Favicon](#Favicon)
+* [QRcode](#QRcode)
+* [File extension](#File extension)
+* [Gravatar](#Gravatar)
+* [Creating Link Tags](#Creating Link Tags)
+* [Validate email address](#Validate email address)
+* [Validate URL](#Validate URL)
+* [RSS Reader](#RSS Reader)
+* [Object to Array](#Object to Array)
+
+
+---
 
 ###Favicon
 Getting remote website Favicon:
