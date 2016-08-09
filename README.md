@@ -226,7 +226,7 @@ $hex = Recipe::rgb2hex("rgb(123,123,123)");
 ```php
 $randomPass = Recipe::generateRandomPassword(10);
 echo $randomPass;
-// outputs random 10 character long string 
+// outputs 10 random character string 
 ```
 ###Simple Encode
 
