@@ -226,7 +226,7 @@ $hex = \ngfw\Recipe::rgb2hex("rgb(123,123,123)");
 ```php
 $randomPass = \ngfw\Recipe::generateRandomPassword(10);
 echo $randomPass;
-// outputs 10 random character string 
+// outputs: 10 random character string 
 ```
 ###Simple Encode
 ```php
@@ -245,14 +245,14 @@ This method checks for `$_SERVER['HTTPS']`
 ```php
 $isHttps = \ngfw\Recipe::isHttps();
 var_dump($isHttps);
-// outputs bool
+// outputs: bool
 ```
 ###Detect AJAX
 This method checks for `$_SERVER['HTTP_X_REQUESTED_WITH']`
 ```php
 $isAjax = \ngfw\Recipe::isAjax();
 var_dump($isAjax);
-// outputs bool
+// outputs: bool
 ```
 
 ###Check if number is odd
