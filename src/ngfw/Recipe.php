@@ -371,9 +371,10 @@ class Recipe
             endif;
             $url .= '@';
         endif;
-
-        $url .= $_SERVER['HTTP_HOST'];
-        if ($_SERVER['SERVER_PORT'] != 80):
+        if(isset($_SERVER['HTTP_HOST'])){
+            $url .= $_SERVER['HTTP_HOST'];
+        }
+        if (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != 80):
             $url .= ':' . $_SERVER['SERVER_PORT'];
         endif;
         if (!isset($_SERVER['REQUEST_URI'])):
@@ -394,7 +395,7 @@ class Recipe
      */
     public static function getClientIP($trustProxyHeaders = false)
     {
-        if (!$trustProxyHeaders):
+        if ($trustProxyHeaders):
             return $_SERVER['REMOTE_ADDR'];
         endif;
         if (!empty($_SERVER['HTTP_CLIENT_IP'])):
