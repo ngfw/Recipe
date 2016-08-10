@@ -266,7 +266,10 @@ $isNumberEven = \ngfw\Recipe::isNumberEven(8);
 // outputs: bool
 ```
 ###Get Current URL
-
+```php
+$currentURL = \ngfw\Recipe::getCurrentURL();
+// outputs: current Request URL
+```
 ###Get Client IP
 
 ###Detect Mobile
