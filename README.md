@@ -34,7 +34,7 @@ Table of Contents
 * [Hours To Text](#hours-to-text)
 * [Shorten String](#shorten-string)
 * [CURL](#curl)
-* [Expand Short URL](#expand-short-url)
+* [Expand Shortened URL](#expand-shortened-url)
 * [Get Alexa Rank](#ge-alexa-rank)
 * [Get Google PageRank](#get-google-pagerank)
 * [Get Tiny URL](#get-tiny-url)
@@ -256,9 +256,15 @@ var_dump($isAjax);
 ```
 
 ###Check if number is odd
-
+```php
+$isNumberOdd = \ngfw\Recipe::isNumberOdd(5);
+// outputs: bool
+```
 ###Check if number is even
-
+```php
+$isNumberEven = \ngfw\Recipe::isNumberEven(8);
+// outputs: bool
+```
 ###Get Current URL
 
 ###Get Client IP
@@ -287,13 +293,13 @@ var_dump($isAjax);
 
 ###Get Google PageRank
 
-###Get Tiny URL
+###Expand Shortened URL
 
 ###Get Keyword Suggestions From Google
 
 ###WIKI Search
 
-###notification
+###Notification
 
 ###Auto Embed
 
