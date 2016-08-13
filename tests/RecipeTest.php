@@ -287,7 +287,9 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     }
     public function test_isMobile()
     {
-
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7";
+        $isMobile = Recipe::isMobile();
+        $this->assertTrue($isMobile);
     }
     public function test_getBrowser()
     {
