@@ -183,7 +183,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             "foo" => "bar",
             "baz" => "qux",
         );
-        $obj    = Recipe::arrayToObject($array);
+        $obj = Recipe::arrayToObject($array);
         $this->assertInternalType('object', $obj);
     }
 
@@ -208,7 +208,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
         );
     }
     /**
-     * Test 
+     * Test
      */
     public function test_generateRandomPassword()
     {
@@ -226,7 +226,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             'qcnVhqjKxpuilw==',
             $encodedString
         );
-        
+
     }
     public function test_simpleDecode()
     {
@@ -243,13 +243,13 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     public function test_isHttps()
     {
         $_SERVER['HTTPS'] = true;
-        $isHttps = Recipe::isHttps();
+        $isHttps          = Recipe::isHttps();
         $this->assertTrue($isHttps);
     }
     public function test_isAjax()
     {
         $_SERVER['HTTP_X_REQUESTED_WITH'] = 'xmlhttprequest';
-        $isAjax = Recipe::isAjax();
+        $isAjax                           = Recipe::isAjax();
         $this->assertTrue($isAjax);
     }
     /**
@@ -257,20 +257,20 @@ class RecipeTest extends PHPUnit_Framework_TestCase
      */
     public function test_isNumberOdd()
     {
-        $number = 5;
+        $number      = 5;
         $isNumberOdd = Recipe::isNumberOdd($number);
-        $this->assertTrue($isNumberOdd);   
+        $this->assertTrue($isNumberOdd);
     }
     public function test_isNumberEven()
     {
-        $number = 8;
+        $number       = 8;
         $isNumberEven = Recipe::isNumberEven($number);
-        $this->assertTrue($isNumberEven);   
+        $this->assertTrue($isNumberEven);
     }
     public function test_getCurrentURL()
     {
         $_SERVER['REQUEST_URI'] = "example.com";
-        $currentURL = Recipe::getCurrentURL();
+        $currentURL             = Recipe::getCurrentURL();
         $this->assertEquals(
             'http://example.com',
             $currentURL
@@ -279,7 +279,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     public function test_getClientIP()
     {
         $_SERVER['REMOTE_ADDR'] = "10.10.10.10";
-        $ip = Recipe::getClientIP();
+        $ip                     = Recipe::getClientIP();
         $this->assertEquals(
             '10.10.10.10',
             $ip
@@ -288,26 +288,26 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     public function test_isMobile()
     {
         $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7";
-        $isMobile = Recipe::isMobile();
+        $isMobile                   = Recipe::isMobile();
         $this->assertTrue($isMobile);
     }
     public function test_getBrowser()
     {
         $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7";
-        $browser = Recipe::getBrowser();
+        $browser                    = Recipe::getBrowser();
         $this->assertInternalType('string', $browser);
     }
 
     public function test_getClientLocation()
     {
         $_SERVER['REMOTE_ADDR'] = "8.8.8.8"; // let's see where is google
-        $location = Recipe::getClientLocation();
+        $location               = Recipe::getClientLocation();
         $this->assertInternalType('string', $location);
     }
     public function test_numberToWord()
     {
         $number = "864210";
-        $word = Recipe::numberToWord($number);
+        $word   = Recipe::numberToWord($number);
         $this->assertEquals(
             'eight hundred and sixty-four thousand, two hundred and ten',
             $word
@@ -315,7 +315,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     }
     public function test_secondsToText()
     {
-        $seconds = 3610;
+        $seconds  = 3610;
         $duration = Recipe::secondsToText($seconds);
         $this->assertEquals(
             "1 hour and 10 seconds",
@@ -329,7 +329,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     }
     public function test_minutesToText()
     {
-        $minutes = 60*24*2;
+        $minutes  = 60 * 24 * 2;
         $duration = Recipe::minutesToText($minutes);
         $this->assertEquals(
             "2 days",
@@ -343,7 +343,17 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     }
     public function test_hoursToText()
     {
-
+        $hours = 4.2;
+        $duration = Recipe::hoursToText($hours);
+        $this->assertEquals(
+            "4 hours and 12 minutes",
+            $duration
+        );
+        $duration = Recipe::hoursToText($hours, $returnAsWords = true);
+        $this->assertEquals(
+            "four hours and twelve minutes",
+            $duration
+        );
     }
     public function test_shortenString()
     {
