@@ -293,23 +293,53 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     }
     public function test_getBrowser()
     {
-
+        $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7";
+        $browser = Recipe::getBrowser();
+        $this->assertInternalType('string', $browser);
     }
+
     public function test_getClientLocation()
     {
-
+        $_SERVER['REMOTE_ADDR'] = "8.8.8.8"; // let's see where is google
+        $location = Recipe::getClientLocation();
+        $this->assertInternalType('string', $location);
     }
     public function test_numberToWord()
     {
-
+        $number = "864210";
+        $word = Recipe::numberToWord($number);
+        $this->assertEquals(
+            'eight hundred and sixty-four thousand, two hundred and ten',
+            $word
+        );
     }
     public function test_secondsToText()
     {
-
+        $seconds = 3610;
+        $duration = Recipe::secondsToText($seconds);
+        $this->assertEquals(
+            "1 hour and 10 seconds",
+            $duration
+        );
+        $duration = Recipe::secondsToText($seconds, $returnAsWords = true);
+        $this->assertEquals(
+            "one hour and ten seconds",
+            $duration
+        );
     }
     public function test_minutesToText()
     {
-
+        $minutes = 60*24*2;
+        $duration = Recipe::minutesToText($minutes);
+        $this->assertEquals(
+            "2 days",
+            $duration
+        );
+        $duration = Recipe::minutesToText($minutes, $returnAsWords = true);
+        $this->assertEquals(
+            "two days",
+            $duration
+        );
     }
     public function test_hoursToText()
     {
