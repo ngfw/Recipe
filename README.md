@@ -34,7 +34,7 @@ Table of Contents
 * [Hours To Text](#hours-to-text)
 * [Shorten String](#shorten-string)
 * [CURL](#curl)
-* [Expand Shortened URL](#expand-shortened-url)
+* [Shorten URL](#shorten-url)
 * [Get Alexa Rank](#ge-alexa-rank)
 * [Get Google PageRank](#get-google-pagerank)
 * [Get Tiny URL](#get-tiny-url)
@@ -371,24 +371,93 @@ $curlWithHeaders = \ngfw\Recipe::curl("http://jsonplaceholder.typicode.com/posts
 //}
 ```
 ###Expand Short URL
-
+```php
+$shortURL = "https://goo.gl/rvDnMX";
+$expandedURL = \ngfw\Recipe::expandShortUrl($shortURL);
+echo $expendedURL;
+// outputs: https://github.com/ngfw/Recipe
+```
 ###Get Alexa Rank
-
+```php
+$AlexaRank = \ngfw\Recipe::getAlexaRank("github.com");
+echo $AlexaRank;
+// outputs: Current alexa ranking as position number (example: 52)
+```
 ###Get Google PageRank
-
-###Expand Shortened URL
-
+```php
+$GoogleRank = \ngfw\Recipe::getGooglePageRank("github.com");
+echo $GoogleRank;
+// outputs: Current google page ranking
+```
+###Shorten URL
+```php
+$TinyUrl = \ngfw\Recipe::getTinyUrl("https://github.com/ngfw/Recipe");
+echo $TinyUrl;
+// outputs: http://tinyurl.com/h2nchjh
+```
 ###Get Keyword Suggestions From Google
-
+```php
+$suggestions = \ngfw\Recipe::getKeywordSuggestionsFromGoogle("Tbilisi, Georgia");
+var_dump($suggestions);
+// outputs: 
+//array(10) {
+//  [0]=>
+//  string(15) "tbilisi georgia"
+//  [1]=>
+//  string(22) "tbilisi georgia hotels"
+//  [2]=>
+//  string(19) "tbilisi georgia map"
+//  [3]=>
+//  string(20) "tbilisi georgia time"
+//  [4]=>
+//  string(23) "tbilisi georgia airport"
+//  [5]=>
+//  string(23) "tbilisi georgia weather"
+//  [6]=>
+//  string(24) "tbilisi georgia language"
+//  [7]=>
+//  string(24) "tbilisi georgia zip code"
+//  [8]=>
+//  string(20) "tbilisi georgia news"
+//  [9]=>
+//  string(28) "tbilisi georgia airport code"
+//}
+```
 ###WIKI Search
-
+```php
+$wiki = \ngfw\Recipe::wikiSearch("Tbilisi");
+var_dump($wiki);
+// outputs: data from wikipedia
+```
 ###Notification
-
+```php
+$notification = \ngfw\Recipe::notification("Test Successful");
+echo $notification;
+// outputs: <div style="display: block;padding: 0.5em;border: solid 1px;border-radius: 0.125em;margin-bottom: 1em; border-color: #a6d9f2;color: #0a5276;background-color: #e7f6fd;"  role="alert">Test Successful</div>
+// NOTE: possible notifications types: success, warning, error and info
+// Type is passed as a second parameter 
+```
 ###Auto Embed
-
+```php
+$string = "Checkout Solomun, Boiler Room at https://www.youtube.com/watch?v=bk6Xst6euQk";
+echo \ngfw\Recipe::autoEmbed($string);
+// outputs:
+// Checkout Solomun, Boiler Room at<iframe width="560" height="315" src="https://www.youtube.com/embed/bk6Xst6euQk?feature=oembed" frameborder="0" allowfullscreen></iframe>
+// supported providers are: youtube.com, blip.tv, vimeo.com, dailymotion.com, flickr.com, smugmug.com, hulu.com, revision3.com, wordpress.tv, funnyordie.com, soundcloud.com, slideshare.net and instagram.com 
+```
 ###Make Clickable Links
-
+```php
+$string = "Check PHP Recipes on https://github.com/ngfw/Recipe";
+$clickable = \ngfw\Recipe::makeClickableLinks($string);
+echo $clickable;
+// outputs:
+// Check PHP Recipes on <a href="https://github.com/ngfw/Recipe" >https://github.com/ngfw/Recipe</a>
+```
 ###Debug
-
+`var_dump()` alternative
+```php
+$string = "Test me";
+\ngfw\Recipe::debug($string);
+```
 
 

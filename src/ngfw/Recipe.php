@@ -946,7 +946,7 @@ class Recipe
     }
 
     /**
-     * Parse text to find url's for embed enabled services like: youtube.com, blip.tv, vimeo.com, dailymotion.com, flickr.com, smugmug.com, hulu.com, revision3.com, wordpress.tv, funnyordie.com twitter.com, soundcloud.com, slideshare.net and instagram.com and embed elements automatically
+     * Parse text to find url's for embed enabled services like: youtube.com, blip.tv, vimeo.com, dailymotion.com, flickr.com, smugmug.com, hulu.com, revision3.com, wordpress.tv, funnyordie.com, soundcloud.com, slideshare.net and instagram.com and embed elements automatically
      * @param  string $string text to parse
      * @param  string $width  max width of embeded element
      * @param  string $height max heigth of embeded element
