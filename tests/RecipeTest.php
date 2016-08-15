@@ -267,6 +267,9 @@ class RecipeTest extends PHPUnit_Framework_TestCase
         $isNumberEven = Recipe::isNumberEven($number);
         $this->assertTrue($isNumberEven);
     }
+    /**
+     * Current URL
+     */
     public function test_getCurrentURL()
     {
         $_SERVER['REQUEST_URI'] = "example.com";
@@ -276,6 +279,9 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             $currentURL
         );
     }
+    /**
+     * Get Client IP address
+     */
     public function test_getClientIP()
     {
         $_SERVER['REMOTE_ADDR'] = "10.10.10.10";
@@ -285,25 +291,36 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             $ip
         );
     }
+    /**
+     * Test mobile device
+     */
     public function test_isMobile()
     {
         $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7";
         $isMobile                   = Recipe::isMobile();
         $this->assertTrue($isMobile);
     }
+    /**
+     * Detect user browser
+     */
     public function test_getBrowser()
     {
         $_SERVER['HTTP_USER_AGENT'] = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_0 like Mac OS X; en-us) AppleWebKit/532.9 (KHTML, like Gecko) Version/4.0.5 Mobile/8A293 Safari/6531.22.7";
         $browser                    = Recipe::getBrowser();
         $this->assertInternalType('string', $browser);
     }
-
+    /**
+     * Get Clients Location
+     */
     public function test_getClientLocation()
     {
         $_SERVER['REMOTE_ADDR'] = "8.8.8.8"; // let's see where is google
         $location               = Recipe::getClientLocation();
         $this->assertInternalType('string', $location);
     }
+    /**
+     * Convert number to word
+     */
     public function test_numberToWord()
     {
         $number = "864210";
@@ -313,6 +330,9 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             $word
         );
     }
+    /**
+     * Convert number of seconds to time
+     */
     public function test_secondsToText()
     {
         $seconds  = 3610;
@@ -327,6 +347,9 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             $duration
         );
     }
+    /**
+     * Convert number of minutes to time
+     */
     public function test_minutesToText()
     {
         $minutes  = 60 * 24 * 2;
@@ -341,9 +364,12 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             $duration
         );
     }
+    /**
+     * Convert hours to text
+     */
     public function test_hoursToText()
     {
-        $hours = 4.2;
+        $hours    = 4.2;
         $duration = Recipe::hoursToText($hours);
         $this->assertEquals(
             "4 hours and 12 minutes",
@@ -355,53 +381,162 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             $duration
         );
     }
+    /**
+     * Shorten the string
+     */
     public function test_shortenString()
     {
+        $string        = "The quick brown fox jumps over the lazy dog";
+        $shortenString = Recipe::shortenString($string, 20);
+        $this->assertEquals(
+            "The quick brown f...",
+            $shortenString
+        );
 
+        $shortenString = Recipe::shortenString($string, 20, $addEllipsis = false);
+        $this->assertEquals(
+            "The quick brown fox ",
+            $shortenString
+        );
+
+        $shortenString = Recipe::shortenString($string, 20, $addEllipsis = false, $wordsage = true);
+        $this->assertEquals(
+            "The quick brown fox",
+            $shortenString
+        );
     }
+    /**
+     * Curl
+     */
     public function test_curl()
     {
+        $testCurl = Recipe::curl("https://api.ipify.org");
+        if (filter_var($testCurl, FILTER_VALIDATE_IP)) {
+            $ipCheck = true;
+        }
+        $this->assertTrue($ipCheck);
 
+        $testCurlPOST = Recipe::curl("http://jsonplaceholder.typicode.com/posts", $method = "POST", $data = array(
+            "title"  => 'foo',
+            "body"   => 'bar',
+            "userId" => 1,
+        ));
+        $POST_obj = json_decode($testCurlPOST);
+        $this->assertInternalType('object', $POST_obj);
+
+        $testCurlHeaderAndReturnInfo = Recipe::curl("http://jsonplaceholder.typicode.com/posts", $method = "GET", $data = false, $header = array(
+            "Accept" => "application/json",
+        ), $returnInfo = true);
+        $this->assertInternalType('array', $testCurlHeaderAndReturnInfo);
+        $this->assertInternalType('array', $testCurlHeaderAndReturnInfo["info"]);
+        $this->assertInternalType('string', $testCurlHeaderAndReturnInfo["contents"]);
     }
+    /**
+     * Expend shortened URLs
+     */
     public function test_expandShortUrl()
     {
-
+        $expandedURL = Recipe::expandShortUrl("https://goo.gl/rvDnMX");
+        $this->assertEquals(
+            "https://github.com/ngfw/Recipe",
+            $expandedURL
+        );
     }
+    /**
+     * get Alexa Ranking
+     */
     public function test_getAlexaRank()
     {
-
+        $AlexaRank = Recipe::getAlexaRank("github.com");
+        $this->assertInternalType('int', $AlexaRank);
     }
+    /**
+     * Get Google Page Rank
+     */
     public function test_getGooglePageRank()
     {
-
+        $GooglePageRank = Recipe::getGooglePageRank("github.com");
+        $this->assertInternalType('int', $GooglePageRank);
     }
+    /**
+     * Shorten the URL
+     */
     public function test_getTinyUrl()
     {
-
+        $TinyUrl = Recipe::getTinyUrl("https://github.com/ngfw/Recipe");
+        $this->assertEquals(
+            "http://tinyurl.com/h2nchjh",
+            $TinyUrl
+        );
+        
     }
+    /**
+     * Get google keyword suggestions
+     */
     public function test_getKeywordSuggestionsFromGoogle()
     {
-
+        $suggestions = Recipe::getKeywordSuggestionsFromGoogle("Tbilisi, Georgia");
+        $this->assertInternalType('array', $suggestions);
+        $this->assertEquals(
+            10,
+            count($suggestions)
+        );
     }
+    /**
+     * Wikipedia search
+     */
     public function test_wikiSearch()
     {
-
+        $wiki = Recipe::wikiSearch("Tbilisi");
+        $this->assertInternalType('array', $wiki);
+        $this->assertInternalType('string', $wiki['title']);
     }
+    /**
+     * Create HTML notifications
+     */
     public function test_notification()
     {
-
+        $notification = Recipe::notification("Test Successful");
+        $this->assertEquals(
+            '<div style="display: block;padding: 0.5em;border: solid 1px;border-radius: 0.125em;margin-bottom: 1em; border-color: #a6d9f2;color: #0a5276;background-color: #e7f6fd;"  role="alert">Test Successful</div>',
+            $notification
+        );
     }
+    /**
+     * Auto Embed
+     */
     public function test_autoEmbed()
     {
-
+        $string = "Checkout Solomun, Boiler Room at https://www.youtube.com/watch?v=bk6Xst6euQk";
+        $converted = Recipe::autoEmbed($string);
+        $this->assertEquals(
+            'Checkout Solomun, Boiler Room at<iframe width="560" height="315" src="https://www.youtube.com/embed/bk6Xst6euQk?feature=oembed" frameborder="0" allowfullscreen></iframe>',
+            $converted
+        );
     }
+    /**
+     * Make links clickable
+     */
     public function test_makeClickableLinks()
     {
-
+        $string = "Check PHP Recipes on https://github.com/ngfw/Recipe";
+        $clickable = Recipe::makeClickableLinks($string);
+        
+        $this->assertEquals(
+            'Check PHP Recipes on <a href="https://github.com/ngfw/Recipe" >https://github.com/ngfw/Recipe</a>',
+            $clickable
+        );
     }
+    /**
+     * Custom Debug
+     */
     public function test_debug()
     {
-
+        $string = "Test me";
+        ob_start();
+        Recipe::debug($string);
+        $debug = ob_get_clean();
+        $this->assertInternalType('string', $debug);
     }
 }
 // EOF
