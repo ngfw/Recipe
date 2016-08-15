@@ -4,6 +4,7 @@
 ![](https://travis-ci.org/ngfw/Recipe.svg?branch=master) ![](https://img.shields.io/packagist/v/ngfw/recipe.svg?maxAge=2592000) ![](https://img.shields.io/badge/code-awesome-brightgreen.svg?maxAge=2592000) ![](https://img.shields.io/badge/language-PHP-blue.svg?maxAge=2592000)
 ---
 Table of Contents
+* [Quick Start](#quick-start)
 * [Favicon](#favicon)
 * [QRcode](#qrcode)
 * [File extension](#file-extension)
@@ -46,7 +47,37 @@ Table of Contents
 * [Debug](#debug)
 
 ---
+###Quick Start
+Run in your terminal:
+```bash
+composer require ngfw/recipe
+```
+Create new file and start using the Recipes
+```php
+<?php
 
+require "vendor/autoload.php";
+
+use ngfw\Recipe as Recipe;
+
+$suggestion = Recipe::getKeywordSuggestionsFromGoogle("home");
+
+print_r($suggestion);
+//
+//Array
+//(
+//    [0] => home depot
+//    [1] => home goods
+//    [2] => home depot near me
+//    [3] => homes for sale
+//    [4] => homeaway
+//    [5] => homes for rent
+//    [6] => home advisor
+//    [7] => home depot credit card
+//    [8] => home depot coupons
+//    [9] => homeland
+//)
+```
 ###Favicon
 Getting remote website Favicon:
 ```php
