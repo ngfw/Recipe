@@ -1,7 +1,7 @@
 # Recipe
 ####Collection of PHP Functions
 
-
+![](https://travis-ci.org/ngfw/Recipe.svg?branch=master)
 ---
 Table of Contents
 * [Favicon](#favicon)
