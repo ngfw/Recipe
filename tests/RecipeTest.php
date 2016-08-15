@@ -399,7 +399,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             $shortenString
         );
 
-        $shortenString = Recipe::shortenString($string, 20, $addEllipsis = false, $wordsage = true);
+        $shortenString = Recipe::shortenString($string, 20, $addEllipsis = false, $wordsafe = true);
         $this->assertEquals(
             "The quick brown fox",
             $shortenString

@@ -328,14 +328,48 @@ echo $duration;
 ```php
 $hours    = 4.2;
 $duration = \ngfw\Recipe::hoursToText($hours);
+echo $duration;
 // outputs: 4 hours and 12 minutes
 // \ngfw\Recipe::hoursToText($hours, $returnAsWords = true);
 // will return: four hours and twelve minutes
 ```
 ###Shorten String
-
+```php
+$string        = "The quick brown fox jumps over the lazy dog";
+$shortenString = \ngfw\Recipe::shortenString($string, 20);
+// output: The quick brown f...
+// \ngfw\Recipe::shortenString($string, 20, $addEllipsis = false);
+// output: "The quick brown fox ", NOTE last space
+// \ngfw\Recipe::shortenString($string, 20, $addEllipsis = false, $wordsafe = true);
+// output: "The quick brown fox", NOTE, will not break in the middle of the word
+```
 ###CURL
 
+Simple GET example:
+```php
+$data = \ngfw\Recipe::curl("https://api.ipify.org");
+var_dump($data);
+// outputs: Curl'ed Data
+```
+POST Example:
+```php
+$CurlPOST = \ngfw\Recipe::curl("http://jsonplaceholder.typicode.com/posts", $method = "POST", $data = array(
+    "title"  => 'foo',
+    "body"   => 'bar',
+    "userId" => 1,
+));
+```
+Custom Headers:
+```php
+$curlWithHeaders = \ngfw\Recipe::curl("http://jsonplaceholder.typicode.com/posts", $method = "GET", $data = false, $header = array(
+    "Accept" => "application/json",
+), $returnInfo = true);
+// NOTE $returnInfo argument 
+// Result will be returned as an array, $curlWithHeaders={
+//  info => containing curl information, see curl_getinfo()
+//  contents  => Data from URL
+//}
+```
 ###Expand Short URL
 
 ###Get Alexa Rank
