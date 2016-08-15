@@ -40,7 +40,7 @@ Table of Contents
 * [Get Tiny URL](#get-tiny-url)
 * [Get Keyword Suggestions From Google](#get-keyword-suggestions-from-google)
 * [WIKI Search](#wiki-search)
-* [notification](#notification)
+* [Notification](#notification)
 * [Auto Embed](#auto-embed)
 * [Make Clickable Links](#make-clickable-links)
 * [Debug](#debug)
