@@ -263,29 +263,75 @@ $isNumberOdd = \ngfw\Recipe::isNumberOdd(5);
 ###Check if number is even
 ```php
 $isNumberEven = \ngfw\Recipe::isNumberEven(8);
+var_dump($isNumberEven);
 // outputs: bool
 ```
 ###Get Current URL
 ```php
 $currentURL = \ngfw\Recipe::getCurrentURL();
+var_dump($currentURL);
 // outputs: current Request URL
 ```
 ###Get Client IP
-
+```php
+$ClientsIP = \ngfw\Recipe::getClientIP();
+echo $ClientsIP;
+//OR 
+// Return Proxy IP if user is behind it
+//$ClientsIP = \ngfw\Recipe::getClientIP($trustProxyHeaders = true);
+// outputs: IP address
+```
 ###Detect Mobile
-
+```php
+$isMobile = \ngfw\Recipe::isMobile();
+var_dump($isMobile);
+// outputs: true or false
+```
 ###Get Browser
-
+```php
+$Browser = \ngfw\Recipe::getBrowser();
+echo $Browser
+// outputs: Browser Details
+```
 ###Get Client Location
-
+```php
+$user_location = \ngfw\Recipe::getClientLocation();
+echo $user_location;
+// outputs: Users Location
+```
 ###Number To Word conversion
-
+```php
+$number = "864210";
+$number_in_words = \ngfw\Recipe::numberToWord($number);
+echo $number_in_words;
+// outputs: eight hundred and sixty-four thousand, two hundred and ten
+```
 ###Seconds To Text
-
+```php
+$seconds = "864210";
+$number_in_words = \ngfw\Recipe::numberToWord($seconds);
+echo $number_in_words;
+// outputs: 1 hour and 10 seconds
+// \ngfw\Recipe::secondsToText($seconds, $returnAsWords = true);
+// will return: one hour and ten seconds
+```
 ###Minutes To Text
-
+```php
+$minutes  = 60 * 24 * 2;
+$duration = \ngfw\Recipe::minutesToText($minutes);
+echo $duration;
+// outputs: 2 days
+// \ngfw\Recipe::minutesToText($minutes, $returnAsWords = true);
+// will return: two days
+```
 ###Hours To Text
-
+```php
+$hours    = 4.2;
+$duration = \ngfw\Recipe::hoursToText($hours);
+// outputs: 4 hours and 12 minutes
+// \ngfw\Recipe::hoursToText($hours, $returnAsWords = true);
+// will return: four hours and twelve minutes
+```
 ###Shorten String
 
 ###CURL
