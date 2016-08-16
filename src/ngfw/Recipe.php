@@ -754,7 +754,7 @@ class Recipe
 
     /**
      * Get Alexa ranking for domain name
-     * @param  string $domain [description]
+     * @param  string $domain Domain name to get ranking for
      * @return mixed false if ranking is found, otherwise integer
      */
     public static function getAlexaRank($domain)
@@ -892,6 +892,7 @@ class Recipe
         $data   = self::curl($apiurl);
         $xml    = simplexml_load_string($data);
         if ((string) $xml->Section->Item->Description) {
+            $array = array();
             $array['title']       = (string) $xml->Section->Item->Text;
             $array['description'] = (string) $xml->Section->Item->Description;
             $array['url'] = (string) $xml->Section->Item->Url;
