@@ -16,6 +16,7 @@ Table of Contents
 * [RSS Reader](#rss-reader)
 * [Object to Array](#object-to-array)
 * [Array to Object](#array-to-object)
+* [Array to String](#array-to-string)
 * [HEX to RGB](#hex-to-rgb)
 * [RGB to HEX](#rgb-to-hex)
 * [Generate Random Password](#generate-random-password)
@@ -242,6 +243,16 @@ $obj = \ngfw\Recipe::arrayToObject($array);
 //   ["baz"]=>
 //   string(3) "qux"
 // }
+```
+###Array to String
+```php
+$array = array(
+    "foo" => "bar",
+    "baz" => "qux",
+);
+$string = Recipe::arrayToString($array);
+echo $string;
+// outputs: foo="bar" baz="qux"
 ```
 ###HEX to RGB
 ```php

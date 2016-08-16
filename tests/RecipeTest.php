@@ -185,6 +185,19 @@ class RecipeTest extends PHPUnit_Framework_TestCase
         );
         $obj = Recipe::arrayToObject($array);
         $this->assertInternalType('object', $obj);
+    } 
+
+    public function test_arrayToString()
+    {
+        $array = array(
+            "foo" => "bar",
+            "baz" => "qux",
+        );
+        $string = Recipe::arrayToString($array);
+        $this->assertEquals(
+            'foo="bar" baz="qux"',
+            $string
+        );
     }
 
     /**

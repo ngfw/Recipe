@@ -18,12 +18,8 @@ class Recipe
             $protocol = 'http://';
         }
         $apiUrl = $protocol . 'www.google.com/s2/favicons?domain=';
-        $attr   = "";
-        if (isset($attributes) && is_array($attributes) && !empty($attributes)) {
-            foreach ($attributes as $attributeName => $attributeValue) {
-                $attr .= $attributeName . '="' . $attributeValue . '" ';
-            }
-        }
+        $attr   = self::arrayToString($attributes);
+        
         if (strpos($url, "http") !== false) {
             $url = str_replace('http://', "", $url);
         }
@@ -45,12 +41,7 @@ class Recipe
         } else {
             $protocol = 'http://';
         }
-        $attr = "";
-        if (isset($attributes) && is_array($attributes) && !empty($attributes)) {
-            foreach ($attributes as $attributeName => $attributeValue) {
-                $attr .= $attributeName . '="' . $attributeValue . '" ';
-            }
-        }
+        $attr   = self::arrayToString($attributes);
         $apiUrl = $protocol . "chart.apis.google.com/chart?chs=" . $width . "x" . $height . "&cht=qr&chl=" . urlencode($string);
         return '<img src="' . $apiUrl . '" ' . trim($attr) . ' />';
     }
@@ -76,12 +67,7 @@ class Recipe
      */
     public static function getGravatar($email, $size = 80, $default = 'mm', $rating = 'g', $attributes = array())
     {
-        $attr = "";
-        if (isset($attributes) && is_array($attributes) && !empty($attributes)) {
-            foreach ($attributes as $attributeName => $attributeValue) {
-                $attr .= $attributeName . '="' . $attributeValue . '" ';
-            }
-        }
+        $attr   = self::arrayToString($attributes);
         if (self::ishttps()) {
             $url = 'https://secure.gravatar.com/';
         } else {
@@ -111,9 +97,7 @@ class Recipe
         if (empty($text)) {
             $text = $link;
         }
-        foreach ($attributes as $attributeName => $attributeValue) {
-            $attr .= $attributeName . '="' . $attributeValue . '" ';
-        }
+        $attr .= self::arrayToString($attributes);
         $linkTag .= trim($attr) . '>' . htmlspecialchars($text, ENT_QUOTES, 'UTF-8') . "</a>";
         return $linkTag;
     }
@@ -197,6 +181,22 @@ class Recipe
         } else {
             return false;
         }
+    }
+
+    /**
+     * Convert Array to string
+     * expected output: <key1>="value1" <key2>="value2"
+     * @param  array         $array array to convert to string
+     * @return string
+     */
+     public static function arrayToString($array = array()){
+        $string="";
+        if (isset($array) && is_array($array) && !empty($array)) {
+            foreach ($array as $key => $value) {
+                $string .= $key . '="' . $value . '" ';
+            }
+        }
+        return rtrim($string, " ");
     }
 
     /**
@@ -916,12 +916,7 @@ class Recipe
      */
     public static function notification($notification, $type = null, $attributes = array())
     {
-        $attr = "";
-        if (isset($attributes) && is_array($attributes) && !empty($attributes)) {
-            foreach ($attributes as $attributeName => $attributeValue) {
-                $attr .= $attributeName . '="' . $attributeValue . '" ';
-            }
-        }
+        $attr   = self::arrayToString($attributes);
         if (isset($notification) && !empty($notification)) {
             switch (strtolower($type)) {
 
@@ -1021,10 +1016,7 @@ class Recipe
      */
     public static function makeClickableLinks($string, $attributes = array())
     {
-        $attr = "";
-        foreach ($attributes as $attributeName => $attributeValue):
-            $attr .= $attributeName . '="' . $attributeValue . '" ';
-        endforeach;
+        $attr   = self::arrayToString($attributes);
         return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" ' . $attr . '>$1</a>', $string);
     }
 
