@@ -19,7 +19,7 @@ class Recipe
         }
         $apiUrl = $protocol . 'www.google.com/s2/favicons?domain=';
         $attr   = self::arrayToString($attributes);
-        
+
         if (strpos($url, "http") !== false) {
             $url = str_replace('http://', "", $url);
         }
@@ -67,7 +67,7 @@ class Recipe
      */
     public static function getGravatar($email, $size = 80, $default = 'mm', $rating = 'g', $attributes = array())
     {
-        $attr   = self::arrayToString($attributes);
+        $attr = self::arrayToString($attributes);
         if (self::ishttps()) {
             $url = 'https://secure.gravatar.com/';
         } else {
@@ -189,8 +189,9 @@ class Recipe
      * @param  array         $array array to convert to string
      * @return string
      */
-     public static function arrayToString($array = array()){
-        $string="";
+    public static function arrayToString($array = array())
+    {
+        $string = "";
         if (isset($array) && is_array($array) && !empty($array)) {
             foreach ($array as $key => $value) {
                 $string .= $key . '="' . $value . '" ';
@@ -429,9 +430,7 @@ class Recipe
     public static function getBrowser()
     {
         $u_agent     = $_SERVER['HTTP_USER_AGENT'];
-        $browserName = 'Unknown';
-        $platform    = 'Unknown';
-        $version     = "";
+        $browserName = $ub = $platform = 'Unknown';
         if (preg_match('/linux/i', $u_agent)) {
             $platform = 'Linux';
         } elseif (preg_match('/macintosh|mac os x/i', $u_agent)) {
@@ -507,7 +506,8 @@ class Recipe
         $separator   = ', ';
         $negative    = 'negative ';
         $decimal     = ' point ';
-        $string      = $fraction      = null;
+        $string      = null;
+        $fraction    = null;
         $dictionary  = array(0 => 'zero', 1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six', 7 => 'seven', 8 => 'eight', 9 => 'nine', 10 => 'ten', 11 => 'eleven', 12 => 'twelve', 13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen', 16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen', 19 => 'nineteen', 20 => 'twenty', 30 => 'thirty', 40 => 'fourty', 50 => 'fifty', 60 => 'sixty', 70 => 'seventy', 80 => 'eighty', 90 => 'ninety', 100 => 'hundred', 1000 => 'thousand', 1000000 => 'million', 1000000000 => 'billion', 1000000000000 => 'trillion', 1000000000000000 => 'quadrillion', 1000000000000000000 => 'quintillion');
 
         if (!is_numeric($number)) {
@@ -648,7 +648,6 @@ class Recipe
             $maxLength = max($maxLength, 0);
         }
         if ($wordsafe) {
-            $matches = array();
             $string  = preg_replace('/\s+?(\S+)?$/', '', mb_substr($string, 0, $maxLength));
         } else {
             $string = mb_substr($string, 0, $maxLength);
@@ -671,7 +670,7 @@ class Recipe
     public static function curl($url, $method = 'GET', $data = false, $headers = false, $returnInfo = false)
     {
         $ch = curl_init();
-
+        $info = null;
         if (strtoupper($method) == 'POST') {
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_POST, true);
@@ -867,7 +866,6 @@ class Recipe
      */
     public static function getKeywordSuggestionsFromGoogle($keyword)
     {
-        $keywords = array();
         $data     = self::curl('http://suggestqueries.google.com/complete/search?output=firefox&client=firefox&hl=en-US&q=' . urlencode($keyword));
         if (($data = json_decode($data, true)) !== null) {
             if (!empty($data[1])) {
@@ -916,7 +914,7 @@ class Recipe
      */
     public static function notification($notification, $type = null, $attributes = array())
     {
-        $attr   = self::arrayToString($attributes);
+        $attr = self::arrayToString($attributes);
         if (isset($notification) && !empty($notification)) {
             switch (strtolower($type)) {
 
@@ -969,7 +967,7 @@ class Recipe
                     break;
                 }
             }
-            if ($requestURL) {
+            if ($requestURL !== false) {
                 $params = array("maxwidth" => $width, "maxheight" => $height, "format" => "json");
 
                 $requestURL = $requestURL . "?url=" . $url . "&" . http_build_query($params);
@@ -1016,7 +1014,7 @@ class Recipe
      */
     public static function makeClickableLinks($string, $attributes = array())
     {
-        $attr   = self::arrayToString($attributes);
+        $attr = self::arrayToString($attributes);
         return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" ' . $attr . '>$1</a>', $string);
     }
 
@@ -1027,7 +1025,6 @@ class Recipe
      */
     public static function debug($variable)
     {
-        $html = '';
         ob_start();
         var_dump($variable);
         $output = ob_get_clean();
