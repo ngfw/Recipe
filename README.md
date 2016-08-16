@@ -22,6 +22,7 @@ Table of Contents
 * [Generate Random Password](#generate-random-password)
 * [Simple Encode](#simple-encode)
 * [Simple Decode](#simple-decode)
+* [Generate Server Specific Hash](#generate-server-specific-hash)
 * [Detect HTTPS](#detect-https)
 * [Detect AJAX](#detect-ajax)
 * [Check if number is odd](#check-if-number-is-odd)
@@ -282,6 +283,12 @@ echo $encodedString;
 $decodedString = \ngfw\Recipe::simpleDecode("qcnVhqjKxpuilw==");
 echo $decodedString;
 // outputs: php recipe
+```
+###Generate Server Specific Hash
+```php
+$serverHash = \ngfw\Recipe::generateServerSpecificHash();
+echo $serverHash;
+// outputs: d41d8cd98f00b204e9800998ecf8427e
 ```
 ###Detect HTTPS
 This method checks for `$_SERVER['HTTPS']`

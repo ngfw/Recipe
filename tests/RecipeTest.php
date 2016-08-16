@@ -249,6 +249,15 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             $decodedString
         );
     }
+
+    public function test_generateServerSpecificHash()
+    {
+        $serverHash = Recipe::generateServerSpecificHash();
+        $this->assertEquals(
+            32,
+            strlen($serverHash)
+        );
+    }
     /**
      * Check if request is on https
      * @return [type] [description]

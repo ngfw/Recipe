@@ -272,7 +272,7 @@ class Recipe
     public static function simpleEncode($string, $passkey = null)
     {
         if (!isset($passkey) || empty($passkey)) {
-            $key = (isset($_SERVER['SERVER_NAME']) && !empty($_SERVER['SERVER_NAME'])) ? md5($_SERVER['SERVER_NAME']) : md5(pathinfo(__FILE__, PATHINFO_FILENAME));
+            $key = self::generateServerSpecificHash();
         } else {
             $key = $passkey;
         }
@@ -295,7 +295,7 @@ class Recipe
     public static function simpleDecode($string, $passkey = null)
     {
         if (!isset($passkey) || empty($passkey)) {
-            $key = (isset($_SERVER['SERVER_NAME']) && !empty($_SERVER['SERVER_NAME'])) ? md5($_SERVER['SERVER_NAME']) : md5(pathinfo(__FILE__, PATHINFO_FILENAME));
+            $key = self::generateServerSpecificHash();
         } else {
             $key = $passkey;
         }
@@ -308,6 +308,15 @@ class Recipe
             $result .= $char;
         }
         return $result;
+    }
+
+    /**
+     * Generate Server Specific hash 
+     * @method generateServerSpecificHash
+     * @return string 
+     */
+    public static function generateServerSpecificHash(){
+        return (isset($_SERVER['SERVER_NAME']) && !empty($_SERVER['SERVER_NAME'])) ? md5($_SERVER['SERVER_NAME']) : md5(pathinfo(__FILE__, PATHINFO_FILENAME));
     }
 
     /**
@@ -461,9 +470,7 @@ class Recipe
 
         $known   = array('Version', $ub, 'other');
         $pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
-        if (!preg_match_all($pattern, $u_agent, $matches)) {
-        }
-
+        preg_match_all($pattern, $u_agent, $matches);
         $i = count($matches['browser']);
         if ($i != 1) {
             if (strripos($u_agent, "Version") < strripos($u_agent, $ub)) {
@@ -506,7 +513,6 @@ class Recipe
         $separator   = ', ';
         $negative    = 'negative ';
         $decimal     = ' point ';
-        $string      = null;
         $fraction    = null;
         $dictionary  = array(0 => 'zero', 1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six', 7 => 'seven', 8 => 'eight', 9 => 'nine', 10 => 'ten', 11 => 'eleven', 12 => 'twelve', 13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen', 16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen', 19 => 'nineteen', 20 => 'twenty', 30 => 'thirty', 40 => 'fourty', 50 => 'fifty', 60 => 'sixty', 70 => 'seventy', 80 => 'eighty', 90 => 'ninety', 100 => 'hundred', 1000 => 'thousand', 1000000 => 'million', 1000000000 => 'billion', 1000000000000 => 'trillion', 1000000000000000 => 'quadrillion', 1000000000000000000 => 'quintillion');
 
@@ -890,9 +896,6 @@ class Recipe
             $array['description'] = (string) $xml->Section->Item->Description;
             $punctuationArray     = array(":");
             $lastChar             = mb_substr(trim($array['description']), -1, 1, "UTF-8");
-
-            if (!in_array($lastChar, $punctuationArray)) {}
-
             $array['url'] = (string) $xml->Section->Item->Url;
             if (isset($xml->Section->Item->Image)) {
                 $img            = (string) $xml->Section->Item->Image->attributes()->source;
@@ -981,7 +984,6 @@ class Recipe
 
                         $title = !empty($data['title']) && is_string($data['title']) ? $data['title'] : '';
                         return '<a href="' . $url . '"><img src="' . htmlspecialchars($data['url'], ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '" width="' . htmlspecialchars($data['width'], ENT_QUOTES, 'UTF-8') . '" height="' . htmlspecialchars($data['height'], ENT_QUOTES, 'UTF-8') . '" /></a>';
-                        break;
 
                     case 'video':
                     case 'rich':
@@ -1035,8 +1037,7 @@ class Recipe
                     case "string":
                         $matches['value'] = htmlspecialchars($matches['value']);
                         return '<span style="color: #0000FF;">string</span>(<span style="color: #1287DB;">' . $matches['length'] . ')</span> <span style="color: #6B6E6E;">' . $matches['value'] . '</span>';
-                        break;
-
+                        
                     case "array":
                         $key   = '<span style="color: #008000;">"' . $matches['key'] . '"</span>';
                         $class = '';
@@ -1048,29 +1049,29 @@ class Recipe
                             $scope = ':<span style="color: #666666;">' . $matches['scope'] . '</span>';
                         }
                         return '[' . $key . $class . $scope . ']=>';
-                        break;
+                        
 
                     case "countable":
                         $type  = '<span style="color: #0000FF;">' . $matches['type'] . '</span>';
                         $count = '(<span style="color: #1287DB;">' . $matches['count'] . '</span>)';
                         return $type . $count;
-                        break;
+                        
 
                     case "bool":
                         return '<span style="color: #0000FF;">bool</span>(<span style="color: #0000FF;">' . $matches['value'] . '</span>)';
-                        break;
+                        
 
                     case "float":
                         return '<span style="color: #0000FF;">float</span>(<span style="color: #1287DB;">' . $matches['value'] . '</span>)';
-                        break;
+                        
 
                     case "resource":
                         return '<span style="color: #0000FF;">resource</span>(<span style="color: #1287DB;">' . $matches['count'] . '</span>) of type (<span style="color: #4D5D94;">' . $matches['class'] . '</span>)';
-                        break;
+                        
 
                     case "object":
                         return '<span style="color: #0000FF;">object</span>(<span style="color: #4D5D94;">' . $matches['class'] . '</span>)#' . $matches['id'] . ' (<span style="color: #1287DB;">' . $matches['count'] . '</span>)';
-                        break;
+                        
                 }
             }, $output);
         }
