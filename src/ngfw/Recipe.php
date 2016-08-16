@@ -894,8 +894,6 @@ class Recipe
         if ((string) $xml->Section->Item->Description) {
             $array['title']       = (string) $xml->Section->Item->Text;
             $array['description'] = (string) $xml->Section->Item->Description;
-            $punctuationArray     = array(":");
-            $lastChar             = mb_substr(trim($array['description']), -1, 1, "UTF-8");
             $array['url'] = (string) $xml->Section->Item->Url;
             if (isset($xml->Section->Item->Image)) {
                 $img            = (string) $xml->Section->Item->Image->attributes()->source;
