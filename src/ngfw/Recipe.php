@@ -354,7 +354,7 @@ class Recipe
      */
     public static function isNumberOdd($num)
     {
-        return (($num - (2 * floor($num / 2))) == 1);
+        return $num % 2 !== 0;
     }
 
     /**
@@ -364,7 +364,7 @@ class Recipe
      */
     public static function isNumberEven($num)
     {
-        return (($num - (2 * floor($num / 2))) == 0);
+        return $num % 2 == 0;
     }
 
     /**
