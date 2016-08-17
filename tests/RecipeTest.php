@@ -309,10 +309,10 @@ class RecipeTest extends PHPUnit_Framework_TestCase
      */
     public function test_getClientIP()
     {
-        $_SERVER['REMOTE_ADDR'] = "10.10.10.10";
+        $_SERVER['REMOTE_ADDR'] = "8.8.8.8";
         $ip                     = Recipe::getClientIP();
         $this->assertEquals(
-            '10.10.10.10',
+            '8.8.8.8',
             $ip
         );
     }

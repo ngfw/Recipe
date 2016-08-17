@@ -111,8 +111,7 @@ class Recipe
     {
         if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
             list($userName, $mailDomain) = explode("@", $address);
-            if (checkdnsrr($mailDomain, "MX"))
-            {
+            if (checkdnsrr($mailDomain, "MX")) {
                 return true;
             }
         }
@@ -315,11 +314,12 @@ class Recipe
     }
 
     /**
-     * Generate Server Specific hash 
+     * Generate Server Specific hash
      * @method generateServerSpecificHash
-     * @return string 
+     * @return string
      */
-    public static function generateServerSpecificHash(){
+    public static function generateServerSpecificHash()
+    {
         return (isset($_SERVER['SERVER_NAME']) && !empty($_SERVER['SERVER_NAME'])) ? md5($_SERVER['SERVER_NAME']) : md5(pathinfo(__FILE__, PATHINFO_FILENAME));
     }
 
@@ -405,22 +405,26 @@ class Recipe
 
     /**
      * Returns the IP address of the client.
-     * @param   boolean $trustProxyHeaders Default false
+     * @param   boolean $headerContainingIPAddress Default false
      * @return  string
      */
-    public static function getClientIP($trustProxyHeaders = false)
+    public static function getClientIP($headerContainingIPAddress = null)
     {
-        if ($trustProxyHeaders) {
-            return $_SERVER['REMOTE_ADDR'];
+        if (!empty($headerContainingIPAddress)) {
+            return isset($_SERVER[$headerContainingIPAddress]) ? trim($_SERVER[$headerContainingIPAddress]) : false;
         }
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
+        $knowIPkeys = array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR');
+        foreach ($knowIPkeys as $key) {
+            if (array_key_exists($key, $_SERVER) === true) {
+                foreach (explode(',', $_SERVER[$key]) as $ip) {
+                    $ip = trim($ip);
+                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
+                        return $ip;
+                    }
+                }
+            }
         }
-        return $ip;
+        return false;
     }
 
     /**
@@ -658,7 +662,7 @@ class Recipe
             $maxLength = max($maxLength, 0);
         }
         if ($wordsafe) {
-            $string  = preg_replace('/\s+?(\S+)?$/', '', mb_substr($string, 0, $maxLength));
+            $string = preg_replace('/\s+?(\S+)?$/', '', mb_substr($string, 0, $maxLength));
         } else {
             $string = mb_substr($string, 0, $maxLength);
         }
@@ -679,7 +683,7 @@ class Recipe
      */
     public static function curl($url, $method = 'GET', $data = false, $headers = false, $returnInfo = false)
     {
-        $ch = curl_init();
+        $ch   = curl_init();
         $info = null;
         if (strtoupper($method) == 'POST') {
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -876,7 +880,7 @@ class Recipe
      */
     public static function getKeywordSuggestionsFromGoogle($keyword)
     {
-        $data     = self::curl('http://suggestqueries.google.com/complete/search?output=firefox&client=firefox&hl=en-US&q=' . urlencode($keyword));
+        $data = self::curl('http://suggestqueries.google.com/complete/search?output=firefox&client=firefox&hl=en-US&q=' . urlencode($keyword));
         if (($data = json_decode($data, true)) !== null) {
             if (!empty($data[1])) {
                 return $data[1];
@@ -896,10 +900,10 @@ class Recipe
         $data   = self::curl($apiurl);
         $xml    = simplexml_load_string($data);
         if ((string) $xml->Section->Item->Description) {
-            $array = array();
+            $array                = array();
             $array['title']       = (string) $xml->Section->Item->Text;
             $array['description'] = (string) $xml->Section->Item->Description;
-            $array['url'] = (string) $xml->Section->Item->Url;
+            $array['url']         = (string) $xml->Section->Item->Url;
             if (isset($xml->Section->Item->Image)) {
                 $img            = (string) $xml->Section->Item->Image->attributes()->source;
                 $array['image'] = str_replace("/50px-", "/200px-", $img);
@@ -1040,7 +1044,7 @@ class Recipe
                     case "string":
                         $matches['value'] = htmlspecialchars($matches['value']);
                         return '<span style="color: #0000FF;">string</span>(<span style="color: #1287DB;">' . $matches['length'] . ')</span> <span style="color: #6B6E6E;">' . $matches['value'] . '</span>';
-                        
+
                     case "array":
                         $key   = '<span style="color: #008000;">"' . $matches['key'] . '"</span>';
                         $class = '';
@@ -1052,29 +1056,24 @@ class Recipe
                             $scope = ':<span style="color: #666666;">' . $matches['scope'] . '</span>';
                         }
                         return '[' . $key . $class . $scope . ']=>';
-                        
 
                     case "countable":
                         $type  = '<span style="color: #0000FF;">' . $matches['type'] . '</span>';
                         $count = '(<span style="color: #1287DB;">' . $matches['count'] . '</span>)';
                         return $type . $count;
-                        
 
                     case "bool":
                         return '<span style="color: #0000FF;">bool</span>(<span style="color: #0000FF;">' . $matches['value'] . '</span>)';
-                        
 
                     case "float":
                         return '<span style="color: #0000FF;">float</span>(<span style="color: #1287DB;">' . $matches['value'] . '</span>)';
-                        
 
                     case "resource":
                         return '<span style="color: #0000FF;">resource</span>(<span style="color: #1287DB;">' . $matches['count'] . '</span>) of type (<span style="color: #4D5D94;">' . $matches['class'] . '</span>)';
-                        
 
                     case "object":
                         return '<span style="color: #0000FF;">object</span>(<span style="color: #4D5D94;">' . $matches['class'] . '</span>)#' . $matches['id'] . ' (<span style="color: #1287DB;">' . $matches['count'] . '</span>)';
-                        
+
                 }
             }, $output);
         }
