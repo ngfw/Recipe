@@ -47,7 +47,7 @@ Table of Contents
 * [Notification](#notification)
 * [Auto Embed](#auto-embed)
 * [Make Clickable Links](#make-clickable-links)
-* [Debug](#debug)
+* [:wrench: Debug](#debug)
 
 ---
 ###Quick Start
