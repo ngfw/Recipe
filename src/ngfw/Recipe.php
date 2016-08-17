@@ -109,8 +109,12 @@ class Recipe
      */
     public static function validateEmail($address)
     {
-        if (isset($address) && filter_var($address, FILTER_VALIDATE_EMAIL)) {
-            return true;
+        if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
+            list($userName, $mailDomain) = explode("@", $address);
+            if (checkdnsrr($mailDomain, "MX"))
+            {
+                return true;
+            }
         }
         return false;
     }
@@ -122,7 +126,7 @@ class Recipe
      */
     public static function validateURL($url)
     {
-        if (isset($url) && filter_var($url, FILTER_VALIDATE_URL)) {
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
             return true;
         }
         return false;

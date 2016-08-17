@@ -140,6 +140,9 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     {
         $isValid = Recipe::validateEmail("user@domain");
         $this->assertFalse($isValid);
+
+        $isValid = Recipe::validateEmail("user@veryLongAndNotExistingDomainName132435.com");
+        $this->assertFalse($isValid);
     }
 
     /**
