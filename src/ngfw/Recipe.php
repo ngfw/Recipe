@@ -110,7 +110,7 @@ class Recipe
     public static function validateEmail($address)
     {
         if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
-            list($userName, $mailDomain) = explode("@", $address);
+            list(, $mailDomain) = explode("@", $address);
             if (checkdnsrr($mailDomain, "MX")) {
                 return true;
             }
