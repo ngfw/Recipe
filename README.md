@@ -1,11 +1,11 @@
-# Recipe
+# Recipe :book:
 ####Collection of PHP Functions
 
 ![](https://travis-ci.org/ngfw/Recipe.svg?branch=master) ![](https://img.shields.io/packagist/v/ngfw/recipe.svg?maxAge=259200) ![](https://img.shields.io/badge/code-awesome-brightgreen.svg?maxAge=2592000) ![](https://img.shields.io/badge/language-PHP-blue.svg?maxAge=2592000)
 
 ---
 Table of Contents
-* [Quick Start](#quick-start)
+* [:rocket: Quick Start](#quick-start)
 * [Favicon](#favicon)
 * [QRcode](#qrcode)
 * [File extension](#file-extension)
