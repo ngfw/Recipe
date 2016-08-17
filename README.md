@@ -328,7 +328,7 @@ $ClientsIP = \ngfw\Recipe::getClientIP();
 echo $ClientsIP;
 //OR 
 // Return Proxy IP if user is behind it
-//$ClientsIP = \ngfw\Recipe::getClientIP($trustProxyHeaders = true);
+//$ClientsIP = \ngfw\Recipe::getClientIP("HTTP_CLIENT_IP"); //'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED', ...
 // outputs: IP address
 ```
 ###Detect Mobile
