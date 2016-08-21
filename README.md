@@ -360,7 +360,7 @@ echo $number_in_words;
 ###Seconds To Text
 ```php
 $seconds = "864210";
-$number_in_words = \ngfw\Recipe::numberToWord($seconds);
+$number_in_words = \ngfw\Recipe::secondsToText($seconds);
 echo $number_in_words;
 // outputs: 1 hour and 10 seconds
 // \ngfw\Recipe::secondsToText($seconds, $returnAsWords = true);
