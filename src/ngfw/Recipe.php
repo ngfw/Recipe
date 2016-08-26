@@ -478,12 +478,13 @@ class Recipe
         }
         $knowIPkeys = ['HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR'];
         foreach ($knowIPkeys as $key) {
-            if (array_key_exists($key, $_SERVER) === true) {
-                foreach (explode(',', $_SERVER[$key]) as $ip) {
-                    $ip = trim($ip);
-                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
-                        return $ip;
-                    }
+            if (array_key_exists($key, $_SERVER) !== true) {
+                continue;
+            }
+            foreach (explode(',', $_SERVER[$key]) as $ip) {
+                $ip = trim($ip);
+                if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
+                    return $ip;
                 }
             }
         }
@@ -553,14 +554,9 @@ class Recipe
         $pattern = '#(?<browser>'.implode('|', $known).')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
         preg_match_all($pattern, $u_agent, $matches);
         $i = count($matches['browser']);
-        if ($i != 1) {
-            if (strripos($u_agent, 'Version') < strripos($u_agent, $ub)) {
-                $version = $matches['version'][0];
-            } else {
-                $version = $matches['version'][1];
-            }
-        } else {
-            $version = $matches['version'][0];
+        $version = $matches['version'][0];
+        if ($i != 1 && strripos($u_agent, 'Version') >= strripos($u_agent, $ub)) {
+            $version = $matches['version'][1];
         }
         if ($version == null || $version == '') {
             $version = '?';
@@ -683,18 +679,21 @@ class Recipe
             $div = floor($seconds / $dur);
             if ($div == 0) {
                 continue;
-            } elseif ($div == 1) {
+            } 
+            if ($div == 1) {
                 $parts[] = ($returnAsWords ? self::numberToWord($div) : $div).' '.$name;
-            } else {
+            } 
+            else {
                 $parts[] = ($returnAsWords ? self::numberToWord($div) : $div).' '.$name.'s';
             }
             $seconds %= $dur;
         }
         $last = array_pop($parts);
-        if (empty($parts)):
-            return $last; else:
-            return implode(', ', $parts).' and '.$last;
-        endif;
+        if (empty($parts)) {
+            return $last; 
+        }
+        
+        return implode(', ', $parts).' and '.$last;
     }
 
     /**
@@ -707,9 +706,7 @@ class Recipe
      */
     public static function minutesToText($minutes, $returnAsWords = false)
     {
-        $seconds = $minutes * 60;
-
-        return self::secondsToText($seconds, $returnAsWords);
+        return self::secondsToText($minutes * 60, $returnAsWords);
     }
 
     /**
@@ -722,9 +719,7 @@ class Recipe
      */
     public static function hoursToText($hours, $returnAsWords = false)
     {
-        $seconds = $hours * 3600;
-
-        return self::secondsToText($seconds, $returnAsWords);
+        return self::secondsToText($hours * 3600, $returnAsWords);
     }
 
     /**
@@ -749,10 +744,9 @@ class Recipe
             $maxLength -= mb_strlen($ellipsis);
             $maxLength = max($maxLength, 0);
         }
+        $string = mb_substr($string, 0, $maxLength);
         if ($wordsafe) {
             $string = preg_replace('/\s+?(\S+)?$/', '', mb_substr($string, 0, $maxLength));
-        } else {
-            $string = mb_substr($string, 0, $maxLength);
         }
         if ($addEllipsis) {
             $string .= $ellipsis;
@@ -782,7 +776,8 @@ class Recipe
             if ($data !== false) {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
             }
-        } else {
+        } 
+        else {
             if ($data !== false) {
                 if (is_array($data)) {
                     $dataTokens = [];
@@ -792,7 +787,8 @@ class Recipe
                     $data = implode('&', $dataTokens);
                 }
                 curl_setopt($ch, CURLOPT_URL, $url.'?'.$data);
-            } else {
+            } 
+            else {
                 curl_setopt($ch, CURLOPT_URL, $url);
             }
         }
@@ -810,9 +806,9 @@ class Recipe
         curl_close($ch);
         if ($returnInfo) {
             return ['contents' => $contents, 'info' => $info];
-        } else {
-            return $contents;
         }
+        
+        return $contents;
     }
 
     /**
@@ -824,34 +820,34 @@ class Recipe
      */
     public static function expandShortUrl($shortURL)
     {
-        if (!empty($shortURL)) {
-            $headers = get_headers($shortURL, 1);
-            if (isset($headers['Location'])) {
-                return $headers['Location'];
-            } else {
-                $data = self::curl($shortURL);
-                preg_match_all('/<[\s]*meta[\s]*http-equiv="?'.'([^>"]*)"?[\s]*'.'content="?([^>"]*)"?[\s]*[\/]?[\s]*>/si', $data, $match);
-                if (isset($match) && is_array($match) && count($match) == 3) {
-                    $originals = $match[0];
-                    $names = $match[1];
-                    $values = $match[2];
-                    if ((isset($originals) && isset($names) && isset($values)) && count($originals) == count($names) && count($names) == count($values)) {
-                        $metaTags = [];
-                        for ($i = 0, $limit = count($names); $i < $limit; $i++) {
-                            $metaTags[$names[$i]] = ['html' => htmlentities($originals[$i]), 'value' => $values[$i]];
-                        }
-                    }
-                }
-                if (isset($metaTags['refresh']['value']) && !empty($metaTags['refresh']['value'])) {
-                    $returnData = explode('=', $metaTags['refresh']['value']);
-                    if (isset($returnData[1]) && !empty($returnData[1])) {
-                        return $returnData[1];
-                    }
+        if (empty($shortURL)) {
+            return false;
+        }
+        
+        $headers = get_headers($shortURL, 1);
+        if (isset($headers['Location'])) {
+            return $headers['Location'];
+        } 
+        
+        $data = self::curl($shortURL);
+        preg_match_all('/<[\s]*meta[\s]*http-equiv="?'.'([^>"]*)"?[\s]*'.'content="?([^>"]*)"?[\s]*[\/]?[\s]*>/si', $data, $match);
+        if (isset($match) && is_array($match) && count($match) == 3) {
+            $originals = $match[0];
+            $names = $match[1];
+            $values = $match[2];
+            if ((isset($originals) && isset($names) && isset($values)) && count($originals) == count($names) && count($names) == count($values)) {
+                $metaTags = [];
+                for ($i = 0, $limit = count($names); $i < $limit; $i++) {
+                    $metaTags[$names[$i]] = ['html' => htmlentities($originals[$i]), 'value' => $values[$i]];
                 }
             }
         }
-
-        return false;
+        if (isset($metaTags['refresh']['value']) && !empty($metaTags['refresh']['value'])) {
+            $returnData = explode('=', $metaTags['refresh']['value']);
+            if (isset($returnData[1]) && !empty($returnData[1])) {
+                return $returnData[1];
+            }
+        }
     }
 
     /**
@@ -955,11 +951,11 @@ class Recipe
 
         if ($pos === false) {
             return false;
-        } else {
-            $pagerank = substr($data, $pos + 9);
+        } 
+        
+        $pagerank = substr($data, $pos + 9);
 
-            return (int) $pagerank;
-        }
+        return (int) $pagerank;
     }
 
     /**
@@ -992,10 +988,8 @@ class Recipe
     public static function getKeywordSuggestionsFromGoogle($keyword)
     {
         $data = self::curl('http://suggestqueries.google.com/complete/search?output=firefox&client=firefox&hl=en-US&q='.urlencode($keyword));
-        if (($data = json_decode($data, true)) !== null) {
-            if (!empty($data[1])) {
-                return $data[1];
-            }
+        if (($data = json_decode($data, true)) !== null && !empty($data[1])) {
+            return $data[1];
         }
 
         return false;
@@ -1043,7 +1037,6 @@ class Recipe
         $attr = self::arrayToString($attributes);
         if (isset($notification) && !empty($notification)) {
             switch (strtolower($type)) {
-
                 case 'success':
                     $css = 'border-color: #bdf2a6;color: #2a760a;background-color: #eefde7;';
                     break;
@@ -1128,9 +1121,10 @@ class Recipe
                     default:
                         return $matches[0];
                 }
-            } else {
-                return $matches[0];
-            }
+            } 
+            
+            return $matches[0];
+            
         }, $string);
 
         return $string;
@@ -1146,9 +1140,7 @@ class Recipe
      */
     public static function makeClickableLinks($string, $attributes = [])
     {
-        $attr = self::arrayToString($attributes);
-
-        return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" '.$attr.'>$1</a>', $string);
+        return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" '.self::arrayToString($attributes).'>$1</a>', $string);
     }
 
     /**
