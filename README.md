@@ -49,6 +49,7 @@ Table of Contents
 * [Auto Embed](#auto-embed)
 * [Make Clickable Links](#make-clickable-links)
 * [:wrench: Debug](#debug)
+* [Get Referrer Page](#referrer)
 
 ---
 ###Quick Start
@@ -87,7 +88,7 @@ Getting remote website Favicon:
 ```php
 $favIcon = \ngfw\Recipe::getFavicon("http://youtube.com/");
 
-echo $favIcon; 
+echo $favIcon;
 // outputs: <img src="http://www.google.com/s2/favicons?domain=youtube.com/"  />
 ```
 <img src="http://www.google.com/s2/favicons?domain=youtube.com/"  />
@@ -95,14 +96,14 @@ echo $favIcon;
 Getting remote website Favicon with HTML attributes:
 ```php
 $favIcon = \ngfw\Recipe::getFavicon(
-          "http://youtube.com/", 
+          "http://youtube.com/",
           array(
             "class" => "favImg"
           )
 );
-echo $favIcon; 
+echo $favIcon;
 //outputs: <img src="http://www.google.com/s2/favicons?domain=youtube.com/" class="favImg" />
-            
+
 ```
 <img src="http://www.google.com/s2/favicons?domain=youtube.com/" class="favImg" />
 
@@ -120,8 +121,8 @@ Generating QR code and adding HTML attributes:
 ```php
 $QRcode = \ngfw\Recipe::getQRcode(
     "ngfw Recipe",
-    $width = 350, 
-    $height = 350, 
+    $width = 350,
+    $height = 350,
     $attributes = array(
         "class" => "QRCode"
     )
@@ -135,7 +136,7 @@ echo $QRcode;
 ###File extension
 ```php
 $ext = \ngfw\Recipe::getFileExtension(__FILE__); // replace '__FILE__' with your filename
-echo $ext; 
+echo $ext;
 //outputs: php
 ```
 
@@ -271,7 +272,7 @@ $hex = \ngfw\Recipe::rgb2hex("rgb(123,123,123)");
 ```php
 $randomPass = \ngfw\Recipe::generateRandomPassword(10);
 echo $randomPass;
-// outputs: 10 random character string 
+// outputs: 10 random character string
 ```
 ###Simple Encode
 ```php
@@ -327,7 +328,7 @@ var_dump($currentURL);
 ```php
 $ClientsIP = \ngfw\Recipe::getClientIP();
 echo $ClientsIP;
-//OR 
+//OR
 // Return Proxy IP if user is behind it
 //$ClientsIP = \ngfw\Recipe::getClientIP("HTTP_CLIENT_IP"); //'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED', ...
 // outputs: IP address
@@ -415,7 +416,7 @@ Custom Headers:
 $curlWithHeaders = \ngfw\Recipe::curl("http://jsonplaceholder.typicode.com/posts", $method = "GET", $data = false, $header = array(
     "Accept" => "application/json",
 ), $returnInfo = true);
-// NOTE $returnInfo argument 
+// NOTE $returnInfo argument
 // Result will be returned as an array, $curlWithHeaders={
 //  info => containing curl information, see curl_getinfo()
 //  contents  => Data from URL
@@ -450,7 +451,7 @@ echo $TinyUrl;
 ```php
 $suggestions = \ngfw\Recipe::getKeywordSuggestionsFromGoogle("Tbilisi, Georgia");
 var_dump($suggestions);
-// outputs: 
+// outputs:
 //array(10) {
 //  [0]=>
 //  string(15) "tbilisi georgia"
@@ -486,7 +487,7 @@ $notification = \ngfw\Recipe::notification("Test Successful");
 echo $notification;
 // outputs: <div style="display: block;padding: 0.5em;border: solid 1px;border-radius: 0.125em;margin-bottom: 1em; border-color: #a6d9f2;color: #0a5276;background-color: #e7f6fd;"  role="alert">Test Successful</div>
 // NOTE: possible notifications types: success, warning, error and info
-// Type is passed as a second parameter 
+// Type is passed as a second parameter
 ```
 ###Auto Embed
 ```php
@@ -494,7 +495,7 @@ $string = "Checkout Solomun, Boiler Room at https://www.youtube.com/watch?v=bk6X
 echo \ngfw\Recipe::autoEmbed($string);
 // outputs:
 // Checkout Solomun, Boiler Room at<iframe width="560" height="315" src="https://www.youtube.com/embed/bk6Xst6euQk?feature=oembed" frameborder="0" allowfullscreen></iframe>
-// supported providers are: youtube.com, blip.tv, vimeo.com, dailymotion.com, flickr.com, smugmug.com, hulu.com, revision3.com, wordpress.tv, funnyordie.com, soundcloud.com, slideshare.net and instagram.com 
+// supported providers are: youtube.com, blip.tv, vimeo.com, dailymotion.com, flickr.com, smugmug.com, hulu.com, revision3.com, wordpress.tv, funnyordie.com, soundcloud.com, slideshare.net and instagram.com
 ```
 ###Make Clickable Links
 ```php
@@ -512,3 +513,10 @@ $string = "Test me";
 ```
 
 
+###Referrer
+Get the referer page (last page visited)
+```php
+$referrer = \ngfw\Recipe::getReferer();
+echo $referrer;
+// outputs an url (http://mywebsite.com/page1)
+```
