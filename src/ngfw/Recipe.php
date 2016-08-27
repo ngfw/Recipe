@@ -1207,7 +1207,7 @@ class Recipe
     }
 
     /**
-     * Return referrer page
+     * Return referer page
      *
      * @return string or false
      */

@@ -513,10 +513,10 @@ $string = "Test me";
 ```
 
 
-###Referrer
+###referer
 Get the referer page (last page visited)
 ```php
 $referrer = \ngfw\Recipe::getReferer();
-echo $referrer;
+echo $referer ;
 // outputs an url (http://mywebsite.com/page1)
 ```
