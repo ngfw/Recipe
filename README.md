@@ -523,7 +523,7 @@ echo $referer ;
 ```
 
 ###Compress Page
-The `compressPage()` method will register new function on PHP shutdown, remove white space from out and try to gZip it.
+The `compressPage()` method will register new function on PHP shutdown, remove white space from output and try to gZip it.
 ```php
 <?php
 require "vendor/autoload.php";
