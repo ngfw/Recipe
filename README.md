@@ -49,7 +49,7 @@ Table of Contents
 * [Auto Embed](#auto-embed)
 * [Make Clickable Links](#make-clickable-links)
 * [:wrench: Debug](#debug)
-* [Get Referer Page](#get-refere)
+* [Get Referer](#get-referer)
 * [Compress Page](#compress-page)
 
 ---
