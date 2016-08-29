@@ -49,7 +49,8 @@ Table of Contents
 * [Auto Embed](#auto-embed)
 * [Make Clickable Links](#make-clickable-links)
 * [:wrench: Debug](#debug)
-* [Get Referer Page](#referer)
+* [Get Referer Page](#getrefere)
+* [Compress Page](#compresspage)
 
 ---
 ###Quick Start
@@ -513,10 +514,40 @@ $string = "Test me";
 ```
 
 
-###Referer
+###Get Referer
 Get the referer page (last page visited)
 ```php
 $referrer = \ngfw\Recipe::getReferer();
 echo $referer ;
 // outputs an url (http://mywebsite.com/page1)
 ```
+
+###Compress Page
+The `compressPage()` method will register new function on PHP shutdown, remove white space from out and try to gZip it.
+```php
+<?php
+require "vendor/autoload.php";
+\ngfw\Recipe::compressPage();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<title>HTML Page Title</title>
+
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+    Hello Friend,
+</body>
+</html>
+```
+
+will output:
+```html
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>HTML Page Title</title><meta name="description" content=""><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body> Hello Friend,</body></html>
+```
+
