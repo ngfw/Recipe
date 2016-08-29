@@ -152,8 +152,8 @@ class Recipe
     }
 
     /**
-     * Read RSS feed as array
-     * requires.
+     * Read RSS feed as array.
+     * requires simplexml.
      *
      * @see http://php.net/manual/en/simplexml.installation.php
      *
@@ -173,7 +173,7 @@ class Recipe
     }
 
     /**
-     * Convert objecte to the array.
+     * Convert object to the array.
      *
      * @param object $object PHP object
      *
@@ -218,11 +218,10 @@ class Recipe
 
     /**
      * Convert Array to string
-     * expected output: <key1>="value1" <key2>="value2".
      *
      * @param array $array array to convert to string
      *
-     * @return string
+     * @return string <key1>="value1" <key2>="value2"
      */
     public static function arrayToString($array = [])
     {
@@ -287,7 +286,7 @@ class Recipe
     }
 
     /**
-     * Generate Random Password.
+     * Generate Simple Random Password.
      *
      * @param int $length length of generated password, default 8
      *
@@ -372,7 +371,7 @@ class Recipe
     }
 
     /**
-     * Check to see if the current page is being server over SSL or not.
+     * Check to see if the current page is being served over SSL.
      *
      * @return bool
      */
@@ -713,7 +712,7 @@ class Recipe
     }
 
     /**
-     * Truncate String with or without ellipsis.
+     * Truncate String (shorten) with or without ellipsis.
      *
      * @param string $string      String to truncate
      * @param int    $maxLength   Maximum length of string
@@ -746,7 +745,7 @@ class Recipe
     }
 
     /**
-     * Make Curl call.
+     * Make a Curl call.
      *
      * @param string $url        URL to curl
      * @param string $method     GET or POST, Default GET
@@ -800,7 +799,7 @@ class Recipe
     }
 
     /**
-     * Get information on a short URL. Find out where it goes.
+     * Get information on a short URL. Find out where it forwards.
      *
      * @param string $shortURL shortened URL
      *
@@ -839,7 +838,7 @@ class Recipe
     }
 
     /**
-     * Get Alexa ranking for domain name.
+     * Get Alexa ranking for a domain name.
      *
      * @param string $domain Domain name to get ranking for
      *
@@ -861,7 +860,7 @@ class Recipe
     }
 
     /**
-     * Get Google page rank for url.
+     * Get Google page rank for URL.
      *
      * @param string $url URL to get Google Page rank for
      *
@@ -1012,7 +1011,7 @@ class Recipe
     }
 
     /**
-     * Build notification message.
+     * Build (HTML) notification message.
      *
      * @param string $notification Text to display in notification
      * @param string $type         Notification type, available notifications: success, warning, error and info
@@ -1050,7 +1049,7 @@ class Recipe
     }
 
     /**
-     * Parse text to find url's for embed enabled services like: youtube.com, blip.tv, vimeo.com, dailymotion.com, flickr.com, smugmug.com, hulu.com, revision3.com, wordpress.tv, funnyordie.com, soundcloud.com, slideshare.net and instagram.com and embed elements automatically.
+     * Parse text to find URL's for embed enabled services like: youtube.com, blip.tv, vimeo.com, dailymotion.com, flickr.com, smugmug.com, hulu.com, revision3.com, wordpress.tv, funnyordie.com, soundcloud.com, slideshare.net and instagram.com and embed elements automatically.
      *
      * @param string $string text to parse
      * @param string $width  max width of embeded element
