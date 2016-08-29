@@ -49,8 +49,8 @@ Table of Contents
 * [Auto Embed](#auto-embed)
 * [Make Clickable Links](#make-clickable-links)
 * [:wrench: Debug](#debug)
-* [Get Referer Page](#getrefere)
-* [Compress Page](#compresspage)
+* [Get Referer Page](#get-refere)
+* [Compress Page](#compress-page)
 
 ---
 ###Quick Start
