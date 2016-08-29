@@ -200,6 +200,14 @@ var_dump($isValid);
 // outputs: true (bool)
 ```
 
+Check for temporary Email addresses:
+
+```php
+$isValid = \ngfw\Recipe::validateEmail('user@fakeinbox.com', $tempEmailAllowed = false);
+var_dump($isValid);
+// outputs: false (bool)
+```
+
 ### Validate URL
 ```php
 $isValid = \ngfw\Recipe::validateURL("http://github.com/");

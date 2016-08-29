@@ -1230,7 +1230,7 @@ class Recipe
                 !empty($_SERVER['HTTP_ACCEPT_ENCODING']) &&
                 extension_loaded('zlib') &&
                 strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false){
-                   ob_start('ob_gzhandler');
+                ob_start('ob_gzhandler');
             }
             echo $buffer;
         });
