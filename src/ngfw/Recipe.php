@@ -247,7 +247,7 @@ class Recipe
     {
         $color = str_replace('#', '', $color);
 
-        strlen($color) == 3 ? $hex = [$color[0].$color[0], $color[1].$color[1], $color[2].$color[2]] : [$color[0].$color[1], $color[2].$color[3], $color[4].$color[5]]; 
+        $hex = strlen($color) == 3 ? [$color[0].$color[0], $color[1].$color[1], $color[2].$color[2]] : [$color[0].$color[1], $color[2].$color[3], $color[4].$color[5]]; 
         list($r, $g, $b) = $hex;
 
         $r = hexdec($r);
