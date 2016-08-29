@@ -133,8 +133,8 @@ class Recipe
             if ($tempEmailAllowed) {
                 return true;
             } else {
-                $handle = fopen( __DIR__.'/banned.txt', 'r' );
-                while( ($line = fgets($handle)) !== false ){
+                $handle = fopen(__DIR__.'/banned.txt', 'r');
+                while (($line = fgets($handle)) !== false ){
                         $temp[] = trim( $line );
                 }
                 if (in_array($mailDomain, $temp)) {
