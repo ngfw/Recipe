@@ -1205,4 +1205,17 @@ class Recipe
         }
         echo '<pre style="background-color: #CDDCF4;border: 1px solid #bbb;border-radius: 4px;-moz-border-radius:4px;-webkit-border-radius\:4px;font-size:12px;line-height:1.4em;margin:30px;padding:7px">'.$header.$output.'</pre>';
     }
+
+    /**
+     * Return referer page
+     *
+     * @return string or false
+     */
+    public static function getReferer()
+    {
+        if (!empty($_SERVER['HTTP_REFERER'])) {
+            return $_SERVER['HTTP_REFERER'];
+        }
+        return false;
+    }
 }
