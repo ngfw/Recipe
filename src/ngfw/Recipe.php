@@ -754,7 +754,7 @@ class Recipe
      * @param mixed  $headers    Additional headers, example: array ("Accept: application/json")
      * @param bool   $returnInfo Whether or not to retrieve curl_getinfo()
      *
-     * @return string if $returnInfo is set to True, array is returned with two keys, contents (will contain response) and info (information regarding a specific transfer), otherwise response content is returned
+     * @return string|array if $returnInfo is set to True, array is returned with two keys, contents (will contain response) and info (information regarding a specific transfer), otherwise response content is returned
      */
     public static function curl($url, $method = 'GET', $data = false, $headers = false, $returnInfo = false)
     {
