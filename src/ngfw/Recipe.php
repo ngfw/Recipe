@@ -122,14 +122,26 @@ class Recipe
      *
      * @return bool True if email address is valid, false is returned otherwise
      */
-    public static function validateEmail($address)
+    public static function validateEmail($address, $tempMailAllowed = true )
     {
         strpos($address, '@') ? list(, $mailDomain) = explode('@', $address) : $mailDomain = null;
         if (filter_var($address, FILTER_VALIDATE_EMAIL) &&
             !is_null($mailDomain) &&
             checkdnsrr($mailDomain, 'MX')
         ) {
-            return true;
+            if ( $tempEmailAllowed )
+                return true;
+            else
+            {
+                $handle = fopen( __DIR__.'/banned.txt', 'r' );
+                while( ($line = fgets($handle)) !== false )
+                        $temp[] = trim( $line );
+
+                if( in_array($mailDomain, $temp) )
+                    return false;
+
+                return true;
+            }
         }
 
         return false;
