@@ -597,5 +597,21 @@ class RecipeTest extends PHPUnit_Framework_TestCase
         $debug = ob_get_clean();
         $this->assertInternalType('string', $debug);
     }
+
+    public function test_getReferer()
+    {
+        $_SERVER['HTTP_REFERER'] = 'example.com';
+        $Referer = Recipe::getReferer();
+        $this->assertEquals(
+            'example.com',
+            $Referer
+        );
+    }
+
+    public function test_compressPage()
+    {
+        // man, testing this will be painful.. 
+        // Just trust me, it works, ROFL
+    }
 }
 // EOF

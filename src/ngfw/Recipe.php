@@ -1196,14 +1196,31 @@ class Recipe
     /**
      * Return referer page.
      *
-     * @return string or false
+     * @return string|false
      */
     public static function getReferer()
     {
-        if (!empty($_SERVER['HTTP_REFERER'])) {
-            return $_SERVER['HTTP_REFERER'];
-        }
+        return isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : false;
+    }
 
-        return false;
+    /**
+     * Captures output via ob_get_contents(), tries to enable gzip, removes whitespace from captured output and echos back
+     * 
+     * @return string whitespace stripped output
+     */
+    public static function compressPage(){
+        register_shutdown_function(function(){
+            $buffer = preg_replace(array('/\>[^\S ]+/s','/[^\S ]+\</s','/(\s)+/s'), array('>','<','\\1'), ob_get_contents());
+            ob_end_clean();
+            if (!(( ini_get('zlib.output_compression') == 'On' ||
+                    ini_get('zlib.output_compression_level') > 0 ) ||
+                    ini_get('output_handler') == 'ob_gzhandler') &&
+                !empty($_SERVER['HTTP_ACCEPT_ENCODING']) &&
+                extension_loaded( 'zlib' ) &&
+                strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== FALSE){
+                   ob_start('ob_gzhandler');
+            }
+            echo $buffer;
+        });
     }
 }
