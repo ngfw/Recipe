@@ -125,7 +125,7 @@ class Recipe
     public static function validateEmail($address)
     {
         strpos($address, '@') ? list(, $mailDomain) = explode('@', $address) : $mailDomain = null;
-        if (filter_var($address, FILTER_VALIDATE_EMAIL)  &&
+        if (filter_var($address, FILTER_VALIDATE_EMAIL) &&
             !is_null($mailDomain) &&
             checkdnsrr($mailDomain, 'MX')
         ) {
@@ -754,7 +754,7 @@ class Recipe
      * @param mixed  $headers    Additional headers, example: array ("Accept: application/json")
      * @param bool   $returnInfo Whether or not to retrieve curl_getinfo()
      *
-     * @return string|array if $returnInfo is set to True, array is returned with two keys, contents (will contain response) and info (information regarding a specific transfer), otherwise response content is returned
+     * @return string if $returnInfo is set to True, array is returned with two keys, contents (will contain response) and info (information regarding a specific transfer), otherwise response content is returned
      */
     public static function curl($url, $method = 'GET', $data = false, $headers = false, $returnInfo = false)
     {
@@ -1061,7 +1061,7 @@ class Recipe
     public static function autoEmbed($string, $width = '560', $height = '315')
     {
         $providers = ['~https?://(?:[0-9A-Z-]+\.)?(?:youtu\.be/|youtube(?:-nocookie)?\.com\S*[^\w\s-])([\w-]{11})(?=[^\w-]|$)[?=&+%\w.-]*~ix' => 'http://www.youtube.com/oembed', '#https?://blip\.tv/(.+)#i' => 'http://blip.tv/oembed/', '~https?://(?:[0-9A-Z-]+\.)?(?:vimeo.com\S*[^\w\s-])([\w-]{1,20})(?=[^\w-]|$)[?=&+%\w.-]*~ix' => 'http://vimeo.com/api/oembed.{format}', '#https?://(www\.)?dailymotion\.com/.*#i' => 'http://www.dailymotion.com/services/oembed', '#https?://(www\.)?flickr\.com/.*#i' => 'http://www.flickr.com/services/oembed/', '#https?://(.+\.)?smugmug\.com/.*#i' => 'http://api.smugmug.com/services/oembed/', '#https?://(www\.)?hulu\.com/watch/.*#i' => 'http://www.hulu.com/api/oembed.{format}', '#https?://revision3\.com/(.+)#i' => 'http://revision3.com/api/oembed/', '#https?://wordpress\.tv/(.+)#i' => 'http://wordpress.tv/oembed/', '#https?://(www\.)?funnyordie\.com/videos/.*#i' => 'http://www.funnyordie.com/oembed', '#https?://(www\.)?soundcloud\.com/.*#i' => 'http://soundcloud.com/oembed', '#https?://(www\.)?slideshare.net/*#' => 'http://www.slideshare.net/api/oembed/2', '#http://instagr(\.am|am\.com)/p/.*#i' => 'http://api.instagram.com/oembed'];
-        $string = preg_replace_callback('@(^|[^"|^\'])(https?://?([-\w]+\.[-\w\.]+)+\w(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)*)@', function ($matches) use ($providers, $width, $height) {
+        $string = preg_replace_callback('@(^|[^"|^\'])(https?://?([-\w]+\.[-\w\.]+)+\w(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)*)@', function($matches) use ($providers, $width, $height) {
             $url = trim($matches[0]);
             $url = explode('#', $url);
             $url = reset($url);
@@ -1144,7 +1144,7 @@ class Recipe
         $output = ob_get_clean();
         $maps = ['string' => "/(string\((?P<length>\d+)\)) (?P<value>\"(?<!\\\).*\")/i", 'array' => "/\[\"(?P<key>.+)\"(?:\:\"(?P<class>[a-z0-9_\\\]+)\")?(?:\:(?P<scope>public|protected|private))?\]=>/Ui", 'countable' => "/(?P<type>array|int|string)\((?P<count>\d+)\)/", 'resource' => "/resource\((?P<count>\d+)\) of type \((?P<class>[a-z0-9_\\\]+)\)/", 'bool' => "/bool\((?P<value>true|false)\)/", 'float' => "/float\((?P<value>[0-9\.]+)\)/", 'object' => "/object\((?P<class>\S+)\)\#(?P<id>\d+) \((?P<count>\d+)\)/i"];
         foreach ($maps as $function => $pattern) {
-            $output = preg_replace_callback($pattern, function ($matches) use ($function) {
+            $output = preg_replace_callback($pattern, function($matches) use ($function) {
                 switch ($function) {
                     case 'string':
                         $matches['value'] = htmlspecialchars($matches['value']);
