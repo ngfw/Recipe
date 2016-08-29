@@ -118,27 +118,26 @@ class Recipe
     /**
      * Validate Email address.
      *
-     * @param string $address Email address to validate
-     * @param  bool $tempEmailAllowed allow Temporary email addresses? 
+     * @param string $address          Email address to validate
+     * @param bool   $tempEmailAllowed Allow Temporary email addresses?
      *
      * @return bool True if email address is valid, false is returned otherwise
      */
-    public static function validateEmail($address, $tempEmailAllowed = true )
+    public static function validateEmail($address, $tempEmailAllowed = true)
     {
         strpos($address, '@') ? list(, $mailDomain) = explode('@', $address) : $mailDomain = null;
         if (filter_var($address, FILTER_VALIDATE_EMAIL) &&
             !is_null($mailDomain) &&
             checkdnsrr($mailDomain, 'MX')
         ) {
-            if ( $tempEmailAllowed )
+            if ($tempEmailAllowed) {
                 return true;
-            else
-            {
+            } else {
                 $handle = fopen( __DIR__.'/banned.txt', 'r' );
                 while( ($line = fgets($handle)) !== false ){
                         $temp[] = trim( $line );
                 }
-                if( in_array($mailDomain, $temp) ){
+                if (in_array($mailDomain, $temp)) {
                     return false;
                 }
 
@@ -231,7 +230,7 @@ class Recipe
     }
 
     /**
-     * Convert Array to string
+     * Convert Array to string.
      *
      * @param array $array array to convert to string
      *
@@ -1230,7 +1229,7 @@ class Recipe
                     ini_get('output_handler') == 'ob_gzhandler') &&
                 !empty($_SERVER['HTTP_ACCEPT_ENCODING']) &&
                 extension_loaded('zlib') &&
-                strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== FALSE){
+                strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false){
                    ob_start('ob_gzhandler');
             }
             echo $buffer;
