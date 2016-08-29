@@ -119,10 +119,11 @@ class Recipe
      * Validate Email address.
      *
      * @param string $address Email address to validate
+     * @param  bool $tempEmailAllowed allow Temporary email addresses? 
      *
      * @return bool True if email address is valid, false is returned otherwise
      */
-    public static function validateEmail($address, $tempMailAllowed = true )
+    public static function validateEmail($address, $tempEmailAllowed = true )
     {
         strpos($address, '@') ? list(, $mailDomain) = explode('@', $address) : $mailDomain = null;
         if (filter_var($address, FILTER_VALIDATE_EMAIL) &&
