@@ -137,7 +137,7 @@ class Recipe
                 while( ($line = fgets($handle)) !== false )
                         $temp[] = trim( $line );
 
-                if( in_array($parts[1], $temp) )
+                if( in_array($mailDomain, $temp) )
                     return false;
 
                 return true;
