@@ -135,11 +135,12 @@ class Recipe
             else
             {
                 $handle = fopen( __DIR__.'/banned.txt', 'r' );
-                while( ($line = fgets($handle)) !== false )
+                while( ($line = fgets($handle)) !== false ){
                         $temp[] = trim( $line );
-
-                if( in_array($mailDomain, $temp) )
+                }
+                if( in_array($mailDomain, $temp) ){
                     return false;
+                }
 
                 return true;
             }
