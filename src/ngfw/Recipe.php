@@ -732,7 +732,7 @@ class Recipe
      * @param bool   $addEllipsis if True, "..." is added in the end of the string, default true
      * @param bool   $wordsafe    if True, Words will not be cut in the middle
      *
-     * @return string Shotened Text
+     * @return string Shortened Text
      */
     public static function shortenString($string, $maxLength, $addEllipsis = true, $wordsafe = false)
     {
@@ -963,7 +963,7 @@ class Recipe
      *
      * @param string $url URL to shorten
      *
-     * @return mixed shortend url or false
+     * @return mixed shortened url or false
      */
     public static function getTinyUrl($url)
     {
@@ -1065,8 +1065,8 @@ class Recipe
      * Parse text to find URL's for embed enabled services like: youtube.com, blip.tv, vimeo.com, dailymotion.com, flickr.com, smugmug.com, hulu.com, revision3.com, wordpress.tv, funnyordie.com, soundcloud.com, slideshare.net and instagram.com and embed elements automatically.
      *
      * @param string $string text to parse
-     * @param string $width  max width of embeded element
-     * @param string $height max heigth of embeded element
+     * @param string $width  max width of embedded element
+     * @param string $height max height of embedded element
      *
      * @return string
      */
