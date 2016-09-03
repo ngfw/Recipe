@@ -15,7 +15,7 @@ class Recipe
     public static function getFavicon($url, $attributes = [])
     {
         $protocol = 'http://';
-        if (self::ishttps()) {
+        if (self::isHttps()) {
             $protocol = 'https://';
         }
 
@@ -42,7 +42,7 @@ class Recipe
     public static function getQRcode($string, $width = 150, $height = 150, $attributes = [])
     {
         $protocol = 'http://';
-        if (self::ishttps()) {
+        if (self::isHttps()) {
             $protocol = 'https://';
         }
 
@@ -80,7 +80,7 @@ class Recipe
         $attr = trim(self::arrayToString($attributes));
 
         $url = 'http://www.gravatar.com/';
-        if (self::ishttps()) {
+        if (self::isHttps()) {
             $url = 'https://secure.gravatar.com/';
         }
 
