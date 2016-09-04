@@ -14,12 +14,8 @@ class Recipe
      */
     public static function getFavicon($url, $attributes = [])
     {
-        $protocol = 'http://';
-        if (self::isHttps()) {
-            $protocol = 'https://';
-        }
 
-        $apiUrl = $protocol.'www.google.com/s2/favicons?domain=';
+        $apiUrl = 'https://www.google.com/s2/favicons?domain=';
         $attr = trim(self::arrayToString($attributes));
 
         if (strpos($url, 'http') !== false) {
