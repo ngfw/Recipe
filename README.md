@@ -50,6 +50,8 @@ Table of Contents
 * [:wrench: Debug](#debug)
 * [Get Referer](#get-referer) :new:
 * [Compress Page](#compress-page) :new:
+* [Check If Email](#check-if-email) :new:
+* [Number Of Days In Month](#number-of-days-in-month) :new:
 
 ---
 ###Quick Start
@@ -531,6 +533,23 @@ echo $referer ;
 
 ###Compress Page
 The `compressPage()` method will register new function on PHP shutdown, remove white space from output and try to gZip it.
+
+###Check If Email
+```php
+$email = Recipe::checkIfEmail("homekjk@gmail.com");
+if(!$email) echo 'invalid';
+else print_r 'ok';
+//outputs ok
+```
+
+###Number Of Days In Month
+```php
+$numDays = Recipe::numberOfDaysInMonth(2, 2012);
+echo $numDays;
+//outputs:
+//29
+```
+
 ```php
 <?php
 require "vendor/autoload.php";
