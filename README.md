@@ -535,7 +535,8 @@ echo $referer ;
 ###Ordinal
 ```php
 for($i=1;$i<=10;$i++){ 
-    echo \ngfwRecipe::ordinal($i).' '; 
+    echo \ngfw\Recipe::ordinal($i);
+    echo ' '; 
 } 
 // outputs 1st 2nd 3rd 4th 5th 6th 7th 8th 9th 10th
 
@@ -543,7 +544,7 @@ for($i=1;$i<=10;$i++){
 
 ###Number Of Days In Month
 ```php
-$numDays = \ngfwRecipe::numberOfDaysInMonth(2, 2012);
+$numDays = \ngfw\Recipe::numberOfDaysInMonth(2, 2012);
 echo $numDays;
 // outputs: 29
 ```
