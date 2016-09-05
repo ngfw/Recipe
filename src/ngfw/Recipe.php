@@ -1231,4 +1231,37 @@ class Recipe
             echo $buffer;
         });
     }
+
+
+    /**
+     * Check if a string has a valid email format.
+     *
+     * @param string $email email to validate
+     *
+     * @return bool
+     */
+    public static function checkIfEmail($email)
+    {
+        return ( ! preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $address)) ? false : true;
+    }
+
+
+    /**
+     * Returns the number of days for the given month and year
+     *
+     * @param int $month Month to check
+     * @param int $year Year to check
+     *
+     * @return int
+     */
+    public static function numberOfDaysInMonth($month=0, $year=0){
+        if ($month < 1 OR $month > 12){return 0;}
+        if ( ! is_numeric($year) OR strlen($year) != 4){$year = date('Y');}
+        if ($month == 2){
+            if ($year % 400 == 0 OR ($year % 4 == 0 AND $year % 100 != 0)){return 29;}
+        }   
+        $days_in_month    = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+        return $days_in_month[$month - 1];
+    }
+}
 }
