@@ -1138,6 +1138,12 @@ class Recipe
         return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" ' . self::arrayToString($attributes) . '>$1</a>', $string);
     }
 
+    public static function pr($variable)
+    {
+        echo '<pre>';
+        print_r($variable);
+        echo '</pre>';
+    }
     /**
      * Dump information about a variable.
      *
