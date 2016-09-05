@@ -630,17 +630,6 @@ class RecipeTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($isValidEmail);
     }
 
-    /**
-     * Email.
-     */
-    public function test_checkIfEmail()
-    {
-        $email = 'nasfkds@fkdakda';
-        $isValidEmail = Recipe::checkIfEmail($email);
-        $this->assertTrue($isValidEmail);
-    }
-
-
 
     public function test_numberOfDaysInMonth()
     {
