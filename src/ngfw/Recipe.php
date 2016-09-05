@@ -16,13 +16,13 @@ class Recipe
     {
 
         $apiUrl = 'https://www.google.com/s2/favicons?domain=';
-        $attr = trim(self::arrayToString($attributes));
+        $attr   = trim(self::arrayToString($attributes));
 
         if (strpos($url, 'http') !== false) {
             $url = str_replace('http://', '', $url);
         }
 
-        return '<img src="'.$apiUrl.$url.'" '.$attr.' />';
+        return '<img src="' . $apiUrl . $url . '" ' . $attr . ' />';
     }
 
     /**
@@ -42,10 +42,10 @@ class Recipe
             $protocol = 'https://';
         }
 
-        $attr = trim(self::arrayToString($attributes));
-        $apiUrl = $protocol.'chart.apis.google.com/chart?chs='.$width.'x'.$height.'&cht=qr&chl='.urlencode($string);
+        $attr   = trim(self::arrayToString($attributes));
+        $apiUrl = $protocol . 'chart.apis.google.com/chart?chs=' . $width . 'x' . $height . '&cht=qr&chl=' . urlencode($string);
 
-        return '<img src="'.$apiUrl.'" '.$attr.' />';
+        return '<img src="' . $apiUrl . '" ' . $attr . ' />';
     }
 
     /**
@@ -80,7 +80,7 @@ class Recipe
             $url = 'https://secure.gravatar.com/';
         }
 
-        return '<img src="'.$url.'avatar.php?gravatar_id='.md5(strtolower(trim($email))).'&default='.$default.'&size='.$size.'&rating='.$rating.'" width="'.$size.'px" height="'.$size.'px" '.$attr.' />';
+        return '<img src="' . $url . 'avatar.php?gravatar_id=' . md5(strtolower(trim($email))) . '&default=' . $default . '&size=' . $size . '&rating=' . $rating . '" width="' . $size . 'px" height="' . $size . 'px" ' . $attr . ' />';
     }
 
     /**
@@ -94,19 +94,19 @@ class Recipe
      */
     public static function createLinkTag($link, $text = '', $attributes = [])
     {
-        $linkTag = '<a href="'.$link.'"';
+        $linkTag = '<a href="' . $link . '"';
         if (self::validateEmail($link)) {
-            $linkTag = '<a href="mailto:'.$link.'"';
+            $linkTag = '<a href="mailto:' . $link . '"';
         }
 
         if (!isset($attributes['title']) && !empty($text)) {
-            $linkTag .= ' title="'.str_replace('"', '', strip_tags($text)).'" ';
+            $linkTag .= ' title="' . str_replace('"', '', strip_tags($text)) . '" ';
         }
         if (empty($text)) {
             $text = $link;
         }
         $attr = trim(self::arrayToString($attributes));
-        $linkTag .= $attr.'>'.htmlspecialchars($text, ENT_QUOTES, 'UTF-8').'</a>';
+        $linkTag .= $attr . '>' . htmlspecialchars($text, ENT_QUOTES, 'UTF-8') . '</a>';
 
         return $linkTag;
     }
@@ -129,9 +129,9 @@ class Recipe
             if ($tempEmailAllowed) {
                 return true;
             } else {
-                $handle = fopen(__DIR__.'/banned.txt', 'r');
-                while (($line = fgets($handle)) !== false ){
-                        $temp[] = trim( $line );
+                $handle = fopen(__DIR__ . '/banned.txt', 'r');
+                while (($line = fgets($handle)) !== false) {
+                    $temp[] = trim($line);
                 }
                 if (in_array($mailDomain, $temp)) {
                     return false;
@@ -173,10 +173,10 @@ class Recipe
     public static function rssReader($url)
     {
         if (strpos($url, 'http') === false) {
-            $url = 'http://'.$url;
+            $url = 'http://' . $url;
         }
         $feed = self::curl($url);
-        $xml = simplexml_load_string($feed, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $xml  = simplexml_load_string($feed, 'SimpleXMLElement', LIBXML_NOCDATA);
 
         return self::objectToArray($xml);
     }
@@ -237,7 +237,7 @@ class Recipe
         $string = '';
         if (isset($array) && is_array($array) && !empty($array)) {
             foreach ($array as $key => $value) {
-                $string .= $key.'="'.$value.'" ';
+                $string .= $key . '="' . $value . '" ';
             }
         }
 
@@ -255,14 +255,14 @@ class Recipe
     {
         $color = str_replace('#', '', $color);
 
-        $hex = strlen($color) == 3 ? [$color[0].$color[0], $color[1].$color[1], $color[2].$color[2]] : [$color[0].$color[1], $color[2].$color[3], $color[4].$color[5]];
+        $hex             = strlen($color) == 3 ? [$color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2]] : [$color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5]];
         list($r, $g, $b) = $hex;
 
         $r = hexdec($r);
         $g = hexdec($g);
         $b = hexdec($b);
 
-        return 'rgb('.$r.', '.$g.', '.$b.')';
+        return 'rgb(' . $r . ', ' . $g . ', ' . $b . ')';
     }
 
     /**
@@ -288,10 +288,10 @@ class Recipe
         $result = '';
         foreach ([$r, $g, $b] as $c) {
             $hex = base_convert($c, 10, 16);
-            $result .= ($c < 16) ? ('0'.$hex) : $hex;
+            $result .= ($c < 16) ? ('0' . $hex) : $hex;
         }
 
-        return '#'.$result;
+        return '#' . $result;
     }
 
     /**
@@ -307,7 +307,7 @@ class Recipe
 
         $alphaLength = strlen($alphabet) - 1;
         for ($i = 0; $i < $length; ++$i) {
-            $n = rand(0, $alphaLength);
+            $n      = rand(0, $alphaLength);
             $pass[] = $alphabet[$n];
         }
 
@@ -331,9 +331,9 @@ class Recipe
 
         $result = '';
         for ($i = 0; $i < strlen($string); $i++) {
-            $char = substr($string, $i, 1);
+            $char    = substr($string, $i, 1);
             $keychar = substr($key, ($i % strlen($key)) - 1, 1);
-            $char = chr(ord($char) + ord($keychar));
+            $char    = chr(ord($char) + ord($keychar));
             $result .= $char;
         }
 
@@ -358,9 +358,9 @@ class Recipe
         $result = '';
         $string = base64_decode($string);
         for ($i = 0; $i < strlen($string); $i++) {
-            $char = substr($string, $i, 1);
+            $char    = substr($string, $i, 1);
             $keychar = substr($key, ($i % strlen($key)) - 1, 1);
-            $char = chr(ord($char) - ord($keychar));
+            $char    = chr(ord($char) - ord($keychar));
             $result .= $char;
         }
 
@@ -446,7 +446,7 @@ class Recipe
         if (isset($_SERVER['PHP_AUTH_USER'])) {
             $url .= $_SERVER['PHP_AUTH_USER'];
             if (isset($_SERVER['PHP_AUTH_PW'])) {
-                $url .= ':'.$_SERVER['PHP_AUTH_PW'];
+                $url .= ':' . $_SERVER['PHP_AUTH_PW'];
             }
             $url .= '@';
         }
@@ -454,12 +454,12 @@ class Recipe
             $url .= $_SERVER['HTTP_HOST'];
         }
         if (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != 80) {
-            $url .= ':'.$_SERVER['SERVER_PORT'];
+            $url .= ':' . $_SERVER['SERVER_PORT'];
         }
         if (!isset($_SERVER['REQUEST_URI'])) {
             $url .= substr($_SERVER['PHP_SELF'], 1);
             if (isset($_SERVER['QUERY_STRING'])) {
-                $url .= '?'.$_SERVER['QUERY_STRING'];
+                $url .= '?' . $_SERVER['QUERY_STRING'];
             }
 
             return $url;
@@ -519,7 +519,7 @@ class Recipe
      */
     public static function getBrowser()
     {
-        $u_agent = $_SERVER['HTTP_USER_AGENT'];
+        $u_agent     = $_SERVER['HTTP_USER_AGENT'];
         $browserName = $ub = $platform = 'Unknown';
         if (preg_match('/linux/i', $u_agent)) {
             $platform = 'Linux';
@@ -531,28 +531,28 @@ class Recipe
 
         if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
             $browserName = 'Internet Explorer';
-            $ub = 'MSIE';
+            $ub          = 'MSIE';
         } elseif (preg_match('/Firefox/i', $u_agent)) {
             $browserName = 'Mozilla Firefox';
-            $ub = 'Firefox';
+            $ub          = 'Firefox';
         } elseif (preg_match('/Chrome/i', $u_agent)) {
             $browserName = 'Google Chrome';
-            $ub = 'Chrome';
+            $ub          = 'Chrome';
         } elseif (preg_match('/Safari/i', $u_agent)) {
             $browserName = 'Apple Safari';
-            $ub = 'Safari';
+            $ub          = 'Safari';
         } elseif (preg_match('/Opera/i', $u_agent)) {
             $browserName = 'Opera';
-            $ub = 'Opera';
+            $ub          = 'Opera';
         } elseif (preg_match('/Netscape/i', $u_agent)) {
             $browserName = 'Netscape';
-            $ub = 'Netscape';
+            $ub          = 'Netscape';
         }
 
-        $known = ['Version', $ub, 'other'];
-        $pattern = '#(?<browser>'.implode('|', $known).')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
+        $known   = ['Version', $ub, 'other'];
+        $pattern = '#(?<browser>' . implode('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
         preg_match_all($pattern, $u_agent, $matches);
-        $i = count($matches['browser']);
+        $i       = count($matches['browser']);
         $version = $matches['version'][0];
         if ($i != 1 && strripos($u_agent, 'Version') >= strripos($u_agent, $ub)) {
             $version = $matches['version'][1];
@@ -561,7 +561,7 @@ class Recipe
             $version = '?';
         }
 
-        return implode(', ', [$browserName, 'Version: '.$version, $platform]);
+        return implode(', ', [$browserName, 'Version: ' . $version, $platform]);
     }
 
     /**
@@ -571,10 +571,10 @@ class Recipe
      */
     public static function getClientLocation()
     {
-        $result = false;
-        $ip_data = @json_decode(self::curl('http://www.geoplugin.net/json.gp?ip='.self::getClientIP()));
+        $result  = false;
+        $ip_data = @json_decode(self::curl('http://www.geoplugin.net/json.gp?ip=' . self::getClientIP()));
         if (isset($ip_data) && $ip_data->geoplugin_countryName != null) {
-            $result = $ip_data->geoplugin_city.', '.$ip_data->geoplugin_countryCode;
+            $result = $ip_data->geoplugin_city . ', ' . $ip_data->geoplugin_countryCode;
         }
 
         return $result;
@@ -589,26 +589,26 @@ class Recipe
      */
     public static function numberToWord($number)
     {
-        $hyphen = '-';
+        $hyphen      = '-';
         $conjunction = ' and ';
-        $separator = ', ';
-        $negative = 'negative ';
-        $decimal = ' point ';
-        $fraction = null;
-        $dictionary = [0 => 'zero', 1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six', 7 => 'seven', 8 => 'eight', 9 => 'nine', 10 => 'ten', 11 => 'eleven', 12 => 'twelve', 13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen', 16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen', 19 => 'nineteen', 20 => 'twenty', 30 => 'thirty', 40 => 'fourty', 50 => 'fifty', 60 => 'sixty', 70 => 'seventy', 80 => 'eighty', 90 => 'ninety', 100 => 'hundred', 1000 => 'thousand', 1000000 => 'million', 1000000000 => 'billion', 1000000000000 => 'trillion', 1000000000000000 => 'quadrillion', 1000000000000000000 => 'quintillion'];
+        $separator   = ', ';
+        $negative    = 'negative ';
+        $decimal     = ' point ';
+        $fraction    = null;
+        $dictionary  = [0 => 'zero', 1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six', 7 => 'seven', 8 => 'eight', 9 => 'nine', 10 => 'ten', 11 => 'eleven', 12 => 'twelve', 13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen', 16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen', 19 => 'nineteen', 20 => 'twenty', 30 => 'thirty', 40 => 'fourty', 50 => 'fifty', 60 => 'sixty', 70 => 'seventy', 80 => 'eighty', 90 => 'ninety', 100 => 'hundred', 1000 => 'thousand', 1000000 => 'million', 1000000000 => 'billion', 1000000000000 => 'trillion', 1000000000000000 => 'quadrillion', 1000000000000000000 => 'quintillion'];
 
         if (!is_numeric($number)) {
             return false;
         }
 
         if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
-            trigger_error('numberToWord only accepts numbers between -'.PHP_INT_MAX.' and '.PHP_INT_MAX, E_USER_WARNING);
+            trigger_error('numberToWord only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX, E_USER_WARNING);
 
             return false;
         }
 
         if ($number < 0) {
-            return $negative.self::numberToWord(abs($number));
+            return $negative . self::numberToWord(abs($number));
         }
 
         if (strpos($number, '.') !== false) {
@@ -621,28 +621,28 @@ class Recipe
                 break;
 
             case $number < 100:
-                $tens = ((int) ($number / 10)) * 10;
-                $units = $number % 10;
+                $tens   = ((int) ($number / 10)) * 10;
+                $units  = $number % 10;
                 $string = $dictionary[$tens];
                 if ($units) {
-                    $string .= $hyphen.$dictionary[$units];
+                    $string .= $hyphen . $dictionary[$units];
                 }
                 break;
 
             case $number < 1000:
-                $hundreds = $number / 100;
+                $hundreds  = $number / 100;
                 $remainder = $number % 100;
-                $string = $dictionary[$hundreds].' '.$dictionary[100];
+                $string    = $dictionary[$hundreds] . ' ' . $dictionary[100];
                 if ($remainder) {
-                    $string .= $conjunction.self::numberToWord($remainder);
+                    $string .= $conjunction . self::numberToWord($remainder);
                 }
                 break;
 
             default:
-                $baseUnit = pow(1000, floor(log($number, 1000)));
+                $baseUnit     = pow(1000, floor(log($number, 1000)));
                 $numBaseUnits = (int) ($number / $baseUnit);
-                $remainder = $number % $baseUnit;
-                $string = self::numberToWord($numBaseUnits).' '.$dictionary[$baseUnit];
+                $remainder    = $number % $baseUnit;
+                $string       = self::numberToWord($numBaseUnits) . ' ' . $dictionary[$baseUnit];
                 if ($remainder) {
                     $string .= $remainder < 100 ? $conjunction : $separator;
                     $string .= self::numberToWord($remainder);
@@ -673,16 +673,16 @@ class Recipe
     public static function secondsToText($seconds, $returnAsWords = false)
     {
         $periods = ['year' => 3.156e+7, 'month' => 2.63e+6, 'week' => 604800, 'day' => 86400, 'hour' => 3600, 'minute' => 60, 'second' => 1];
-        $parts = [];
+        $parts   = [];
         foreach ($periods as $name => $dur) {
             $div = floor($seconds / $dur);
             if ($div == 0) {
                 continue;
             }
             if ($div == 1) {
-                $parts[] = ($returnAsWords ? self::numberToWord($div) : $div).' '.$name;
+                $parts[] = ($returnAsWords ? self::numberToWord($div) : $div) . ' ' . $name;
             } else {
-                $parts[] = ($returnAsWords ? self::numberToWord($div) : $div).' '.$name.'s';
+                $parts[] = ($returnAsWords ? self::numberToWord($div) : $div) . ' ' . $name . 's';
             }
             $seconds %= $dur;
         }
@@ -691,7 +691,7 @@ class Recipe
             return $last;
         }
 
-        return implode(', ', $parts).' and '.$last;
+        return implode(', ', $parts) . ' and ' . $last;
     }
 
     /**
@@ -732,7 +732,7 @@ class Recipe
      */
     public static function shortenString($string, $maxLength, $addEllipsis = true, $wordsafe = false)
     {
-        $ellipsis = '';
+        $ellipsis  = '';
         $maxLength = max($maxLength, 0);
         if (mb_strlen($string) <= $maxLength) {
             return $string;
@@ -766,7 +766,7 @@ class Recipe
      */
     public static function curl($url, $method = 'GET', $data = false, $headers = false, $returnInfo = false)
     {
-        $ch = curl_init();
+        $ch   = curl_init();
         $info = null;
         if (strtoupper($method) == 'POST') {
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -779,11 +779,11 @@ class Recipe
                 if (is_array($data)) {
                     $dataTokens = [];
                     foreach ($data as $key => $value) {
-                        array_push($dataTokens, urlencode($key).'='.urlencode($value));
+                        array_push($dataTokens, urlencode($key) . '=' . urlencode($value));
                     }
                     $data = implode('&', $dataTokens);
                 }
-                curl_setopt($ch, CURLOPT_URL, $url.'?'.$data);
+                curl_setopt($ch, CURLOPT_URL, $url . '?' . $data);
             } else {
                 curl_setopt($ch, CURLOPT_URL, $url);
             }
@@ -826,11 +826,11 @@ class Recipe
         }
 
         $data = self::curl($shortURL);
-        preg_match_all('/<[\s]*meta[\s]*http-equiv="?'.'([^>"]*)"?[\s]*'.'content="?([^>"]*)"?[\s]*[\/]?[\s]*>/si', $data, $match);
+        preg_match_all('/<[\s]*meta[\s]*http-equiv="?' . '([^>"]*)"?[\s]*' . 'content="?([^>"]*)"?[\s]*[\/]?[\s]*>/si', $data, $match);
         if (isset($match) && is_array($match) && count($match) == 3) {
             $originals = $match[0];
-            $names = $match[1];
-            $values = $match[2];
+            $names     = $match[1];
+            $values    = $match[2];
             if ((isset($originals) && isset($names) && isset($values)) && count($originals) == count($names) && count($names) == count($values)) {
                 $metaTags = [];
                 for ($i = 0, $limit = count($names); $i < $limit; $i++) {
@@ -855,15 +855,15 @@ class Recipe
      */
     public static function getAlexaRank($domain)
     {
-        $domain = preg_replace('~^https?://~', '', $domain);
-        $alexa = 'http://data.alexa.com/data?cli=10&dat=s&url=%s';
+        $domain      = preg_replace('~^https?://~', '', $domain);
+        $alexa       = 'http://data.alexa.com/data?cli=10&dat=s&url=%s';
         $request_url = sprintf($alexa, urlencode($domain));
-        $xml = simplexml_load_file($request_url);
+        $xml         = simplexml_load_file($request_url);
         if (!isset($xml->SD[1])) {
             return false;
         }
         $nodeAttributes = $xml->SD[1]->POPULARITY->attributes();
-        $text = (int) $nodeAttributes['TEXT'];
+        $text           = (int) $nodeAttributes['TEXT'];
 
         return $text;
     }
@@ -905,8 +905,8 @@ class Recipe
             $Check1 = (($Check1 >> 4) & 0x3FFFFC0) | ($Check1 & 0x3F);
             $Check1 = (($Check1 >> 4) & 0x3FFC00) | ($Check1 & 0x3FF);
             $Check1 = (($Check1 >> 4) & 0x3C000) | ($Check1 & 0x3FFF);
-            $T1 = (((($Check1 & 0x3C0) << 4) | ($Check1 & 0x3C)) << 2) | ($Check2 & 0xF0F);
-            $T2 = (((($Check1 & 0xFFFFC000) << 4) | ($Check1 & 0x3C00)) << 0xA) | ($Check2 & 0xF0F0000);
+            $T1     = (((($Check1 & 0x3C0) << 4) | ($Check1 & 0x3C)) << 2) | ($Check2 & 0xF0F);
+            $T2     = (((($Check1 & 0xFFFFC000) << 4) | ($Check1 & 0x3C00)) << 0xA) | ($Check2 & 0xF0F0000);
 
             return $T1 | $T2;
         }
@@ -914,9 +914,9 @@ class Recipe
         function CheckHash($Hashnum)
         {
             $CheckByte = 0;
-            $Flag = 0;
-            $HashStr = sprintf('%u', $Hashnum);
-            $length = strlen($HashStr);
+            $Flag      = 0;
+            $HashStr   = sprintf('%u', $Hashnum);
+            $length    = strlen($HashStr);
             for ($i = $length - 1; $i >= 0; $i--) {
                 $Re = $HashStr[$i];
                 if (1 === ($Flag % 2)) {
@@ -937,13 +937,13 @@ class Recipe
                 }
             }
 
-            return '7'.$CheckByte.$HashStr;
+            return '7' . $CheckByte . $HashStr;
         }
 
-        $query = 'http://toolbarqueries.google.com/tbr?client=navclient-auto&ch='.CheckHash(HashURL($url)).'&features=Rank&q=info:'.$url.'&num=100&filter=0';
+        $query = 'http://toolbarqueries.google.com/tbr?client=navclient-auto&ch=' . CheckHash(HashURL($url)) . '&features=Rank&q=info:' . $url . '&num=100&filter=0';
 
         $data = file_get_contents($query);
-        $pos = strpos($data, 'Rank_');
+        $pos  = strpos($data, 'Rank_');
 
         if ($pos === false) {
             return false;
@@ -964,9 +964,9 @@ class Recipe
     public static function getTinyUrl($url)
     {
         if (strpos($url, 'http') === false) {
-            $url = 'http://'.$url;
+            $url = 'http://' . $url;
         }
-        $gettiny = self::curl('http://tinyurl.com/api-create.php?url='.$url);
+        $gettiny = self::curl('http://tinyurl.com/api-create.php?url=' . $url);
         if (isset($gettiny) && !empty($gettiny)) {
             return $gettiny;
         }
@@ -983,7 +983,7 @@ class Recipe
      */
     public static function getKeywordSuggestionsFromGoogle($keyword)
     {
-        $data = self::curl('http://suggestqueries.google.com/complete/search?output=firefox&client=firefox&hl=en-US&q='.urlencode($keyword));
+        $data = self::curl('http://suggestqueries.google.com/complete/search?output=firefox&client=firefox&hl=en-US&q=' . urlencode($keyword));
         if (($data = json_decode($data, true)) !== null && !empty($data[1])) {
             return $data[1];
         }
@@ -1000,16 +1000,16 @@ class Recipe
      */
     public static function wikiSearch($keyword)
     {
-        $apiurl = 'http://wikipedia.org/w/api.php?action=opensearch&search='.urlencode($keyword).'&format=xml&limit=1';
-        $data = self::curl($apiurl);
-        $xml = simplexml_load_string($data);
+        $apiurl = 'http://wikipedia.org/w/api.php?action=opensearch&search=' . urlencode($keyword) . '&format=xml&limit=1';
+        $data   = self::curl($apiurl);
+        $xml    = simplexml_load_string($data);
         if ((string) $xml->Section->Item->Description) {
-            $array = [];
-            $array['title'] = (string) $xml->Section->Item->Text;
+            $array                = [];
+            $array['title']       = (string) $xml->Section->Item->Text;
             $array['description'] = (string) $xml->Section->Item->Description;
-            $array['url'] = (string) $xml->Section->Item->Url;
+            $array['url']         = (string) $xml->Section->Item->Url;
             if (isset($xml->Section->Item->Image)) {
-                $img = (string) $xml->Section->Item->Image->attributes()->source;
+                $img            = (string) $xml->Section->Item->Image->attributes()->source;
                 $array['image'] = str_replace('/50px-', '/200px-', $img);
             }
 
@@ -1051,7 +1051,7 @@ class Recipe
                     break;
             }
 
-            return '<div style="display: block;padding: 0.5em;border: solid 1px;border-radius: 0.125em;margin-bottom: 1em; '.$css.'" '.$attr.' role="alert">'.$notification.'</div>';
+            return '<div style="display: block;padding: 0.5em;border: solid 1px;border-radius: 0.125em;margin-bottom: 1em; ' . $css . '" ' . $attr . ' role="alert">' . $notification . '</div>';
         }
 
         return false;
@@ -1069,7 +1069,7 @@ class Recipe
     public static function autoEmbed($string, $width = '560', $height = '315')
     {
         $providers = ['~https?://(?:[0-9A-Z-]+\.)?(?:youtu\.be/|youtube(?:-nocookie)?\.com\S*[^\w\s-])([\w-]{11})(?=[^\w-]|$)[?=&+%\w.-]*~ix' => 'http://www.youtube.com/oembed', '#https?://blip\.tv/(.+)#i' => 'http://blip.tv/oembed/', '~https?://(?:[0-9A-Z-]+\.)?(?:vimeo.com\S*[^\w\s-])([\w-]{1,20})(?=[^\w-]|$)[?=&+%\w.-]*~ix' => 'http://vimeo.com/api/oembed.{format}', '#https?://(www\.)?dailymotion\.com/.*#i' => 'http://www.dailymotion.com/services/oembed', '#https?://(www\.)?flickr\.com/.*#i' => 'http://www.flickr.com/services/oembed/', '#https?://(.+\.)?smugmug\.com/.*#i' => 'http://api.smugmug.com/services/oembed/', '#https?://(www\.)?hulu\.com/watch/.*#i' => 'http://www.hulu.com/api/oembed.{format}', '#https?://revision3\.com/(.+)#i' => 'http://revision3.com/api/oembed/', '#https?://wordpress\.tv/(.+)#i' => 'http://wordpress.tv/oembed/', '#https?://(www\.)?funnyordie\.com/videos/.*#i' => 'http://www.funnyordie.com/oembed', '#https?://(www\.)?soundcloud\.com/.*#i' => 'http://soundcloud.com/oembed', '#https?://(www\.)?slideshare.net/*#' => 'http://www.slideshare.net/api/oembed/2', '#http://instagr(\.am|am\.com)/p/.*#i' => 'http://api.instagram.com/oembed'];
-        $string = preg_replace_callback('@(^|[^"|^\'])(https?://?([-\w]+\.[-\w\.]+)+\w(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)*)@', function($matches) use ($providers, $width, $height) {
+        $string    = preg_replace_callback('@(^|[^"|^\'])(https?://?([-\w]+\.[-\w\.]+)+\w(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)*)@', function ($matches) use ($providers, $width, $height) {
             $url = trim($matches[0]);
             $url = explode('#', $url);
             $url = reset($url);
@@ -1088,8 +1088,8 @@ class Recipe
             if ($requestURL !== false) {
                 $params = ['maxwidth' => $width, 'maxheight' => $height, 'format' => 'json'];
 
-                $requestURL = $requestURL.'?url='.$url.'&'.http_build_query($params);
-                $data = json_decode(self::curl($requestURL), true);
+                $requestURL = $requestURL . '?url=' . $url . '&' . http_build_query($params);
+                $data       = json_decode(self::curl($requestURL), true);
 
                 switch ($data['type']) {
                     case 'photo':
@@ -1099,7 +1099,7 @@ class Recipe
 
                         $title = !empty($data['title']) && is_string($data['title']) ? $data['title'] : '';
 
-                        return '<a href="'.$url.'"><img src="'.htmlspecialchars($data['url'], ENT_QUOTES, 'UTF-8').'" alt="'.htmlspecialchars($title, ENT_QUOTES, 'UTF-8').'" width="'.htmlspecialchars($data['width'], ENT_QUOTES, 'UTF-8').'" height="'.htmlspecialchars($data['height'], ENT_QUOTES, 'UTF-8').'" /></a>';
+                        return '<a href="' . $url . '"><img src="' . htmlspecialchars($data['url'], ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '" width="' . htmlspecialchars($data['width'], ENT_QUOTES, 'UTF-8') . '" height="' . htmlspecialchars($data['height'], ENT_QUOTES, 'UTF-8') . '" /></a>';
 
                     case 'video':
                     case 'rich':
@@ -1135,7 +1135,7 @@ class Recipe
      */
     public static function makeClickableLinks($string, $attributes = [])
     {
-        return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" '.self::arrayToString($attributes).'>$1</a>', $string);
+        return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" ' . self::arrayToString($attributes) . '>$1</a>', $string);
     }
 
     /**
@@ -1150,55 +1150,55 @@ class Recipe
         ob_start();
         var_dump($variable);
         $output = ob_get_clean();
-        $maps = ['string' => "/(string\((?P<length>\d+)\)) (?P<value>\"(?<!\\\).*\")/i", 'array' => "/\[\"(?P<key>.+)\"(?:\:\"(?P<class>[a-z0-9_\\\]+)\")?(?:\:(?P<scope>public|protected|private))?\]=>/Ui", 'countable' => "/(?P<type>array|int|string)\((?P<count>\d+)\)/", 'resource' => "/resource\((?P<count>\d+)\) of type \((?P<class>[a-z0-9_\\\]+)\)/", 'bool' => "/bool\((?P<value>true|false)\)/", 'float' => "/float\((?P<value>[0-9\.]+)\)/", 'object' => "/object\((?P<class>\S+)\)\#(?P<id>\d+) \((?P<count>\d+)\)/i"];
+        $maps   = ['string' => "/(string\((?P<length>\d+)\)) (?P<value>\"(?<!\\\).*\")/i", 'array' => "/\[\"(?P<key>.+)\"(?:\:\"(?P<class>[a-z0-9_\\\]+)\")?(?:\:(?P<scope>public|protected|private))?\]=>/Ui", 'countable' => "/(?P<type>array|int|string)\((?P<count>\d+)\)/", 'resource' => "/resource\((?P<count>\d+)\) of type \((?P<class>[a-z0-9_\\\]+)\)/", 'bool' => "/bool\((?P<value>true|false)\)/", 'float' => "/float\((?P<value>[0-9\.]+)\)/", 'object' => "/object\((?P<class>\S+)\)\#(?P<id>\d+) \((?P<count>\d+)\)/i"];
         foreach ($maps as $function => $pattern) {
-            $output = preg_replace_callback($pattern, function($matches) use ($function) {
+            $output = preg_replace_callback($pattern, function ($matches) use ($function) {
                 switch ($function) {
                     case 'string':
                         $matches['value'] = htmlspecialchars($matches['value']);
 
-                        return '<span style="color: #0000FF;">string</span>(<span style="color: #1287DB;">'.$matches['length'].')</span> <span style="color: #6B6E6E;">'.$matches['value'].'</span>';
+                        return '<span style="color: #0000FF;">string</span>(<span style="color: #1287DB;">' . $matches['length'] . ')</span> <span style="color: #6B6E6E;">' . $matches['value'] . '</span>';
 
                     case 'array':
-                        $key = '<span style="color: #008000;">"'.$matches['key'].'"</span>';
+                        $key   = '<span style="color: #008000;">"' . $matches['key'] . '"</span>';
                         $class = '';
                         $scope = '';
                         if (isset($matches['class']) && !empty($matches['class'])) {
-                            $class = ':<span style="color: #4D5D94;">"'.$matches['class'].'"</span>';
+                            $class = ':<span style="color: #4D5D94;">"' . $matches['class'] . '"</span>';
                         }
                         if (isset($matches['scope']) && !empty($matches['scope'])) {
-                            $scope = ':<span style="color: #666666;">'.$matches['scope'].'</span>';
+                            $scope = ':<span style="color: #666666;">' . $matches['scope'] . '</span>';
                         }
 
-                        return '['.$key.$class.$scope.']=>';
+                        return '[' . $key . $class . $scope . ']=>';
 
                     case 'countable':
-                        $type = '<span style="color: #0000FF;">'.$matches['type'].'</span>';
-                        $count = '(<span style="color: #1287DB;">'.$matches['count'].'</span>)';
+                        $type  = '<span style="color: #0000FF;">' . $matches['type'] . '</span>';
+                        $count = '(<span style="color: #1287DB;">' . $matches['count'] . '</span>)';
 
-                        return $type.$count;
+                        return $type . $count;
 
                     case 'bool':
-                        return '<span style="color: #0000FF;">bool</span>(<span style="color: #0000FF;">'.$matches['value'].'</span>)';
+                        return '<span style="color: #0000FF;">bool</span>(<span style="color: #0000FF;">' . $matches['value'] . '</span>)';
 
                     case 'float':
-                        return '<span style="color: #0000FF;">float</span>(<span style="color: #1287DB;">'.$matches['value'].'</span>)';
+                        return '<span style="color: #0000FF;">float</span>(<span style="color: #1287DB;">' . $matches['value'] . '</span>)';
 
                     case 'resource':
-                        return '<span style="color: #0000FF;">resource</span>(<span style="color: #1287DB;">'.$matches['count'].'</span>) of type (<span style="color: #4D5D94;">'.$matches['class'].'</span>)';
+                        return '<span style="color: #0000FF;">resource</span>(<span style="color: #1287DB;">' . $matches['count'] . '</span>) of type (<span style="color: #4D5D94;">' . $matches['class'] . '</span>)';
 
                     case 'object':
-                        return '<span style="color: #0000FF;">object</span>(<span style="color: #4D5D94;">'.$matches['class'].'</span>)#'.$matches['id'].' (<span style="color: #1287DB;">'.$matches['count'].'</span>)';
+                        return '<span style="color: #0000FF;">object</span>(<span style="color: #4D5D94;">' . $matches['class'] . '</span>)#' . $matches['id'] . ' (<span style="color: #1287DB;">' . $matches['count'] . '</span>)';
 
                 }
             }, $output);
         }
-        $header = '';
+        $header          = '';
         list($debugfile) = debug_backtrace();
         if (!empty($debugfile['file'])) {
-            $header = '<h4 style="border-bottom:1px solid #bbb;font-weight:bold;margin:0 0 10px 0;padding:3px 0 10px 0">'.$debugfile['file'].'</h4>';
+            $header = '<h4 style="border-bottom:1px solid #bbb;font-weight:bold;margin:0 0 10px 0;padding:3px 0 10px 0">' . $debugfile['file'] . '</h4>';
         }
-        echo '<pre style="background-color: #CDDCF4;border: 1px solid #bbb;border-radius: 4px;-moz-border-radius:4px;-webkit-border-radius\:4px;font-size:12px;line-height:1.4em;margin:30px;padding:7px">'.$header.$output.'</pre>';
+        echo '<pre style="background-color: #CDDCF4;border: 1px solid #bbb;border-radius: 4px;-moz-border-radius:4px;-webkit-border-radius\:4px;font-size:12px;line-height:1.4em;margin:30px;padding:7px">' . $header . $output . '</pre>';
     }
 
     /**
@@ -1213,25 +1213,25 @@ class Recipe
 
     /**
      * Captures output via ob_get_contents(), tries to enable gzip, removes whitespace from captured output and echos back
-     * 
+     *
      * @return string whitespace stripped output
      */
-    public static function compressPage(){
-        register_shutdown_function(function(){
+    public static function compressPage()
+    {
+        register_shutdown_function(function () {
             $buffer = preg_replace(array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'), array('>', '<', '\\1'), ob_get_contents());
             ob_end_clean();
             if (!((ini_get('zlib.output_compression') == 'On' ||
-                    ini_get('zlib.output_compression_level') > 0) ||
-                    ini_get('output_handler') == 'ob_gzhandler') &&
+                ini_get('zlib.output_compression_level') > 0) ||
+                ini_get('output_handler') == 'ob_gzhandler') &&
                 !empty($_SERVER['HTTP_ACCEPT_ENCODING']) &&
                 extension_loaded('zlib') &&
-                strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false){
+                strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false) {
                 ob_start('ob_gzhandler');
             }
             echo $buffer;
         });
     }
-
 
     /**
      *  Takes a number and adds “th, st, nd, rd, th” after it
@@ -1240,14 +1240,12 @@ class Recipe
      *
      * @return string
      */
-    public static function  ordinal($cardinal){ 
-    $test_c = abs($cardinal) % 10; 
-    $ext = ((abs($cardinal) %100 < 21 && abs($cardinal) %100 > 4) ? 'th' 
-            : (($test_c < 4) ? ($test_c < 3) ? ($test_c < 2) ? ($test_c < 1) 
-            ? 'th' : 'st' : 'nd' : 'rd' : 'th')); 
-    return $cardinal.$ext; 
-    }  
-
+    public static function ordinal($cardinal)
+    {
+        $test_c = abs($cardinal) % 10;
+        $ext    = ((abs($cardinal) % 100 < 21 && abs($cardinal) % 100 > 4) ? 'th' : (($test_c < 4) ? ($test_c < 3) ? ($test_c < 2) ? ($test_c < 1) ? 'th' : 'st' : 'nd' : 'rd' : 'th'));
+        return $cardinal . $ext;
+    }
 
     /**
      * Returns the number of days for the given month and year
@@ -1257,14 +1255,14 @@ class Recipe
      *
      * @return int
      */
-    public static function numberOfDaysInMonth($month=0, $year=0){
-        if ($month < 1 OR $month > 12){return 0;}
-        if ( ! is_numeric($year) OR strlen($year) != 4){$year = date('Y');}
-        if ($month == 2){
-            if ($year % 400 == 0 OR ($year % 4 == 0 AND $year % 100 != 0)){return 29;}
-        }   
-        $days_in_month    = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+    public static function numberOfDaysInMonth($month = 0, $year = 0)
+    {
+        if ($month < 1 or $month > 12) {return 0;}
+        if (!is_numeric($year) or strlen($year) != 4) {$year = date('Y');}
+        if ($month == 2) {
+            if ($year % 400 == 0 or ($year % 4 == 0 and $year % 100 != 0)) {return 29;}
+        }
+        $days_in_month = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
         return $days_in_month[$month - 1];
     }
 }
-
