@@ -1231,4 +1231,40 @@ class Recipe
             echo $buffer;
         });
     }
+
+
+    /**
+     *  Takes a number and adds “th, st, nd, rd, th” after it
+     *
+     * @param int $cardinal Number to add termination
+     *
+     * @return string
+     */
+    public static function  ordinal($cardinal){ 
+    $test_c = abs($cardinal) % 10; 
+    $ext = ((abs($cardinal) %100 < 21 && abs($cardinal) %100 > 4) ? 'th' 
+            : (($test_c < 4) ? ($test_c < 3) ? ($test_c < 2) ? ($test_c < 1) 
+            ? 'th' : 'st' : 'nd' : 'rd' : 'th')); 
+    return $cardinal.$ext; 
+    }  
+
+
+    /**
+     * Returns the number of days for the given month and year
+     *
+     * @param int $month Month to check
+     * @param int $year Year to check
+     *
+     * @return int
+     */
+    public static function numberOfDaysInMonth($month=0, $year=0){
+        if ($month < 1 OR $month > 12){return 0;}
+        if ( ! is_numeric($year) OR strlen($year) != 4){$year = date('Y');}
+        if ($month == 2){
+            if ($year % 400 == 0 OR ($year % 4 == 0 AND $year % 100 != 0)){return 29;}
+        }   
+        $days_in_month    = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+        return $days_in_month[$month - 1];
+    }
+}
 }

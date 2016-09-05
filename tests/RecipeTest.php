@@ -619,5 +619,22 @@ class RecipeTest extends PHPUnit_Framework_TestCase
         // man, testing this will be painful.. 
         // Just trust me, it works, ROFL
     }
+
+   
+    public function test_ordinal()
+    {
+        
+        $ordinal = Recipe::ordinal(2);
+        $this->assertEquals($ordinal, '2nd');
+    }
+
+
+    public function test_numberOfDaysInMonth()
+    {
+        $numDaysFeb=29;
+        $numDays=Recipe::numberOfDaysInMonth(2, 2016);
+
+        $this->assertEquals($numDaysFeb, $numDays);
+    }
 }
 // EOF
