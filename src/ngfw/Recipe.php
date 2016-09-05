@@ -1234,16 +1234,19 @@ class Recipe
 
 
     /**
-     * Check if a string has a valid email format.
+     *  Takes a number and adds “th, st, nd, rd, th” after it
      *
-     * @param string $email email to validate
+     * @param int $cardinal Number to add termination
      *
-     * @return bool
+     * @return string
      */
-    public static function checkIfEmail($email)
-    {
-        return ( ! preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $address)) ? false : true;
-    }
+    public static function  ordinal($cardinal){ 
+    $test_c = abs($cardinal) % 10; 
+    $ext = ((abs($cardinal) %100 < 21 && abs($cardinal) %100 > 4) ? 'th' 
+            : (($test_c < 4) ? ($test_c < 3) ? ($test_c < 2) ? ($test_c < 1) 
+            ? 'th' : 'st' : 'nd' : 'rd' : 'th')); 
+    return $cardinal.$ext; 
+    }  
 
 
     /**
