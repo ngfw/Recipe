@@ -1,7 +1,7 @@
 # Recipe :book:
 ####Collection of PHP Functions
 
-![](https://travis-ci.org/ngfw/Recipe.svg?branch=master) ![](https://img.shields.io/packagist/v/ngfw/recipe.svg?maxAge=259204) ![](https://img.shields.io/badge/code-awesome-brightgreen.svg?maxAge=2592100) ![](https://img.shields.io/badge/language-PHP-blue.svg?maxAge=2592000)
+![](https://travis-ci.org/ngfw/Recipe.svg?branch=master) ![](https://img.shields.io/packagist/v/ngfw/recipe.svg?maxAge=259206) ![](https://img.shields.io/badge/code-awesome-brightgreen.svg?maxAge=2592100) ![](https://img.shields.io/badge/language-PHP-blue.svg?maxAge=2592000)
 
 ---
 Table of Contents
@@ -48,8 +48,8 @@ Table of Contents
 * [Auto Embed](#auto-embed)
 * [Make Clickable Links](#make-clickable-links)
 * [:wrench: Debug](#debug)
-* [Get Referer](#get-referer) :new:
-* [Compress Page](#compress-page) :new:
+* [Get Referer](#get-referer)
+* [Compress Page](#compress-page)
 * [Ordinal](#ordinal) :new:
 * [Number Of Days In Month](#number-of-days-in-month) :new:
 
@@ -531,25 +531,25 @@ echo $referer ;
 // outputs an url (http://mywebsite.com/page1)
 ```
 
-###Compress Page
-The `compressPage()` method will register new function on PHP shutdown, remove white space from output and try to gZip it.
 
 ###Ordinal
 ```php
 for($i=1;$i<=10;$i++){ 
-    echo Recipe::ordinal($i).' '; 
+    echo \ngfwRecipe::ordinal($i).' '; 
 } 
-//outputs 1st 2nd 3rd 4th 5th 6th 7th 8th 9th 10th
+// outputs 1st 2nd 3rd 4th 5th 6th 7th 8th 9th 10th
 
 ```
 
 ###Number Of Days In Month
 ```php
-$numDays = Recipe::numberOfDaysInMonth(2, 2012);
+$numDays = \ngfwRecipe::numberOfDaysInMonth(2, 2012);
 echo $numDays;
-//outputs:
-//29
+// outputs: 29
 ```
+
+###Compress Page
+The `compressPage()` method will register new function on PHP shutdown, remove white space from output and try to gZip it.
 
 ```php
 <?php
