@@ -620,14 +620,12 @@ class RecipeTest extends PHPUnit_Framework_TestCase
         // Just trust me, it works, ROFL
     }
 
-    /**
-     * Email.
-     */
-    public function test_checkIfEmail()
+   
+    public function test_ordinal()
     {
-        $email = 'nasfkds@fkdakda';
-        $isValidEmail = Recipe::checkIfEmail($email);
-        $this->assertTrue($isValidEmail);
+        
+        $ordinal = Recipe::ordinal(2);
+        $this->assertEquals($ordinal, '2nd');
     }
 
 
