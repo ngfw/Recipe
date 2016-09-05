@@ -1267,4 +1267,4 @@ class Recipe
         return $days_in_month[$month - 1];
     }
 }
-}
+
