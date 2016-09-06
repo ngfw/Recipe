@@ -636,5 +636,11 @@ class RecipeTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($numDaysFeb, $numDays);
     }
+
+    public function test_pr()
+    {
+        $this->expectOutputString("<pre>Array\n(\n    [0] => he\n    [1] => ll\n    [2] => oo\n)\n</pre>");
+        Recipe::pr(array("he","ll","oo"));
+    }
 }
 // EOF
