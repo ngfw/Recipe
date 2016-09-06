@@ -756,13 +756,13 @@ class Recipe
     /**
      * Make a Curl call.
      *
-     * @param string $url URL to curl
-     * @param string $method GET or POST, Default GET
-     * @param mixed $data Data to post, Default false
-     * @param mixed $headers Additional headers, example: array ("Accept: application/json")
-     * @param bool $returnInfo Whether or not to retrieve curl_getinfo()
+     * @param string     $url        URL to curl
+     * @param string     $method     GET or POST, Default GET
+     * @param mixed      $data       Data to post, Default false
+     * @param mixed      $headers    Additional headers, example: array ("Accept: application/json")
+     * @param bool       $returnInfo Whether or not to retrieve curl_getinfo()
+     * @param bool|array $auth       Basic authentication params. If array with keys 'username' and 'password' specified, CURLOPT_USERPWD cURL option will be set
      *
-     * @param bool|array $auth Basic authentication params. If array with keys 'username' and 'password' specified, CURLOPT_USERPWD cURL option will be set
      * @return array|string if $returnInfo is set to True, array is returned with two keys, contents (will contain response) and info (information regarding a specific transfer), otherwise response content is returned
      */
     public static function curl($url, $method = 'GET', $data = false, $headers = false, $returnInfo = false, $auth = false)
