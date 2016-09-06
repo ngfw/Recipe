@@ -756,15 +756,16 @@ class Recipe
     /**
      * Make a Curl call.
      *
-     * @param string $url        URL to curl
-     * @param string $method     GET or POST, Default GET
-     * @param mixed  $data       Data to post, Default false
-     * @param mixed  $headers    Additional headers, example: array ("Accept: application/json")
-     * @param bool   $returnInfo Whether or not to retrieve curl_getinfo()
+     * @param string     $url        URL to curl
+     * @param string     $method     GET or POST, Default GET
+     * @param mixed      $data       Data to post, Default false
+     * @param mixed      $headers    Additional headers, example: array ("Accept: application/json")
+     * @param bool       $returnInfo Whether or not to retrieve curl_getinfo()
+     * @param bool|array $auth       Basic authentication params. If array with keys 'username' and 'password' specified, CURLOPT_USERPWD cURL option will be set
      *
-     * @return string|array if $returnInfo is set to True, array is returned with two keys, contents (will contain response) and info (information regarding a specific transfer), otherwise response content is returned
+     * @return array|string if $returnInfo is set to True, array is returned with two keys, contents (will contain response) and info (information regarding a specific transfer), otherwise response content is returned
      */
-    public static function curl($url, $method = 'GET', $data = false, $headers = false, $returnInfo = false)
+    public static function curl($url, $method = 'GET', $data = false, $headers = false, $returnInfo = false, $auth = false)
     {
         $ch   = curl_init();
         $info = null;
@@ -794,6 +795,9 @@ class Recipe
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         if ($headers !== false) {
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        }
+        if ($auth !== false && strlen($auth['username']) > 0 && strlen($auth['password']) > 0) {
+            curl_setopt($ch, CURLOPT_USERPWD, $auth['username'].':'.$auth['password']);
         }
         $contents = curl_exec($ch);
         if ($returnInfo) {
