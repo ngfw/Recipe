@@ -579,3 +579,17 @@ will output:
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>HTML Page Title</title><meta name="description" content=""><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body> Hello Friend,</body></html>
 ```
 
+### PR 
+```php
+Recipe::pr( array("he","ll","oo") );
+```
+will output:
+```html
+<pre>Array
+(    
+    [0] => he
+    [1] => ll
+    [2] => oo
+)
+</pre>
+```
