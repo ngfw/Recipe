@@ -433,6 +433,20 @@ $curlWithHeaders = Recipe::curl("http://jsonplaceholder.typicode.com/posts", $me
 //  contents  => Data from URL
 //}
 ```
+Basic authentication with CURL:
+```php
+$curlBasicAuth = Recipe::curl(
+    "http://jsonplaceholder.typicode.com/posts",
+    $method = "GET",
+    $data = false,
+    $header = false,
+    $returnInfo = false,
+    $auth = array(
+       'username' => 'your_login',
+       'password' => 'your_password',
+    )
+);
+```
 ###Expand Short URL
 ```php
 $shortURL = "https://goo.gl/rvDnMX";
