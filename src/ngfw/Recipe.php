@@ -1138,12 +1138,6 @@ class Recipe
         return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" ' . self::arrayToString($attributes) . '>$1</a>', $string);
     }
 
-    public static function pr($variable)
-    {
-        echo '<pre>';
-        print_r($variable);
-        echo '</pre>';
-    }
     /**
      * Dump information about a variable.
      *
@@ -1270,5 +1264,19 @@ class Recipe
         }
         $days_in_month = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
         return $days_in_month[$month - 1];
+    }
+
+    /**
+     * print_r's Variable in <pre> tags.
+     * 
+     * @param  var $variable variable to print_r
+     * 
+     * @return void
+     */
+    public static function pr($variable)
+    {
+        echo '<pre>';
+        print_r($variable);
+        echo '</pre>';
     }
 }
