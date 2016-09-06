@@ -52,6 +52,7 @@ Table of Contents
 * [Compress Page](#compress-page)
 * [Ordinal](#ordinal) :new:
 * [Number Of Days In Month](#number-of-days-in-month) :new:
+* [pr](#pr) :new:
 
 ---
 ###Quick Start
@@ -579,7 +580,7 @@ will output:
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>HTML Page Title</title><meta name="description" content=""><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body> Hello Friend,</body></html>
 ```
 
-### PR 
+###PR 
 ```php
 Recipe::pr( array("he","ll","oo") );
 ```
