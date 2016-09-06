@@ -88,7 +88,7 @@ print_r($suggestion);
 ###Favicon
 Getting remote website Favicon:
 ```php
-$favIcon = \ngfw\Recipe::getFavicon("http://youtube.com/");
+$favIcon = Recipe::getFavicon("http://youtube.com/");
 
 echo $favIcon;
 // outputs: <img src="https://www.google.com/s2/favicons?domain=youtube.com/"  />
@@ -97,7 +97,7 @@ echo $favIcon;
 
 Getting remote website Favicon with HTML attributes:
 ```php
-$favIcon = \ngfw\Recipe::getFavicon(
+$favIcon = Recipe::getFavicon(
           "http://youtube.com/",
           array(
             "class" => "favImg"
@@ -113,7 +113,7 @@ echo $favIcon;
 ###QRcode
 Generating QR code
 ```php
-$QRcode = \ngfw\Recipe::getQRcode("ngfw Recipe");
+$QRcode = Recipe::getQRcode("ngfw Recipe");
 echo $QRcode;  
 //outputs: <img src="http://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=ngfw+Recipe"  />
 ```
@@ -121,7 +121,7 @@ echo $QRcode;
 
 Generating QR code and adding HTML attributes:
 ```php
-$QRcode = \ngfw\Recipe::getQRcode(
+$QRcode = Recipe::getQRcode(
     "ngfw Recipe",
     $width = 350,
     $height = 350,
@@ -137,7 +137,7 @@ echo $QRcode;
 
 ###File extension
 ```php
-$ext = \ngfw\Recipe::getFileExtension(__FILE__); // replace '__FILE__' with your filename
+$ext = Recipe::getFileExtension(__FILE__); // replace '__FILE__' with your filename
 echo $ext;
 //outputs: php
 ```
@@ -145,7 +145,7 @@ echo $ext;
 ###Gravatar
 Getting Gravatar:
 ```php
-$Gravatar = \ngfw\Recipe::getGravatar("gejadze@gmail.com");
+$Gravatar = Recipe::getGravatar("gejadze@gmail.com");
 echo $Gravatar;
 // outputs: <img src="http://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=mm&size=80&rating=g" width="80px" height="80px"  />
 ```
@@ -154,7 +154,7 @@ echo $Gravatar;
 
 Getting Gravatar with HTML attributes:
 ```php
-$Gravatar = \ngfw\Recipe::getGravatar(
+$Gravatar = Recipe::getGravatar(
     "gejadze@gmail.com",
     $size = 200,
     $default = 'monsterid',
@@ -173,21 +173,21 @@ ehco $Gravatar;
 ###Creating Link Tags
 Simple Link:
 ```php
-$linkTags = \ngfw\Recipe::createLinkTag("google.com");
+$linkTags = Recipe::createLinkTag("google.com");
 echo $linkTags;   
 //outputs: <a href="google.com">google.com</a>
 ```
 
 Link with title:
 ```php
-$linkTags = \ngfw\Recipe::createLinkTag("google.com", "Visit Google");
+$linkTags = Recipe::createLinkTag("google.com", "Visit Google");
 echo $linkTags;   
 //outputs: <a href="google.com" title="Visit Google" >Visit Google</a>
 ```
 
 Link with title and HTML attributes:
 ```php
-$linkTags = \ngfw\Recipe::createLinkTag("google.com", "Visit Google", array(
+$linkTags = Recipe::createLinkTag("google.com", "Visit Google", array(
     "class" => "outgoingLink"
 ));
 echo $linkTags;   
@@ -197,7 +197,7 @@ echo $linkTags;
 
 ### Validate email address
 ```php
-$isValid = \ngfw\Recipe::validateEmail("user@gmail.com");
+$isValid = Recipe::validateEmail("user@gmail.com");
 var_dump($isValid);
 // outputs: true (bool)
 ```
@@ -205,21 +205,21 @@ var_dump($isValid);
 Check for temporary Email addresses:
 
 ```php
-$isValid = \ngfw\Recipe::validateEmail('user@fakeinbox.com', $tempEmailAllowed = false);
+$isValid = Recipe::validateEmail('user@fakeinbox.com', $tempEmailAllowed = false);
 var_dump($isValid);
 // outputs: false (bool)
 ```
 
 ### Validate URL
 ```php
-$isValid = \ngfw\Recipe::validateURL("http://github.com/");
+$isValid = Recipe::validateURL("http://github.com/");
 var_dump($isValid);
 // outputs: true (bool)
 ```
 
 ### RSS Reader
 ```php
-$rssArray = \ngfw\Recipe::rssReader("https://github.com/ngfw/Recipe/commits/master.atom");
+$rssArray = Recipe::rssReader("https://github.com/ngfw/Recipe/commits/master.atom");
 var_dump($rssArray);
 // Outputs feed as an array
 ```
@@ -229,7 +229,7 @@ var_dump($rssArray);
 $obj = new stdClass;
 $obj->foo = 'bar';
 $obj->baz = 'qux';
-$array = \ngfw\Recipe::objectToArray($obj);
+$array = Recipe::objectToArray($obj);
 var_dump($array);
 
 // outputs:
@@ -248,7 +248,7 @@ $array = array(
     "foo" => "bar",
     "baz" => "qux",
 );
-$obj = \ngfw\Recipe::arrayToObject($array);
+$obj = Recipe::arrayToObject($array);
 // outputs:
 // object(stdClass)#15 (2) {
 //   ["foo"]=>
@@ -269,153 +269,153 @@ echo $string;
 ```
 ###HEX to RGB
 ```php
-$rgb = \ngfw\Recipe::hex2rgb("#FFF");
+$rgb = Recipe::hex2rgb("#FFF");
 echo $rgb;
 // outputs: rgb(255, 255, 255)
 ```
 ###RGB to HEX
 ```php
-$hex = \ngfw\Recipe::rgb2hex("rgb(123,123,123)");
+$hex = Recipe::rgb2hex("rgb(123,123,123)");
 // outputs: #7b7b7b
 ```
 ###Generate Random Password
 ```php
-$randomPass = \ngfw\Recipe::generateRandomPassword(10);
+$randomPass = Recipe::generateRandomPassword(10);
 echo $randomPass;
 // outputs: 10 random character string
 ```
 ###Simple Encode
 ```php
-$encodedString = \ngfw\Recipe::simpleEncode("php recipe");
+$encodedString = Recipe::simpleEncode("php recipe");
 echo $encodedString;
 // outputs: qcnVhqjKxpuilw==
 ```
 ###Simple Decode
 ```php
-$decodedString = \ngfw\Recipe::simpleDecode("qcnVhqjKxpuilw==");
+$decodedString = Recipe::simpleDecode("qcnVhqjKxpuilw==");
 echo $decodedString;
 // outputs: php recipe
 ```
 ###Generate Server Specific Hash
 ```php
-$serverHash = \ngfw\Recipe::generateServerSpecificHash();
+$serverHash = Recipe::generateServerSpecificHash();
 echo $serverHash;
 // outputs: d41d8cd98f00b204e9800998ecf8427e
 ```
 ###Detect HTTPS
 This method checks for `$_SERVER['HTTPS']`
 ```php
-$isHttps = \ngfw\Recipe::isHttps();
+$isHttps = Recipe::isHttps();
 var_dump($isHttps);
 // outputs: bool
 ```
 ###Detect AJAX
 This method checks for `$_SERVER['HTTP_X_REQUESTED_WITH']`
 ```php
-$isAjax = \ngfw\Recipe::isAjax();
+$isAjax = Recipe::isAjax();
 var_dump($isAjax);
 // outputs: bool
 ```
 
 ###Check if number is odd
 ```php
-$isNumberOdd = \ngfw\Recipe::isNumberOdd(5);
+$isNumberOdd = Recipe::isNumberOdd(5);
 // outputs: bool
 ```
 ###Check if number is even
 ```php
-$isNumberEven = \ngfw\Recipe::isNumberEven(8);
+$isNumberEven = Recipe::isNumberEven(8);
 var_dump($isNumberEven);
 // outputs: bool
 ```
 ###Get Current URL
 ```php
-$currentURL = \ngfw\Recipe::getCurrentURL();
+$currentURL = Recipe::getCurrentURL();
 var_dump($currentURL);
 // outputs: current Request URL
 ```
 ###Get Client IP
 ```php
-$ClientsIP = \ngfw\Recipe::getClientIP();
+$ClientsIP = Recipe::getClientIP();
 echo $ClientsIP;
 //OR
 // Return Proxy IP if user is behind it
-//$ClientsIP = \ngfw\Recipe::getClientIP("HTTP_CLIENT_IP"); //'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED', ...
+//$ClientsIP = Recipe::getClientIP("HTTP_CLIENT_IP"); //'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED', ...
 // outputs: IP address
 ```
 ###Detect Mobile
 ```php
-$isMobile = \ngfw\Recipe::isMobile();
+$isMobile = Recipe::isMobile();
 var_dump($isMobile);
 // outputs: true or false
 ```
 ###Get Browser
 ```php
-$Browser = \ngfw\Recipe::getBrowser();
+$Browser = Recipe::getBrowser();
 echo $Browser
 // outputs: Browser Details
 ```
 ###Get Client Location
 ```php
-$user_location = \ngfw\Recipe::getClientLocation();
+$user_location = Recipe::getClientLocation();
 echo $user_location;
 // outputs: Users Location
 ```
 ###Number To Word conversion
 ```php
 $number = "864210";
-$number_in_words = \ngfw\Recipe::numberToWord($number);
+$number_in_words = Recipe::numberToWord($number);
 echo $number_in_words;
 // outputs: eight hundred and sixty-four thousand, two hundred and ten
 ```
 ###Seconds To Text
 ```php
 $seconds = "864210";
-$number_in_words = \ngfw\Recipe::secondsToText($seconds);
+$number_in_words = Recipe::secondsToText($seconds);
 echo $number_in_words;
 // outputs: 1 hour and 10 seconds
-// \ngfw\Recipe::secondsToText($seconds, $returnAsWords = true);
+// Recipe::secondsToText($seconds, $returnAsWords = true);
 // will return: one hour and ten seconds
 ```
 ###Minutes To Text
 ```php
 $minutes  = 60 * 24 * 2;
-$duration = \ngfw\Recipe::minutesToText($minutes);
+$duration = Recipe::minutesToText($minutes);
 echo $duration;
 // outputs: 2 days
-// \ngfw\Recipe::minutesToText($minutes, $returnAsWords = true);
+// Recipe::minutesToText($minutes, $returnAsWords = true);
 // will return: two days
 ```
 ###Hours To Text
 ```php
 $hours    = 4.2;
-$duration = \ngfw\Recipe::hoursToText($hours);
+$duration = Recipe::hoursToText($hours);
 echo $duration;
 // outputs: 4 hours and 12 minutes
-// \ngfw\Recipe::hoursToText($hours, $returnAsWords = true);
+// Recipe::hoursToText($hours, $returnAsWords = true);
 // will return: four hours and twelve minutes
 ```
 ###Shorten String
 ```php
 $string        = "The quick brown fox jumps over the lazy dog";
-$shortenString = \ngfw\Recipe::shortenString($string, 20);
+$shortenString = Recipe::shortenString($string, 20);
 // output: The quick brown f...
-// \ngfw\Recipe::shortenString($string, 20, $addEllipsis = false);
+// Recipe::shortenString($string, 20, $addEllipsis = false);
 // output: "The quick brown fox ", NOTE last space
-// \ngfw\Recipe::shortenString($string, 20, $addEllipsis = false, $wordsafe = true);
+// Recipe::shortenString($string, 20, $addEllipsis = false, $wordsafe = true);
 // output: "The quick brown fox", NOTE, will not break in the middle of the word
 ```
 ###CURL
 
 Simple GET example:
 ```php
-$data = \ngfw\Recipe::curl("https://api.ipify.org");
+$data = Recipe::curl("https://api.ipify.org");
 var_dump($data);
 // outputs: Curl'ed Data
 ```
 POST Example:
 ```php
-$CurlPOST = \ngfw\Recipe::curl("http://jsonplaceholder.typicode.com/posts", $method = "POST", $data = array(
+$CurlPOST = Recipe::curl("http://jsonplaceholder.typicode.com/posts", $method = "POST", $data = array(
     "title"  => 'foo',
     "body"   => 'bar',
     "userId" => 1,
@@ -423,7 +423,7 @@ $CurlPOST = \ngfw\Recipe::curl("http://jsonplaceholder.typicode.com/posts", $met
 ```
 Custom Headers:
 ```php
-$curlWithHeaders = \ngfw\Recipe::curl("http://jsonplaceholder.typicode.com/posts", $method = "GET", $data = false, $header = array(
+$curlWithHeaders = Recipe::curl("http://jsonplaceholder.typicode.com/posts", $method = "GET", $data = false, $header = array(
     "Accept" => "application/json",
 ), $returnInfo = true);
 // NOTE $returnInfo argument
@@ -435,31 +435,31 @@ $curlWithHeaders = \ngfw\Recipe::curl("http://jsonplaceholder.typicode.com/posts
 ###Expand Short URL
 ```php
 $shortURL = "https://goo.gl/rvDnMX";
-$expandedURL = \ngfw\Recipe::expandShortUrl($shortURL);
+$expandedURL = Recipe::expandShortUrl($shortURL);
 echo $expendedURL;
 // outputs: https://github.com/ngfw/Recipe
 ```
 ###Get Alexa Rank
 ```php
-$AlexaRank = \ngfw\Recipe::getAlexaRank("github.com");
+$AlexaRank = Recipe::getAlexaRank("github.com");
 echo $AlexaRank;
 // outputs: Current alexa ranking as position number (example: 52)
 ```
 ###Get Google PageRank
 ```php
-$GoogleRank = \ngfw\Recipe::getGooglePageRank("github.com");
+$GoogleRank = Recipe::getGooglePageRank("github.com");
 echo $GoogleRank;
 // outputs: Current google page ranking
 ```
 ###Shorten URL
 ```php
-$TinyUrl = \ngfw\Recipe::getTinyUrl("https://github.com/ngfw/Recipe");
+$TinyUrl = Recipe::getTinyUrl("https://github.com/ngfw/Recipe");
 echo $TinyUrl;
 // outputs: http://tinyurl.com/h2nchjh
 ```
 ###Get Keyword Suggestions From Google
 ```php
-$suggestions = \ngfw\Recipe::getKeywordSuggestionsFromGoogle("Tbilisi, Georgia");
+$suggestions = Recipe::getKeywordSuggestionsFromGoogle("Tbilisi, Georgia");
 var_dump($suggestions);
 // outputs:
 //array(10) {
@@ -487,13 +487,13 @@ var_dump($suggestions);
 ```
 ###WIKI Search
 ```php
-$wiki = \ngfw\Recipe::wikiSearch("Tbilisi");
+$wiki = Recipe::wikiSearch("Tbilisi");
 var_dump($wiki);
 // outputs: data from wikipedia
 ```
 ###Notification
 ```php
-$notification = \ngfw\Recipe::notification("Test Successful");
+$notification = Recipe::notification("Test Successful");
 echo $notification;
 // outputs: <div style="display: block;padding: 0.5em;border: solid 1px;border-radius: 0.125em;margin-bottom: 1em; border-color: #a6d9f2;color: #0a5276;background-color: #e7f6fd;"  role="alert">Test Successful</div>
 // NOTE: possible notifications types: success, warning, error and info
@@ -502,7 +502,7 @@ echo $notification;
 ###Auto Embed
 ```php
 $string = "Checkout Solomun, Boiler Room at https://www.youtube.com/watch?v=bk6Xst6euQk";
-echo \ngfw\Recipe::autoEmbed($string);
+echo Recipe::autoEmbed($string);
 // outputs:
 // Checkout Solomun, Boiler Room at<iframe width="560" height="315" src="https://www.youtube.com/embed/bk6Xst6euQk?feature=oembed" frameborder="0" allowfullscreen></iframe>
 // supported providers are: youtube.com, blip.tv, vimeo.com, dailymotion.com, flickr.com, smugmug.com, hulu.com, revision3.com, wordpress.tv, funnyordie.com, soundcloud.com, slideshare.net and instagram.com
@@ -510,7 +510,7 @@ echo \ngfw\Recipe::autoEmbed($string);
 ###Make Clickable Links
 ```php
 $string = "Check PHP Recipes on https://github.com/ngfw/Recipe";
-$clickable = \ngfw\Recipe::makeClickableLinks($string);
+$clickable = Recipe::makeClickableLinks($string);
 echo $clickable;
 // outputs:
 // Check PHP Recipes on <a href="https://github.com/ngfw/Recipe" >https://github.com/ngfw/Recipe</a>
@@ -519,14 +519,14 @@ echo $clickable;
 `var_dump()` alternative
 ```php
 $string = "Test me";
-\ngfw\Recipe::debug($string);
+Recipe::debug($string);
 ```
 
 
 ###Get Referer
 Get the referer page (last page visited)
 ```php
-$referrer = \ngfw\Recipe::getReferer();
+$referrer = Recipe::getReferer();
 echo $referer ;
 // outputs an url (http://mywebsite.com/page1)
 ```
@@ -535,7 +535,7 @@ echo $referer ;
 ###Ordinal
 ```php
 for($i=1;$i<=10;$i++){ 
-    echo \ngfw\Recipe::ordinal($i);
+    echo Recipe::ordinal($i);
     echo ' '; 
 } 
 // outputs 1st 2nd 3rd 4th 5th 6th 7th 8th 9th 10th
@@ -544,7 +544,7 @@ for($i=1;$i<=10;$i++){
 
 ###Number Of Days In Month
 ```php
-$numDays = \ngfw\Recipe::numberOfDaysInMonth(2, 2012);
+$numDays = Recipe::numberOfDaysInMonth(2, 2012);
 echo $numDays;
 // outputs: 29
 ```
@@ -555,7 +555,7 @@ The `compressPage()` method will register new function on PHP shutdown, remove w
 ```php
 <?php
 require "vendor/autoload.php";
-\ngfw\Recipe::compressPage();
+Recipe::compressPage();
 ?>
 <!DOCTYPE html>
 <html lang="en">
