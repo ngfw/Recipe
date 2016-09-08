@@ -17,7 +17,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     {
         $favIcon = Recipe::getFavicon('http://youtube.com/');
         $this->assertEquals(
-            '<img src="https://www.google.com/s2/favicons?domain=youtube.com/"  />',
+            '<img src="https://www.google.com/s2/favicons?domain=youtube.com%2F"  />',
             $favIcon
         );
     }
@@ -28,7 +28,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             'class' => 'favImg',
         ]);
         $this->assertEquals(
-            '<img src="https://www.google.com/s2/favicons?domain=youtube.com/" class="favImg" />',
+            '<img src="https://www.google.com/s2/favicons?domain=youtube.com%2F" class="favImg" />',
             $favIcon
         );
     }
