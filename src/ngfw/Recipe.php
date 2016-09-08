@@ -7,8 +7,8 @@ class Recipe
     /**
      * Get a Website favicon image.
      *
-     * @param string $url        website url
-     * @param array  $attributes Optional, additional key/value attributes to include in the IMG tag
+     * @param string $url website url
+     * @param array $attributes Optional, additional key/value attributes to include in the IMG tag
      *
      * @return string containing complete image tag
      */
@@ -16,7 +16,7 @@ class Recipe
     {
 
         $apiUrl = 'https://www.google.com/s2/favicons?domain=';
-        $attr   = trim(self::arrayToString($attributes));
+        $attr = trim(self::arrayToString($attributes));
 
         if (strpos($url, 'http') !== false) {
             $url = str_replace('http://', '', $url);
@@ -28,10 +28,10 @@ class Recipe
     /**
      * Get a QR code.
      *
-     * @param string $string     String to generate QR code for.
-     * @param int    $width      QR code width
-     * @param int    $height     QR code height
-     * @param array  $attributes Optional, additional key/value attributes to include in the IMG tag
+     * @param string $string String to generate QR code for.
+     * @param int $width QR code width
+     * @param int $height QR code height
+     * @param array $attributes Optional, additional key/value attributes to include in the IMG tag
      *
      * @return string containing complete image tag
      */
@@ -42,7 +42,7 @@ class Recipe
             $protocol = 'https://';
         }
 
-        $attr   = trim(self::arrayToString($attributes));
+        $attr = trim(self::arrayToString($attributes));
         $apiUrl = $protocol . 'chart.apis.google.com/chart?chs=' . $width . 'x' . $height . '&cht=qr&chl=' . urlencode($string);
 
         return '<img src="' . $apiUrl . '" ' . $attr . ' />';
@@ -63,11 +63,11 @@ class Recipe
     /**
      * Get a Gravatar for email.
      *
-     * @param string $email      The email address
-     * @param int    $size       Size in pixels, defaults to 80 (in px), available values from 1 to 2048
-     * @param string $default    Default imageset to use, available values: 404, mm, identicon, monsterid, wavatar
-     * @param string $rating     Maximum rating (inclusive), available values:  g, pg, r, x
-     * @param array  $attributes Optional, additional key/value attributes to include in the IMG tag
+     * @param string $email The email address
+     * @param int $size Size in pixels, defaults to 80 (in px), available values from 1 to 2048
+     * @param string $default Default imageset to use, available values: 404, mm, identicon, monsterid, wavatar
+     * @param string $rating Maximum rating (inclusive), available values:  g, pg, r, x
+     * @param array $attributes Optional, additional key/value attributes to include in the IMG tag
      *
      * @return string containing complete image tag
      */
@@ -86,9 +86,9 @@ class Recipe
     /**
      * Create HTML A Tag.
      *
-     * @param string $link       URL or Email address
-     * @param string $text       Optional, If link text is empty, $link variable value will be used by default
-     * @param array  $attributes Optional, additional key/value attributes to include in the IMG tag
+     * @param string $link URL or Email address
+     * @param string $text Optional, If link text is empty, $link variable value will be used by default
+     * @param array $attributes Optional, additional key/value attributes to include in the IMG tag
      *
      * @return string containing complete a tag
      */
@@ -114,8 +114,8 @@ class Recipe
     /**
      * Validate Email address.
      *
-     * @param string $address          Email address to validate
-     * @param bool   $tempEmailAllowed Allow Temporary email addresses?
+     * @param string $address Email address to validate
+     * @param bool $tempEmailAllowed Allow Temporary email addresses?
      *
      * @return bool True if email address is valid, false is returned otherwise
      */
@@ -176,7 +176,7 @@ class Recipe
             $url = 'http://' . $url;
         }
         $feed = self::curl($url);
-        $xml  = simplexml_load_string($feed, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $xml = simplexml_load_string($feed, 'SimpleXMLElement', LIBXML_NOCDATA);
 
         return self::objectToArray($xml);
     }
@@ -235,6 +235,7 @@ class Recipe
     public static function arrayToString($array = [])
     {
         $string = '';
+
         if (isset($array) && is_array($array) && !empty($array)) {
             foreach ($array as $key => $value) {
                 $string .= $key . '="' . $value . '" ';
@@ -255,7 +256,7 @@ class Recipe
     {
         $color = str_replace('#', '', $color);
 
-        $hex             = strlen($color) == 3 ? [$color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2]] : [$color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5]];
+        $hex = strlen($color) == 3 ? [$color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2]] : [$color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5]];
         list($r, $g, $b) = $hex;
 
         $r = hexdec($r);
@@ -307,7 +308,7 @@ class Recipe
 
         $alphaLength = strlen($alphabet) - 1;
         for ($i = 0; $i < $length; ++$i) {
-            $n      = rand(0, $alphaLength);
+            $n = rand(0, $alphaLength);
             $pass[] = $alphabet[$n];
         }
 
@@ -317,7 +318,7 @@ class Recipe
     /**
      * Simple Encode string.
      *
-     * @param string $string  String you would like to encode
+     * @param string $string String you would like to encode
      * @param string $passkey salt for encoding
      *
      * @return string
@@ -331,9 +332,9 @@ class Recipe
 
         $result = '';
         for ($i = 0; $i < strlen($string); $i++) {
-            $char    = substr($string, $i, 1);
+            $char = substr($string, $i, 1);
             $keychar = substr($key, ($i % strlen($key)) - 1, 1);
-            $char    = chr(ord($char) + ord($keychar));
+            $char = chr(ord($char) + ord($keychar));
             $result .= $char;
         }
 
@@ -343,7 +344,7 @@ class Recipe
     /**
      * Simple Decode string.
      *
-     * @param string $string  String encoded via Recipe::simpleEncode()
+     * @param string $string String encoded via Recipe::simpleEncode()
      * @param string $passkey salt for encoding
      *
      * @return string
@@ -358,9 +359,9 @@ class Recipe
         $result = '';
         $string = base64_decode($string);
         for ($i = 0; $i < strlen($string); $i++) {
-            $char    = substr($string, $i, 1);
+            $char = substr($string, $i, 1);
             $keychar = substr($key, ($i % strlen($key)) - 1, 1);
-            $char    = chr(ord($char) - ord($keychar));
+            $char = chr(ord($char) - ord($keychar));
             $result .= $char;
         }
 
@@ -519,7 +520,7 @@ class Recipe
      */
     public static function getBrowser()
     {
-        $u_agent     = $_SERVER['HTTP_USER_AGENT'];
+        $u_agent = $_SERVER['HTTP_USER_AGENT'];
         $browserName = $ub = $platform = 'Unknown';
         if (preg_match('/linux/i', $u_agent)) {
             $platform = 'Linux';
@@ -531,28 +532,28 @@ class Recipe
 
         if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
             $browserName = 'Internet Explorer';
-            $ub          = 'MSIE';
+            $ub = 'MSIE';
         } elseif (preg_match('/Firefox/i', $u_agent)) {
             $browserName = 'Mozilla Firefox';
-            $ub          = 'Firefox';
+            $ub = 'Firefox';
         } elseif (preg_match('/Chrome/i', $u_agent)) {
             $browserName = 'Google Chrome';
-            $ub          = 'Chrome';
+            $ub = 'Chrome';
         } elseif (preg_match('/Safari/i', $u_agent)) {
             $browserName = 'Apple Safari';
-            $ub          = 'Safari';
+            $ub = 'Safari';
         } elseif (preg_match('/Opera/i', $u_agent)) {
             $browserName = 'Opera';
-            $ub          = 'Opera';
+            $ub = 'Opera';
         } elseif (preg_match('/Netscape/i', $u_agent)) {
             $browserName = 'Netscape';
-            $ub          = 'Netscape';
+            $ub = 'Netscape';
         }
 
-        $known   = ['Version', $ub, 'other'];
+        $known = ['Version', $ub, 'other'];
         $pattern = '#(?<browser>' . implode('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
         preg_match_all($pattern, $u_agent, $matches);
-        $i       = count($matches['browser']);
+        $i = count($matches['browser']);
         $version = $matches['version'][0];
         if ($i != 1 && strripos($u_agent, 'Version') >= strripos($u_agent, $ub)) {
             $version = $matches['version'][1];
@@ -571,7 +572,7 @@ class Recipe
      */
     public static function getClientLocation()
     {
-        $result  = false;
+        $result = false;
         $ip_data = @json_decode(self::curl('http://www.geoplugin.net/json.gp?ip=' . self::getClientIP()));
         if (isset($ip_data) && $ip_data->geoplugin_countryName != null) {
             $result = $ip_data->geoplugin_city . ', ' . $ip_data->geoplugin_countryCode;
@@ -589,19 +590,19 @@ class Recipe
      */
     public static function numberToWord($number)
     {
-        $hyphen      = '-';
+        $hyphen = '-';
         $conjunction = ' and ';
-        $separator   = ', ';
-        $negative    = 'negative ';
-        $decimal     = ' point ';
-        $fraction    = null;
-        $dictionary  = [0 => 'zero', 1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six', 7 => 'seven', 8 => 'eight', 9 => 'nine', 10 => 'ten', 11 => 'eleven', 12 => 'twelve', 13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen', 16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen', 19 => 'nineteen', 20 => 'twenty', 30 => 'thirty', 40 => 'fourty', 50 => 'fifty', 60 => 'sixty', 70 => 'seventy', 80 => 'eighty', 90 => 'ninety', 100 => 'hundred', 1000 => 'thousand', 1000000 => 'million', 1000000000 => 'billion', 1000000000000 => 'trillion', 1000000000000000 => 'quadrillion', 1000000000000000000 => 'quintillion'];
+        $separator = ', ';
+        $negative = 'negative ';
+        $decimal = ' point ';
+        $fraction = null;
+        $dictionary = [0 => 'zero', 1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six', 7 => 'seven', 8 => 'eight', 9 => 'nine', 10 => 'ten', 11 => 'eleven', 12 => 'twelve', 13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen', 16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen', 19 => 'nineteen', 20 => 'twenty', 30 => 'thirty', 40 => 'fourty', 50 => 'fifty', 60 => 'sixty', 70 => 'seventy', 80 => 'eighty', 90 => 'ninety', 100 => 'hundred', 1000 => 'thousand', 1000000 => 'million', 1000000000 => 'billion', 1000000000000 => 'trillion', 1000000000000000 => 'quadrillion', 1000000000000000000 => 'quintillion'];
 
         if (!is_numeric($number)) {
             return false;
         }
 
-        if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
+        if (($number >= 0 && (int)$number < 0) || (int)$number < 0 - PHP_INT_MAX) {
             trigger_error('numberToWord only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX, E_USER_WARNING);
 
             return false;
@@ -621,8 +622,8 @@ class Recipe
                 break;
 
             case $number < 100:
-                $tens   = ((int) ($number / 10)) * 10;
-                $units  = $number % 10;
+                $tens = ((int)($number / 10)) * 10;
+                $units = $number % 10;
                 $string = $dictionary[$tens];
                 if ($units) {
                     $string .= $hyphen . $dictionary[$units];
@@ -630,19 +631,19 @@ class Recipe
                 break;
 
             case $number < 1000:
-                $hundreds  = $number / 100;
+                $hundreds = $number / 100;
                 $remainder = $number % 100;
-                $string    = $dictionary[$hundreds] . ' ' . $dictionary[100];
+                $string = $dictionary[$hundreds] . ' ' . $dictionary[100];
                 if ($remainder) {
                     $string .= $conjunction . self::numberToWord($remainder);
                 }
                 break;
 
             default:
-                $baseUnit     = pow(1000, floor(log($number, 1000)));
-                $numBaseUnits = (int) ($number / $baseUnit);
-                $remainder    = $number % $baseUnit;
-                $string       = self::numberToWord($numBaseUnits) . ' ' . $dictionary[$baseUnit];
+                $baseUnit = pow(1000, floor(log($number, 1000)));
+                $numBaseUnits = (int)($number / $baseUnit);
+                $remainder = $number % $baseUnit;
+                $string = self::numberToWord($numBaseUnits) . ' ' . $dictionary[$baseUnit];
                 if ($remainder) {
                     $string .= $remainder < 100 ? $conjunction : $separator;
                     $string .= self::numberToWord($remainder);
@@ -653,7 +654,7 @@ class Recipe
         if (null !== $fraction && is_numeric($fraction)) {
             $string .= $decimal;
             $words = [];
-            foreach (str_split((string) $fraction) as $number) {
+            foreach (str_split((string)$fraction) as $number) {
                 $words[] = $dictionary[$number];
             }
             $string .= implode(' ', $words);
@@ -665,7 +666,7 @@ class Recipe
     /**
      * Convert seconds to real time.
      *
-     * @param int  $seconds       time in seconds
+     * @param int $seconds time in seconds
      * @param bool $returnAsWords return time in words (example one minute and 20 seconds) if value is True or (1 minute and 20 seconds) if value is false, default false
      *
      * @return string
@@ -673,7 +674,7 @@ class Recipe
     public static function secondsToText($seconds, $returnAsWords = false)
     {
         $periods = ['year' => 3.156e+7, 'month' => 2.63e+6, 'week' => 604800, 'day' => 86400, 'hour' => 3600, 'minute' => 60, 'second' => 1];
-        $parts   = [];
+        $parts = [];
         foreach ($periods as $name => $dur) {
             $div = floor($seconds / $dur);
             if ($div == 0) {
@@ -697,7 +698,7 @@ class Recipe
     /**
      * Convert minutes to real time.
      *
-     * @param int  $minutes       time in minutes
+     * @param int $minutes time in minutes
      * @param bool $returnAsWords return time in words (example one hour and 20 minutes) if value is True or (1 hour and 20 minutes) if value is false, default false
      *
      * @return string
@@ -710,7 +711,7 @@ class Recipe
     /**
      * Convert hours to real time.
      *
-     * @param int  $hours         time in hours
+     * @param int $hours time in hours
      * @param bool $returnAsWords return time in words (example one hour) if value is True or (1 hour) if value is false, default false
      *
      * @return string
@@ -723,16 +724,16 @@ class Recipe
     /**
      * Truncate String (shorten) with or without ellipsis.
      *
-     * @param string $string      String to truncate
-     * @param int    $maxLength   Maximum length of string
-     * @param bool   $addEllipsis if True, "..." is added in the end of the string, default true
-     * @param bool   $wordsafe    if True, Words will not be cut in the middle
+     * @param string $string String to truncate
+     * @param int $maxLength Maximum length of string
+     * @param bool $addEllipsis if True, "..." is added in the end of the string, default true
+     * @param bool $wordsafe if True, Words will not be cut in the middle
      *
      * @return string Shortened Text
      */
     public static function shortenString($string, $maxLength, $addEllipsis = true, $wordsafe = false)
     {
-        $ellipsis  = '';
+        $ellipsis = '';
         $maxLength = max($maxLength, 0);
         if (mb_strlen($string) <= $maxLength) {
             return $string;
@@ -756,18 +757,18 @@ class Recipe
     /**
      * Make a Curl call.
      *
-     * @param string     $url        URL to curl
-     * @param string     $method     GET or POST, Default GET
-     * @param mixed      $data       Data to post, Default false
-     * @param mixed      $headers    Additional headers, example: array ("Accept: application/json")
-     * @param bool       $returnInfo Whether or not to retrieve curl_getinfo()
-     * @param bool|array $auth       Basic authentication params. If array with keys 'username' and 'password' specified, CURLOPT_USERPWD cURL option will be set
+     * @param string $url URL to curl
+     * @param string $method GET or POST, Default GET
+     * @param mixed $data Data to post, Default false
+     * @param mixed $headers Additional headers, example: array ("Accept: application/json")
+     * @param bool $returnInfo Whether or not to retrieve curl_getinfo()
+     * @param bool|array $auth Basic authentication params. If array with keys 'username' and 'password' specified, CURLOPT_USERPWD cURL option will be set
      *
      * @return array|string if $returnInfo is set to True, array is returned with two keys, contents (will contain response) and info (information regarding a specific transfer), otherwise response content is returned
      */
     public static function curl($url, $method = 'GET', $data = false, $headers = false, $returnInfo = false, $auth = false)
     {
-        $ch   = curl_init();
+        $ch = curl_init();
         $info = null;
         if (strtoupper($method) == 'POST') {
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -797,7 +798,7 @@ class Recipe
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         }
         if ($auth !== false && strlen($auth['username']) > 0 && strlen($auth['password']) > 0) {
-            curl_setopt($ch, CURLOPT_USERPWD, $auth['username'].':'.$auth['password']);
+            curl_setopt($ch, CURLOPT_USERPWD, $auth['username'] . ':' . $auth['password']);
         }
         $contents = curl_exec($ch);
         if ($returnInfo) {
@@ -833,8 +834,8 @@ class Recipe
         preg_match_all('/<[\s]*meta[\s]*http-equiv="?' . '([^>"]*)"?[\s]*' . 'content="?([^>"]*)"?[\s]*[\/]?[\s]*>/si', $data, $match);
         if (isset($match) && is_array($match) && count($match) == 3) {
             $originals = $match[0];
-            $names     = $match[1];
-            $values    = $match[2];
+            $names = $match[1];
+            $values = $match[2];
             if ((isset($originals) && isset($names) && isset($values)) && count($originals) == count($names) && count($names) == count($values)) {
                 $metaTags = [];
                 for ($i = 0, $limit = count($names); $i < $limit; $i++) {
@@ -859,15 +860,15 @@ class Recipe
      */
     public static function getAlexaRank($domain)
     {
-        $domain      = preg_replace('~^https?://~', '', $domain);
-        $alexa       = 'http://data.alexa.com/data?cli=10&dat=s&url=%s';
+        $domain = preg_replace('~^https?://~', '', $domain);
+        $alexa = 'http://data.alexa.com/data?cli=10&dat=s&url=%s';
         $request_url = sprintf($alexa, urlencode($domain));
-        $xml         = simplexml_load_file($request_url);
+        $xml = simplexml_load_file($request_url);
         if (!isset($xml->SD[1])) {
             return false;
         }
         $nodeAttributes = $xml->SD[1]->POPULARITY->attributes();
-        $text           = (int) $nodeAttributes['TEXT'];
+        $text = (int)$nodeAttributes['TEXT'];
 
         return $text;
     }
@@ -892,7 +893,7 @@ class Recipe
             for ($i = 0; $i < $length; $i++) {
                 $Check *= $Magic;
                 if ($Check >= $Int32Unit) {
-                    $Check = ($Check - $Int32Unit * (int) ($Check / $Int32Unit));
+                    $Check = ($Check - $Int32Unit * (int)($Check / $Int32Unit));
                     $Check = ($Check < -2147483648) ? ($Check + $Int32Unit) : $Check;
                 }
                 $Check += ord($Str[$i]);
@@ -909,8 +910,8 @@ class Recipe
             $Check1 = (($Check1 >> 4) & 0x3FFFFC0) | ($Check1 & 0x3F);
             $Check1 = (($Check1 >> 4) & 0x3FFC00) | ($Check1 & 0x3FF);
             $Check1 = (($Check1 >> 4) & 0x3C000) | ($Check1 & 0x3FFF);
-            $T1     = (((($Check1 & 0x3C0) << 4) | ($Check1 & 0x3C)) << 2) | ($Check2 & 0xF0F);
-            $T2     = (((($Check1 & 0xFFFFC000) << 4) | ($Check1 & 0x3C00)) << 0xA) | ($Check2 & 0xF0F0000);
+            $T1 = (((($Check1 & 0x3C0) << 4) | ($Check1 & 0x3C)) << 2) | ($Check2 & 0xF0F);
+            $T2 = (((($Check1 & 0xFFFFC000) << 4) | ($Check1 & 0x3C00)) << 0xA) | ($Check2 & 0xF0F0000);
 
             return $T1 | $T2;
         }
@@ -918,14 +919,14 @@ class Recipe
         function CheckHash($Hashnum)
         {
             $CheckByte = 0;
-            $Flag      = 0;
-            $HashStr   = sprintf('%u', $Hashnum);
-            $length    = strlen($HashStr);
+            $Flag = 0;
+            $HashStr = sprintf('%u', $Hashnum);
+            $length = strlen($HashStr);
             for ($i = $length - 1; $i >= 0; $i--) {
                 $Re = $HashStr[$i];
                 if (1 === ($Flag % 2)) {
                     $Re += $Re;
-                    $Re = (int) ($Re / 10) + ($Re % 10);
+                    $Re = (int)($Re / 10) + ($Re % 10);
                 }
                 $CheckByte += $Re;
                 $Flag++;
@@ -947,7 +948,7 @@ class Recipe
         $query = 'http://toolbarqueries.google.com/tbr?client=navclient-auto&ch=' . CheckHash(HashURL($url)) . '&features=Rank&q=info:' . $url . '&num=100&filter=0';
 
         $data = file_get_contents($query);
-        $pos  = strpos($data, 'Rank_');
+        $pos = strpos($data, 'Rank_');
 
         if ($pos === false) {
             return false;
@@ -955,7 +956,7 @@ class Recipe
 
         $pagerank = substr($data, $pos + 9);
 
-        return (int) $pagerank;
+        return (int)$pagerank;
     }
 
     /**
@@ -1005,15 +1006,15 @@ class Recipe
     public static function wikiSearch($keyword)
     {
         $apiurl = 'http://wikipedia.org/w/api.php?action=opensearch&search=' . urlencode($keyword) . '&format=xml&limit=1';
-        $data   = self::curl($apiurl);
-        $xml    = simplexml_load_string($data);
-        if ((string) $xml->Section->Item->Description) {
-            $array                = [];
-            $array['title']       = (string) $xml->Section->Item->Text;
-            $array['description'] = (string) $xml->Section->Item->Description;
-            $array['url']         = (string) $xml->Section->Item->Url;
+        $data = self::curl($apiurl);
+        $xml = simplexml_load_string($data);
+        if ((string)$xml->Section->Item->Description) {
+            $array = [];
+            $array['title'] = (string)$xml->Section->Item->Text;
+            $array['description'] = (string)$xml->Section->Item->Description;
+            $array['url'] = (string)$xml->Section->Item->Url;
             if (isset($xml->Section->Item->Image)) {
-                $img            = (string) $xml->Section->Item->Image->attributes()->source;
+                $img = (string)$xml->Section->Item->Image->attributes()->source;
                 $array['image'] = str_replace('/50px-', '/200px-', $img);
             }
 
@@ -1027,8 +1028,8 @@ class Recipe
      * Build (HTML) notification message.
      *
      * @param string $notification Text to display in notification
-     * @param string $type         Notification type, available notifications: success, warning, error and info
-     * @param array  $attributes   Optional, additional key/value attributes to include in the DIV tag
+     * @param string $type Notification type, available notifications: success, warning, error and info
+     * @param array $attributes Optional, additional key/value attributes to include in the DIV tag
      *
      * @return string containing complete div tag
      */
@@ -1065,7 +1066,7 @@ class Recipe
      * Parse text to find URL's for embed enabled services like: youtube.com, blip.tv, vimeo.com, dailymotion.com, flickr.com, smugmug.com, hulu.com, revision3.com, wordpress.tv, funnyordie.com, soundcloud.com, slideshare.net and instagram.com and embed elements automatically.
      *
      * @param string $string text to parse
-     * @param string $width  max width of embedded element
+     * @param string $width max width of embedded element
      * @param string $height max height of embedded element
      *
      * @return string
@@ -1073,7 +1074,7 @@ class Recipe
     public static function autoEmbed($string, $width = '560', $height = '315')
     {
         $providers = ['~https?://(?:[0-9A-Z-]+\.)?(?:youtu\.be/|youtube(?:-nocookie)?\.com\S*[^\w\s-])([\w-]{11})(?=[^\w-]|$)[?=&+%\w.-]*~ix' => 'http://www.youtube.com/oembed', '#https?://blip\.tv/(.+)#i' => 'http://blip.tv/oembed/', '~https?://(?:[0-9A-Z-]+\.)?(?:vimeo.com\S*[^\w\s-])([\w-]{1,20})(?=[^\w-]|$)[?=&+%\w.-]*~ix' => 'http://vimeo.com/api/oembed.{format}', '#https?://(www\.)?dailymotion\.com/.*#i' => 'http://www.dailymotion.com/services/oembed', '#https?://(www\.)?flickr\.com/.*#i' => 'http://www.flickr.com/services/oembed/', '#https?://(.+\.)?smugmug\.com/.*#i' => 'http://api.smugmug.com/services/oembed/', '#https?://(www\.)?hulu\.com/watch/.*#i' => 'http://www.hulu.com/api/oembed.{format}', '#https?://revision3\.com/(.+)#i' => 'http://revision3.com/api/oembed/', '#https?://wordpress\.tv/(.+)#i' => 'http://wordpress.tv/oembed/', '#https?://(www\.)?funnyordie\.com/videos/.*#i' => 'http://www.funnyordie.com/oembed', '#https?://(www\.)?soundcloud\.com/.*#i' => 'http://soundcloud.com/oembed', '#https?://(www\.)?slideshare.net/*#' => 'http://www.slideshare.net/api/oembed/2', '#http://instagr(\.am|am\.com)/p/.*#i' => 'http://api.instagram.com/oembed'];
-        $string    = preg_replace_callback('@(^|[^"|^\'])(https?://?([-\w]+\.[-\w\.]+)+\w(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)*)@', function ($matches) use ($providers, $width, $height) {
+        $string = preg_replace_callback('@(^|[^"|^\'])(https?://?([-\w]+\.[-\w\.]+)+\w(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)*)@', function ($matches) use ($providers, $width, $height) {
             $url = trim($matches[0]);
             $url = explode('#', $url);
             $url = reset($url);
@@ -1093,7 +1094,7 @@ class Recipe
                 $params = ['maxwidth' => $width, 'maxheight' => $height, 'format' => 'json'];
 
                 $requestURL = $requestURL . '?url=' . $url . '&' . http_build_query($params);
-                $data       = json_decode(self::curl($requestURL), true);
+                $data = json_decode(self::curl($requestURL), true);
 
                 switch ($data['type']) {
                     case 'photo':
@@ -1132,8 +1133,8 @@ class Recipe
     /**
      * Parse text to find all URLs that are not linked and create A tag.
      *
-     * @param string $string     Text to parse
-     * @param array  $attributes Optional, additional key/value attributes to include in the A tag
+     * @param string $string Text to parse
+     * @param array $attributes Optional, additional key/value attributes to include in the A tag
      *
      * @return string
      */
@@ -1154,7 +1155,7 @@ class Recipe
         ob_start();
         var_dump($variable);
         $output = ob_get_clean();
-        $maps   = ['string' => "/(string\((?P<length>\d+)\)) (?P<value>\"(?<!\\\).*\")/i", 'array' => "/\[\"(?P<key>.+)\"(?:\:\"(?P<class>[a-z0-9_\\\]+)\")?(?:\:(?P<scope>public|protected|private))?\]=>/Ui", 'countable' => "/(?P<type>array|int|string)\((?P<count>\d+)\)/", 'resource' => "/resource\((?P<count>\d+)\) of type \((?P<class>[a-z0-9_\\\]+)\)/", 'bool' => "/bool\((?P<value>true|false)\)/", 'float' => "/float\((?P<value>[0-9\.]+)\)/", 'object' => "/object\((?P<class>\S+)\)\#(?P<id>\d+) \((?P<count>\d+)\)/i"];
+        $maps = ['string' => "/(string\((?P<length>\d+)\)) (?P<value>\"(?<!\\\).*\")/i", 'array' => "/\[\"(?P<key>.+)\"(?:\:\"(?P<class>[a-z0-9_\\\]+)\")?(?:\:(?P<scope>public|protected|private))?\]=>/Ui", 'countable' => "/(?P<type>array|int|string)\((?P<count>\d+)\)/", 'resource' => "/resource\((?P<count>\d+)\) of type \((?P<class>[a-z0-9_\\\]+)\)/", 'bool' => "/bool\((?P<value>true|false)\)/", 'float' => "/float\((?P<value>[0-9\.]+)\)/", 'object' => "/object\((?P<class>\S+)\)\#(?P<id>\d+) \((?P<count>\d+)\)/i"];
         foreach ($maps as $function => $pattern) {
             $output = preg_replace_callback($pattern, function ($matches) use ($function) {
                 switch ($function) {
@@ -1164,7 +1165,7 @@ class Recipe
                         return '<span style="color: #0000FF;">string</span>(<span style="color: #1287DB;">' . $matches['length'] . ')</span> <span style="color: #6B6E6E;">' . $matches['value'] . '</span>';
 
                     case 'array':
-                        $key   = '<span style="color: #008000;">"' . $matches['key'] . '"</span>';
+                        $key = '<span style="color: #008000;">"' . $matches['key'] . '"</span>';
                         $class = '';
                         $scope = '';
                         if (isset($matches['class']) && !empty($matches['class'])) {
@@ -1177,7 +1178,7 @@ class Recipe
                         return '[' . $key . $class . $scope . ']=>';
 
                     case 'countable':
-                        $type  = '<span style="color: #0000FF;">' . $matches['type'] . '</span>';
+                        $type = '<span style="color: #0000FF;">' . $matches['type'] . '</span>';
                         $count = '(<span style="color: #1287DB;">' . $matches['count'] . '</span>)';
 
                         return $type . $count;
@@ -1197,7 +1198,7 @@ class Recipe
                 }
             }, $output);
         }
-        $header          = '';
+        $header = '';
         list($debugfile) = debug_backtrace();
         if (!empty($debugfile['file'])) {
             $header = '<h4 style="border-bottom:1px solid #bbb;font-weight:bold;margin:0 0 10px 0;padding:3px 0 10px 0">' . $debugfile['file'] . '</h4>';
@@ -1226,11 +1227,12 @@ class Recipe
             $buffer = preg_replace(array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'), array('>', '<', '\\1'), ob_get_contents());
             ob_end_clean();
             if (!((ini_get('zlib.output_compression') == 'On' ||
-                ini_get('zlib.output_compression_level') > 0) ||
-                ini_get('output_handler') == 'ob_gzhandler') &&
+                        ini_get('zlib.output_compression_level') > 0) ||
+                    ini_get('output_handler') == 'ob_gzhandler') &&
                 !empty($_SERVER['HTTP_ACCEPT_ENCODING']) &&
                 extension_loaded('zlib') &&
-                strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false) {
+                strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false
+            ) {
                 ob_start('ob_gzhandler');
             }
             echo $buffer;
@@ -1247,7 +1249,7 @@ class Recipe
     public static function ordinal($cardinal)
     {
         $test_c = abs($cardinal) % 10;
-        $ext    = ((abs($cardinal) % 100 < 21 && abs($cardinal) % 100 > 4) ? 'th' : (($test_c < 4) ? ($test_c < 3) ? ($test_c < 2) ? ($test_c < 1) ? 'th' : 'st' : 'nd' : 'rd' : 'th'));
+        $ext = ((abs($cardinal) % 100 < 21 && abs($cardinal) % 100 > 4) ? 'th' : (($test_c < 4) ? ($test_c < 3) ? ($test_c < 2) ? ($test_c < 1) ? 'th' : 'st' : 'nd' : 'rd' : 'th'));
         return $cardinal . $ext;
     }
 
@@ -1261,20 +1263,30 @@ class Recipe
      */
     public static function numberOfDaysInMonth($month = 0, $year = 0)
     {
-        if ($month < 1 or $month > 12) {return 0;}
-        if (!is_numeric($year) or strlen($year) != 4) {$year = date('Y');}
-        if ($month == 2) {
-            if ($year % 400 == 0 or ($year % 4 == 0 and $year % 100 != 0)) {return 29;}
+        if ($month < 1 or $month > 12) {
+            return 0;
         }
+
+        if (!is_numeric($year) or strlen($year) != 4) {
+            $year = date('Y');
+        }
+
+        if ($month == 2) {
+            if ($year % 400 == 0 or ($year % 4 == 0 and $year % 100 != 0)) {
+                return 29;
+            }
+        }
+
         $days_in_month = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+
         return $days_in_month[$month - 1];
     }
 
     /**
      * print_r's Variable in <pre> tags.
-     * 
-     * @param  var $variable variable to print_r
-     * 
+     *
+     * @param mixed $variable variable to print_r
+     *
      * @return void
      */
     public static function pr($variable)
