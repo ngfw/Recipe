@@ -5,7 +5,7 @@
 
 ---
 Table of Contents
-* [:rocket: Quick Start](#quick-start)
+* [🚀 Quick Start](#quick-start)
 * [Favicon](#favicon)
 * [QRcode](#qrcode)
 * [File extension](#file-extension)
@@ -47,12 +47,12 @@ Table of Contents
 * [Notification](#notification)
 * [Auto Embed](#auto-embed)
 * [Make Clickable Links](#make-clickable-links)
-* [:wrench: Debug](#debug)
+* [🔧 Debug](#debug)
 * [Get Referer](#get-referer)
 * [Compress Page](#compress-page)
-* [Ordinal](#ordinal) :new:
-* [Number Of Days In Month](#number-of-days-in-month) :new:
-* [pr](#pr) :new:
+* [Ordinal](#ordinal) 🆕
+* [Number Of Days In Month](#number-of-days-in-month) 🆕
+* [pr](#pr) 🆕
 
 ---
 ###Quick Start
