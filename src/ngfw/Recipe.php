@@ -1450,4 +1450,9 @@ class Recipe
         print_r($variable);
         echo '</pre>';
     }
+    
+    public static function sanitizeFileName($filename)
+    {
+        return str_replace(array(" ", '"', "'", "&", "/", "\\", "?", "#"), '_', $filename);
+    }    
 }
