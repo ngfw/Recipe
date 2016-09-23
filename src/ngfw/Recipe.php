@@ -14,16 +14,14 @@ class Recipe
      */
     public static function getFavicon($url, $attributes = [])
     {
-        $apiUrl = 'https://www.google.com/s2/favicons?domain=';
         $attr = trim(self::arrayToString($attributes));
 
-        if (strpos($url, 'http') !== false) {
-            $url = str_replace('http://', '', $url);
+        if (!empty($attr)) {
+            $attr = " $attr";
         }
 
         return sprintf(
-            "<img src=\"%s%s\" %s />",
-            $apiUrl,
+            "<img src=\"https://www.google.com/s2/favicons?domain=%s\"%s/>",
             urlencode($url),
             $attr
         );
@@ -171,11 +169,7 @@ class Recipe
      */
     public static function validateURL($url)
     {
-        if (filter_var($url, FILTER_VALIDATE_URL)) {
-            return true;
-        }
-
-        return false;
+        return (bool)filter_var($url, FILTER_VALIDATE_URL);
     }
 
     /**
@@ -250,21 +244,14 @@ class Recipe
      * @return string <key1>="value1" <key2>="value2"
      * @throws \Exception
      */
-    public static function arrayToString(array $array = [])
+    public static function arrayToString(array $array = array())
     {
-        if (!is_array($array)) {
-            throw new \Exception("Not an array");
+        $pairs = array();
+        foreach ($array as $key => $value) {
+            $pairs[] = "$key=\"$value\"";
         }
 
-        $string = '';
-
-        if (isset($array) && is_array($array) && !empty($array)) {
-            foreach ($array as $key => $value) {
-                $string .= $key . '="' . $value . '" ';
-            }
-        }
-
-        return rtrim($string, ' ');
+        return implode(' ', $pairs);
     }
 
     /**
@@ -416,11 +403,7 @@ class Recipe
      */
     public static function isHttps()
     {
-        if (isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
-            return true;
-        }
-
-        return false;
+        return isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
     }
 
     /**

@@ -11,13 +11,16 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * GetFavicon Tests.
+     * GetFavicon tests.
+     * @param string $url
+     * @param string $expectedUrl
+     * @dataProvider dp_getFavicon
      */
-    public function test_getFavicon()
+    public function test_getFavicon($url, $expectedUrl)
     {
-        $favIcon = Recipe::getFavicon('http://youtube.com/');
+        $favIcon = Recipe::getFavicon($url);
         $this->assertEquals(
-            '<img src="https://www.google.com/s2/favicons?domain=youtube.com%2F"  />',
+            '<img src="https://www.google.com/s2/favicons?domain='.$expectedUrl.'"/>',
             $favIcon
         );
     }
@@ -28,7 +31,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             'class' => 'favImg',
         ]);
         $this->assertEquals(
-            '<img src="https://www.google.com/s2/favicons?domain=youtube.com%2F" class="favImg" />',
+            '<img src="https://www.google.com/s2/favicons?domain=http%3A%2F%2Fyoutube.com%2F" class="favImg"/>',
             $favIcon
         );
     }
@@ -641,6 +644,27 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     {
         $this->expectOutputString("<pre>Array\n(\n    [0] => he\n    [1] => ll\n    [2] => oo\n)\n</pre>");
         Recipe::pr(array("he","ll","oo"));
+    }
+
+    /**
+     * @return array
+     */
+    public function dp_getFavicon()
+    {
+        return array(
+            array(
+                'http://youtube.com/',
+                'http%3A%2F%2Fyoutube.com%2F'
+            ),
+            array(
+                'http.net',
+                'http.net'
+            ),
+            array(
+                'http://youtube.com/test',
+                'http%3A%2F%2Fyoutube.com%2Ftest'
+            )
+        );
     }
 }
 // EOF
