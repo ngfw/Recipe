@@ -17,7 +17,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     {
         $favIcon = Recipe::getFavicon('http://youtube.com/');
         $this->assertEquals(
-            '<img src="http://www.google.com/s2/favicons?domain=youtube.com/"  />',
+            '<img src="https://www.google.com/s2/favicons?domain=youtube.com%2F"  />',
             $favIcon
         );
     }
@@ -28,7 +28,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             'class' => 'favImg',
         ]);
         $this->assertEquals(
-            '<img src="http://www.google.com/s2/favicons?domain=youtube.com/" class="favImg" />',
+            '<img src="https://www.google.com/s2/favicons?domain=youtube.com%2F" class="favImg" />',
             $favIcon
         );
     }
@@ -618,6 +618,29 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     {
         // man, testing this will be painful.. 
         // Just trust me, it works, ROFL
+    }
+
+   
+    public function test_ordinal()
+    {
+        
+        $ordinal = Recipe::ordinal(2);
+        $this->assertEquals($ordinal, '2nd');
+    }
+
+
+    public function test_numberOfDaysInMonth()
+    {
+        $numDaysFeb=29;
+        $numDays=Recipe::numberOfDaysInMonth(2, 2016);
+
+        $this->assertEquals($numDaysFeb, $numDays);
+    }
+
+    public function test_pr()
+    {
+        $this->expectOutputString("<pre>Array\n(\n    [0] => he\n    [1] => ll\n    [2] => oo\n)\n</pre>");
+        Recipe::pr(array("he","ll","oo"));
     }
 }
 // EOF
