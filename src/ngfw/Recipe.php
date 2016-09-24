@@ -186,6 +186,7 @@ class Recipe
     {
         if (strpos($url, 'http') !== 0) {
         $url = 'http://' . $url;
+        }
     }
 
         $feed = self::curl($url);
