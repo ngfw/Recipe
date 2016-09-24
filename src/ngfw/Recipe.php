@@ -185,9 +185,8 @@ class Recipe
     public static function rssReader($url)
     {
         if (strpos($url, 'http') !== 0) {
-        $url = 'http://' . $url;
+            $url = 'http://' . $url;
         }
-    }
 
         $feed = self::curl($url);
         $xml = simplexml_load_string($feed, 'SimpleXMLElement', LIBXML_NOCDATA);
