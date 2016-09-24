@@ -184,9 +184,9 @@ class Recipe
      */
     public static function rssReader($url)
     {
-        if (strpos($url, 'http') === false) {
-            $url = 'http://' . $url;
-        }
+        if (strpos($url, 'http') !== 0) {
+        $url = 'http://' . $url;
+    }
 
         $feed = self::curl($url);
         $xml = simplexml_load_string($feed, 'SimpleXMLElement', LIBXML_NOCDATA);
@@ -1090,7 +1090,7 @@ class Recipe
      */
     public static function getTinyUrl($url)
     {
-        if (strpos($url, 'http') === false) {
+        if (strpos($url, 'http') !== 0) {
             $url = 'http://' . $url;
         }
         
