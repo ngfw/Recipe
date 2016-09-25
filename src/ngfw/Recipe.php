@@ -184,7 +184,7 @@ class Recipe
      */
     public static function rssReader($url)
     {
-        if (strpos($url, 'http') === false) {
+        if (strpos($url, 'http') !== 0) {
             $url = 'http://' . $url;
         }
 
@@ -1090,7 +1090,7 @@ class Recipe
      */
     public static function getTinyUrl($url)
     {
-        if (strpos($url, 'http') === false) {
+        if (strpos($url, 'http') !== 0) {
             $url = 'http://' . $url;
         }
         
