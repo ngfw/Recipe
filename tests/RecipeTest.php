@@ -100,7 +100,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             ]
         );
         $this->assertEquals(
-            '<img src="http://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=monsterid&size=200&rating=x" width="200px" height="200px" class="Gravatar" />',
+            '<img src="https://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=monsterid&size=200&rating=x" width="200px" height="200px" class="Gravatar" />',
             $Gravatar
         );
     }
