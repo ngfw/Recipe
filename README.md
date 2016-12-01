@@ -459,12 +459,7 @@ $AlexaRank = Recipe::getAlexaRank("github.com");
 echo $AlexaRank;
 // outputs: Current alexa ranking as position number (example: 52)
 ```
-###Get Google PageRank
-```php
-$GoogleRank = Recipe::getGooglePageRank("github.com");
-echo $GoogleRank;
-// outputs: Current google page ranking
-```
+
 ###Shorten URL
 ```php
 $TinyUrl = Recipe::getTinyUrl("https://github.com/ngfw/Recipe");
