@@ -83,7 +83,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     {
         $Gravatar = Recipe::getGravatar('gejadze@gmail.com');
         $this->assertEquals(
-            '<img src="http://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=mm&size=80&rating=g" width="80px" height="80px"  />',
+            '<img src="https://www.gravatar.com/avatar.php?gravatar_id=9d9d478c3b65d4046a84cf84b4c8bf46&default=mm&size=80&rating=g" width="80px" height="80px"  />',
             $Gravatar
         );
     }
