@@ -40,7 +40,6 @@ Table of Contents
 * [CURL](#curl)
 * [Shorten URL](#shorten-url)
 * [Get Alexa Rank](#ge-alexa-rank)
-* [Get Google PageRank](#get-google-pagerank)
 * [Get Tiny URL](#get-tiny-url)
 * [Get Keyword Suggestions From Google](#get-keyword-suggestions-from-google)
 * [WIKI Search](#wiki-search)
