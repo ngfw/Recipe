@@ -77,10 +77,7 @@ class Recipe
     {
         $attr = trim(self::arrayToString($attributes));
 
-        $url = 'http://www.gravatar.com/';
-        if (self::isHttps()) {
-            $url = 'https://secure.gravatar.com/';
-        }
+        $url = 'https://www.gravatar.com/';
 
         return sprintf(
             "<img src=\"%savatar.php?gravatar_id=%s&default=%s&size=%s&rating=%s\" width=\"%spx\" height=\"%spx\" %s />",
