@@ -512,15 +512,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('int', $AlexaRank);
     }
 
-    /**
-     * Get Google Page Rank.
-     */
-    public function test_getGooglePageRank()
-    {
-        $GooglePageRank = Recipe::getGooglePageRank('github.com');
-        $this->assertInternalType('int', $GooglePageRank);
-    }
-
+  
     /**
      * Shorten the URL.
      */
