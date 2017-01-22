@@ -12,6 +12,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
 
     /**
      * GetFavicon tests.
+     *
      * @param string $url
      * @param string $expectedUrl
      * @dataProvider dp_getFavicon
@@ -512,7 +513,6 @@ class RecipeTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('int', $AlexaRank);
     }
 
-  
     /**
      * Shorten the URL.
      */
@@ -611,23 +611,20 @@ class RecipeTest extends PHPUnit_Framework_TestCase
 
     public function test_compressPage()
     {
-        // man, testing this will be painful.. 
+        // man, testing this will be painful..
         // Just trust me, it works, ROFL
     }
 
-   
     public function test_ordinal()
     {
-        
         $ordinal = Recipe::ordinal(2);
         $this->assertEquals($ordinal, '2nd');
     }
 
-
     public function test_numberOfDaysInMonth()
     {
-        $numDaysFeb=29;
-        $numDays=Recipe::numberOfDaysInMonth(2, 2016);
+        $numDaysFeb = 29;
+        $numDays = Recipe::numberOfDaysInMonth(2, 2016);
 
         $this->assertEquals($numDaysFeb, $numDays);
     }
@@ -635,7 +632,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     public function test_pr()
     {
         $this->expectOutputString("<pre>Array\n(\n    [0] => he\n    [1] => ll\n    [2] => oo\n)\n</pre>");
-        Recipe::pr(array("he","ll","oo"));
+        Recipe::pr(['he', 'll', 'oo']);
     }
 
     /**
@@ -643,20 +640,20 @@ class RecipeTest extends PHPUnit_Framework_TestCase
      */
     public function dp_getFavicon()
     {
-        return array(
-            array(
+        return [
+            [
                 'http://youtube.com/',
-                'http%3A%2F%2Fyoutube.com%2F'
-            ),
-            array(
+                'http%3A%2F%2Fyoutube.com%2F',
+            ],
+            [
                 'http.net',
-                'http.net'
-            ),
-            array(
+                'http.net',
+            ],
+            [
                 'http://youtube.com/test',
-                'http%3A%2F%2Fyoutube.com%2Ftest'
-            )
-        );
+                'http%3A%2F%2Fyoutube.com%2Ftest',
+            ],
+        ];
     }
 }
 // EOF
