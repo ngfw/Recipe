@@ -201,7 +201,7 @@ class Recipe
     public static function objectToArray($object)
     {
         if (is_object($object)) {
-            return (array) $object;
+            return json_decode(json_encode($object), true);
         } else {
             throw new \Exception("Not an object");
         }
