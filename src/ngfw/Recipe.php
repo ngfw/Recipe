@@ -315,14 +315,19 @@ class Recipe
     /**
      * Generate Simple Random Password.
      *
-     * @param int $length length of generated password, default 8
+     * @param int    $length         length of generated password, default 8
+     * @param string $customAlphabet a custom alphabet string
      *
      * @return string Generated Password
      */
-    public static function generateRandomPassword($length = 8)
+    public static function generateRandomPassword($length = 8, $customAlphabet = null)
     {
         $pass = [];
-        $alphabet = 'abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789';
+        if (strlen(trim($customAlphabet))) {
+            $alphabet = trim($customAlphabet);
+        } else {
+            $alphabet = 'abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789';
+        }
 
         $alphaLength = strlen($alphabet) - 1;
         for ($i = 0; $i < $length; ++$i) {
