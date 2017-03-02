@@ -241,7 +241,7 @@ class Recipe
     /**
      * Convert Array to string.
      *
-     * @param array $array array to convert to string
+     * @param array  $array     array to convert to string
      * @param string $delimiter
      *
      * @throws \Exception
