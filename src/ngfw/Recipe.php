@@ -233,9 +233,9 @@ class Recipe
                     $object->{$name} = $value;
                 }
             }
-
-            return $object;
         }
+
+        return $object;
     }
 
     /**
