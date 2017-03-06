@@ -103,7 +103,7 @@ class Recipe
      */
     public static function createLinkTag($link, $text = '', $attributes = [])
     {
-        $linkTag = '<a href="'.$link.'"';
+        $linkTag = '<a href="'.urlencode($link).'"';
 
         if (self::validateEmail($link)) {
             $linkTag = '<a href="mailto:'.$link.'"';
