@@ -1,4 +1,5 @@
 <?php
+
 namespace ngfw;
 
 class Recipe
@@ -1358,30 +1359,34 @@ class Recipe
     }
 
     /**
-     * Sanitize FileName from special chart
+     * Sanitize FileName from special chart.
      *
      * @method sanitizeFileName
-     * @param  string   $filename filename to sanitize
      *
-     * @return string   Sanitized filename
+     * @param string $filename filename to sanitize
+     *
+     * @return string Sanitized filename
      */
     public static function sanitizeFileName($filename)
     {
-        return str_replace(array(" ", '"', "'", "&", "/", "\\", "?", "#"), '_', $filename);
+        return str_replace([' ', '"', "'", '&', '/', '\\', '?', '#'], '_', $filename);
     }
 
     /**
-     * Converts bytes to human readable size
+     * Converts bytes to human readable size.
      *
      * @method bytesToHumanReadableSize
-     * @param  int          $size      Size in bytes
-     * @param  integer      $precision returned value precision
      *
-     * @return string       Human readable size
+     * @param int $size      Size in bytes
+     * @param int $precision returned value precision
+     *
+     * @return string Human readable size
      */
     public static function bytesToHumanReadableSize($size, $precision = 2)
     {
-        for($i = 0; ($size / 1024) > 0.9; $i++, $size /= 1024) {}
-        return round($size, $precision)." ".['B','KB','MB','GB','TB','PB','EB','ZB','YB'][$i];
+        for ($i = 0; ($size / 1024) > 0.9; $i++, $size /= 1024) {
+        }
+
+        return round($size, $precision).' '.['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'][$i];
     }
 }
