@@ -1,5 +1,5 @@
 # Recipe :book:
-####Collection of PHP Functions
+#### Collection of PHP Functions
 
 ![](https://travis-ci.org/ngfw/Recipe.svg?branch=master) ![](https://img.shields.io/packagist/v/ngfw/recipe.svg?maxAge=259120) ![](https://img.shields.io/badge/code-awesome-brightgreen.svg?maxAge=2592100) ![](https://img.shields.io/badge/language-PHP-blue.svg?maxAge=2592000) [![StyleCI](https://styleci.io/repos/65232201/shield?branch=master)](https://styleci.io/repos/65232201)
 
@@ -49,12 +49,14 @@ Table of Contents
 * [🔧 Debug](#debug)
 * [Get Referer](#get-referer)
 * [Compress Page](#compress-page)
-* [Ordinal](#ordinal) 🆕
-* [Number Of Days In Month](#number-of-days-in-month) 🆕
-* [pr](#pr) 🆕
+* [Ordinal](#ordinal)
+* [Number Of Days In Month](#number-of-days-in-month)
+* [pr](#pr) 
+* [Bytes To Human Readable Size](#bytes-to-human-readable-size) 🆕
+
 
 ---
-###Quick Start
+### Quick Start
 Run in your terminal:
 ```bash
 composer require ngfw/recipe
@@ -85,7 +87,7 @@ print_r($suggestion);
 //    [9] => homeland
 //)
 ```
-###Favicon
+### Favicon
 Getting remote website Favicon:
 ```php
 $favIcon = Recipe::getFavicon("http://youtube.com/");
@@ -110,7 +112,7 @@ echo $favIcon;
 <img src="https://www.google.com/s2/favicons?domain=youtube.com/" class="favImg" />
 
 
-###QRcode
+### QRcode
 Generating QR code
 ```php
 $QRcode = Recipe::getQRcode("ngfw Recipe");
@@ -135,14 +137,14 @@ echo $QRcode;
 <img src="http://chart.apis.google.com/chart?chs=350x350&cht=qr&chl=ngfw+Recipe" class="QRCode" />
 
 
-###File extension
+### File extension
 ```php
 $ext = Recipe::getFileExtension(__FILE__); // replace '__FILE__' with your filename
 echo $ext;
 //outputs: php
 ```
 
-###Gravatar
+### Gravatar
 Getting Gravatar:
 ```php
 $Gravatar = Recipe::getGravatar("gejadze@gmail.com");
@@ -170,7 +172,7 @@ echo $Gravatar;
 
 
 
-###Creating Link Tags
+### Creating Link Tags
 Simple Link:
 ```php
 $linkTags = Recipe::createLinkTag("google.com");
@@ -195,7 +197,7 @@ echo $linkTags;
 ```
 
 
-### Validate email address
+###  Validate email address
 ```php
 $isValid = Recipe::validateEmail("user@gmail.com");
 var_dump($isValid);
@@ -210,21 +212,21 @@ var_dump($isValid);
 // outputs: false (bool)
 ```
 
-### Validate URL
+###  Validate URL
 ```php
 $isValid = Recipe::validateURL("http://github.com/");
 var_dump($isValid);
 // outputs: true (bool)
 ```
 
-### RSS Reader
+###  RSS Reader
 ```php
 $rssArray = Recipe::rssReader("https://github.com/ngfw/Recipe/commits/master.atom");
 var_dump($rssArray);
 // Outputs feed as an array
 ```
 
-### Object to Array
+###  Object to Array
 ```php
 $obj = new stdClass;
 $obj->foo = 'bar';
@@ -242,7 +244,7 @@ var_dump($array);
 
 ```
 
-###Array to Object
+### Array to Object
 ```php
 $array = array(
     "foo" => "bar",
@@ -257,7 +259,7 @@ $obj = Recipe::arrayToObject($array);
 //   string(3) "qux"
 // }
 ```
-###Array to String
+### Array to String
 ```php
 $array = array(
     "foo" => "bar",
@@ -267,49 +269,49 @@ $string = Recipe::arrayToString($array);
 echo $string;
 // outputs: foo="bar" baz="qux"
 ```
-###HEX to RGB
+### HEX to RGB
 ```php
 $rgb = Recipe::hex2rgb("#FFF");
 echo $rgb;
 // outputs: rgb(255, 255, 255)
 ```
-###RGB to HEX
+### RGB to HEX
 ```php
 $hex = Recipe::rgb2hex("rgb(123,123,123)");
 // outputs: #7b7b7b
 ```
-###Generate Random Password
+### Generate Random Password
 ```php
 $randomPass = Recipe::generateRandomPassword(10);
 echo $randomPass;
 // outputs: 10 random character string
 ```
-###Simple Encode
+### Simple Encode
 ```php
 $encodedString = Recipe::simpleEncode("php recipe");
 echo $encodedString;
 // outputs: qcnVhqjKxpuilw==
 ```
-###Simple Decode
+### Simple Decode
 ```php
 $decodedString = Recipe::simpleDecode("qcnVhqjKxpuilw==");
 echo $decodedString;
 // outputs: php recipe
 ```
-###Generate Server Specific Hash
+### Generate Server Specific Hash
 ```php
 $serverHash = Recipe::generateServerSpecificHash();
 echo $serverHash;
 // outputs: d41d8cd98f00b204e9800998ecf8427e
 ```
-###Detect HTTPS
+### Detect HTTPS
 This method checks for `$_SERVER['HTTPS']`
 ```php
 $isHttps = Recipe::isHttps();
 var_dump($isHttps);
 // outputs: bool
 ```
-###Detect AJAX
+### Detect AJAX
 This method checks for `$_SERVER['HTTP_X_REQUESTED_WITH']`
 ```php
 $isAjax = Recipe::isAjax();
@@ -317,24 +319,24 @@ var_dump($isAjax);
 // outputs: bool
 ```
 
-###Check if number is odd
+### Check if number is odd
 ```php
 $isNumberOdd = Recipe::isNumberOdd(5);
 // outputs: bool
 ```
-###Check if number is even
+### Check if number is even
 ```php
 $isNumberEven = Recipe::isNumberEven(8);
 var_dump($isNumberEven);
 // outputs: bool
 ```
-###Get Current URL
+### Get Current URL
 ```php
 $currentURL = Recipe::getCurrentURL();
 var_dump($currentURL);
 // outputs: current Request URL
 ```
-###Get Client IP
+### Get Client IP
 ```php
 $ClientsIP = Recipe::getClientIP();
 echo $ClientsIP;
@@ -343,32 +345,32 @@ echo $ClientsIP;
 //$ClientsIP = Recipe::getClientIP("HTTP_CLIENT_IP"); //'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED', ...
 // outputs: IP address
 ```
-###Detect Mobile
+### Detect Mobile
 ```php
 $isMobile = Recipe::isMobile();
 var_dump($isMobile);
 // outputs: true or false
 ```
-###Get Browser
+### Get Browser
 ```php
 $Browser = Recipe::getBrowser();
 echo $Browser
 // outputs: Browser Details
 ```
-###Get Client Location
+### Get Client Location
 ```php
 $user_location = Recipe::getClientLocation();
 echo $user_location;
 // outputs: Users Location
 ```
-###Number To Word conversion
+### Number To Word conversion
 ```php
 $number = "864210";
 $number_in_words = Recipe::numberToWord($number);
 echo $number_in_words;
 // outputs: eight hundred and sixty-four thousand, two hundred and ten
 ```
-###Seconds To Text
+### Seconds To Text
 ```php
 $seconds = "864210";
 $number_in_words = Recipe::secondsToText($seconds);
@@ -377,7 +379,7 @@ echo $number_in_words;
 // Recipe::secondsToText($seconds, $returnAsWords = true);
 // will return: one hour and ten seconds
 ```
-###Minutes To Text
+### Minutes To Text
 ```php
 $minutes  = 60 * 24 * 2;
 $duration = Recipe::minutesToText($minutes);
@@ -386,7 +388,7 @@ echo $duration;
 // Recipe::minutesToText($minutes, $returnAsWords = true);
 // will return: two days
 ```
-###Hours To Text
+### Hours To Text
 ```php
 $hours    = 4.2;
 $duration = Recipe::hoursToText($hours);
@@ -395,7 +397,7 @@ echo $duration;
 // Recipe::hoursToText($hours, $returnAsWords = true);
 // will return: four hours and twelve minutes
 ```
-###Shorten String
+### Shorten String
 ```php
 $string        = "The quick brown fox jumps over the lazy dog";
 $shortenString = Recipe::shortenString($string, 20);
@@ -405,7 +407,7 @@ $shortenString = Recipe::shortenString($string, 20);
 // Recipe::shortenString($string, 20, $addEllipsis = false, $wordsafe = true);
 // output: "The quick brown fox", NOTE, will not break in the middle of the word
 ```
-###CURL
+### CURL
 
 Simple GET example:
 ```php
@@ -446,27 +448,27 @@ $curlBasicAuth = Recipe::curl(
     )
 );
 ```
-###Expand Short URL
+### Expand Short URL
 ```php
 $shortURL = "https://goo.gl/rvDnMX";
 $expandedURL = Recipe::expandShortUrl($shortURL);
 echo $expendedURL;
 // outputs: https://github.com/ngfw/Recipe
 ```
-###Get Alexa Rank
+### Get Alexa Rank
 ```php
 $AlexaRank = Recipe::getAlexaRank("github.com");
 echo $AlexaRank;
 // outputs: Current alexa ranking as position number (example: 52)
 ```
 
-###Shorten URL
+### Shorten URL
 ```php
 $TinyUrl = Recipe::getTinyUrl("https://github.com/ngfw/Recipe");
 echo $TinyUrl;
 // outputs: http://tinyurl.com/h2nchjh
 ```
-###Get Keyword Suggestions From Google
+### Get Keyword Suggestions From Google
 ```php
 $suggestions = Recipe::getKeywordSuggestionsFromGoogle("Tbilisi, Georgia");
 var_dump($suggestions);
@@ -494,13 +496,13 @@ var_dump($suggestions);
 //  string(28) "tbilisi georgia airport code"
 //}
 ```
-###WIKI Search
+### WIKI Search
 ```php
 $wiki = Recipe::wikiSearch("Tbilisi");
 var_dump($wiki);
 // outputs: data from wikipedia
 ```
-###Notification
+### Notification
 ```php
 $notification = Recipe::notification("Test Successful");
 echo $notification;
@@ -508,7 +510,7 @@ echo $notification;
 // NOTE: possible notifications types: success, warning, error and info
 // Type is passed as a second parameter
 ```
-###Auto Embed
+### Auto Embed
 ```php
 $string = "Checkout Solomun, Boiler Room at https://www.youtube.com/watch?v=bk6Xst6euQk";
 echo Recipe::autoEmbed($string);
@@ -516,7 +518,7 @@ echo Recipe::autoEmbed($string);
 // Checkout Solomun, Boiler Room at<iframe width="560" height="315" src="https://www.youtube.com/embed/bk6Xst6euQk?feature=oembed" frameborder="0" allowfullscreen></iframe>
 // supported providers are: youtube.com, blip.tv, vimeo.com, dailymotion.com, flickr.com, smugmug.com, hulu.com, revision3.com, wordpress.tv, funnyordie.com, soundcloud.com, slideshare.net and instagram.com
 ```
-###Make Clickable Links
+### Make Clickable Links
 ```php
 $string = "Check PHP Recipes on https://github.com/ngfw/Recipe";
 $clickable = Recipe::makeClickableLinks($string);
@@ -524,7 +526,7 @@ echo $clickable;
 // outputs:
 // Check PHP Recipes on <a href="https://github.com/ngfw/Recipe" >https://github.com/ngfw/Recipe</a>
 ```
-###Debug
+### Debug
 `var_dump()` alternative
 ```php
 $string = "Test me";
@@ -532,7 +534,7 @@ Recipe::debug($string);
 ```
 
 
-###Get Referer
+### Get Referer
 Get the referer page (last page visited)
 ```php
 $referrer = Recipe::getReferer();
@@ -541,7 +543,7 @@ echo $referer ;
 ```
 
 
-###Ordinal
+### Ordinal
 ```php
 for($i=1;$i<=10;$i++){ 
     echo Recipe::ordinal($i);
@@ -551,14 +553,14 @@ for($i=1;$i<=10;$i++){
 
 ```
 
-###Number Of Days In Month
+### Number Of Days In Month
 ```php
 $numDays = Recipe::numberOfDaysInMonth(2, 2012);
 echo $numDays;
 // outputs: 29
 ```
 
-###Compress Page
+### Compress Page
 The `compressPage()` method will register new function on PHP shutdown, remove white space from output and try to gZip it.
 
 ```php
@@ -588,7 +590,7 @@ will output:
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>HTML Page Title</title><meta name="description" content=""><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body> Hello Friend,</body></html>
 ```
 
-###PR 
+### PR 
 ```php
 Recipe::pr( array("he","ll","oo") );
 ```
@@ -601,4 +603,14 @@ will output:
     [2] => oo
 )
 </pre>
+```
+
+
+### Bytes To Human Readable Size
+```php
+Recipe::test_bytesToHumanReadableSize( "17179869184" );
+```
+will output:
+```html
+16 GB
 ```
