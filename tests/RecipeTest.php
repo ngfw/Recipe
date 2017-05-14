@@ -634,11 +634,11 @@ class RecipeTest extends PHPUnit_Framework_TestCase
         $this->expectOutputString("<pre>Array\n(\n    [0] => he\n    [1] => ll\n    [2] => oo\n)\n</pre>");
         Recipe::pr(['he', 'll', 'oo']);
     }
-    
+
     public function test_bytesToHumanReadableSize()
     {
-        $this->expectOutputString("16 GB");
-        Recipe::bytesToHumanReadableSize("17179869184");
+        $this->expectOutputString('16 GB');
+        Recipe::bytesToHumanReadableSize('17179869184');
     }
 
     /**
