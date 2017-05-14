@@ -146,7 +146,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
         $isValid = Recipe::validateEmail('user@gmail.com');
         $this->assertTrue($isValid);
 
-        $isValid = Recipe::validateEmail('user@fakeinbox.com', $tempEmailAllowed = true);
+        $isValid = Recipe::validateEmail('user@fakemail.fr', $tempEmailAllowed = true);
         $this->assertTrue($isValid);
     }
 
@@ -637,8 +637,8 @@ class RecipeTest extends PHPUnit_Framework_TestCase
 
     public function test_bytesToHumanReadableSize()
     {
-        $this->expectOutputString('16 GB');
-        Recipe::bytesToHumanReadableSize('17179869184');
+        $HumanReadable = Recipe::bytesToHumanReadableSize('17179869184');
+        $this->assertEquals($HumanReadable, '16 GB');
     }
 
     /**
