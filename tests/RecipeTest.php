@@ -639,10 +639,6 @@ class RecipeTest extends PHPUnit_Framework_TestCase
     {
         $this->expectOutputString("16 GB");
         Recipe::bytesToHumanReadableSize("17179869184");
-    }()
-    {
-        $this->expectOutputString("16 GB");
-        Recipe::bytesToHumanReadableSize("17179869184");
     }
 
     /**
