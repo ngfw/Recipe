@@ -608,7 +608,7 @@ will output:
 
 ### Bytes To Human Readable Size
 ```php
-Recipe::test_bytesToHumanReadableSize( "17179869184" );
+Recipe::bytesToHumanReadableSize( "17179869184" );
 ```
 will output:
 ```html
