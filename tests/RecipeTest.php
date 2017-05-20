@@ -470,6 +470,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
      */
     public function test_curl()
     {
+        $ipCheck = false;
         $testCurl = Recipe::curl('https://api.ipify.org');
         if (filter_var($testCurl, FILTER_VALIDATE_IP)) {
             $ipCheck = true;
