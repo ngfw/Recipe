@@ -19,7 +19,7 @@ Table of Contents
 * [Array to String](#array-to-string)
 * [HEX to RGB](#hex-to-rgb)
 * [RGB to HEX](#rgb-to-hex)
-* [Color Name to HEX]($color-name-to-hex)
+* [Color Name to HEX](#color-name-to-hex)
 * [Generate Random Password](#generate-random-password)
 * [Simple Encode](#simple-encode)
 * [Simple Decode](#simple-decode)
