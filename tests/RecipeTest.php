@@ -663,5 +663,10 @@ class RecipeTest extends PHPUnit_Framework_TestCase
             ],
         ];
     }
+    
+    public function text_colorNameToHex(){
+        $colorHex = Recipe::colorNameToHex('red');
+        $this->assertEquals($colorHex, '#FF0000');
+    }
 }
 // EOF
