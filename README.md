@@ -521,7 +521,7 @@ echo $notification;
 $string = "Checkout Solomun, Boiler Room at https://www.youtube.com/watch?v=bk6Xst6euQk";
 echo Recipe::autoEmbed($string);
 // outputs:
-// Checkout Solomun, Boiler Room at<iframe width="560" height="315" src="https://www.youtube.com/embed/bk6Xst6euQk?feature=oembed" frameborder="0" allowfullscreen></iframe>
+// Checkout Solomun, Boiler Room at<iframe width="560" height="315" src="https://www.youtube.com/embed/bk6Xst6euQk?feature=oembed" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 // supported providers are: youtube.com, blip.tv, vimeo.com, dailymotion.com, flickr.com, smugmug.com, hulu.com, revision3.com, wordpress.tv, funnyordie.com, soundcloud.com, slideshare.net and instagram.com
 ```
 ### Make Clickable Links
