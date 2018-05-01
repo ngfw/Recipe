@@ -570,7 +570,7 @@ class RecipeTest extends PHPUnit_Framework_TestCase
         $string = 'Checkout Solomun, Boiler Room at https://www.youtube.com/watch?v=bk6Xst6euQk';
         $converted = Recipe::autoEmbed($string);
         $this->assertEquals(
-            'Checkout Solomun, Boiler Room at<iframe width="560" height="315" src="https://www.youtube.com/embed/bk6Xst6euQk?feature=oembed" frameborder="0" allowfullscreen></iframe>',
+            'Checkout Solomun, Boiler Room at<iframe width="560" height="315" src="https://www.youtube.com/embed/bk6Xst6euQk?feature=oembed" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
             $converted
         );
     }
