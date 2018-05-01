@@ -19,6 +19,7 @@ Table of Contents
 * [Array to String](#array-to-string)
 * [HEX to RGB](#hex-to-rgb)
 * [RGB to HEX](#rgb-to-hex)
+* [Color Name to HEX]($color-name-to-hex)
 * [Generate Random Password](#generate-random-password)
 * [Simple Encode](#simple-encode)
 * [Simple Decode](#simple-decode)
@@ -52,7 +53,7 @@ Table of Contents
 * [Ordinal](#ordinal)
 * [Number Of Days In Month](#number-of-days-in-month)
 * [pr](#pr) 
-* [Bytes To Human Readable Size](#bytes-to-human-readable-size) 🆕
+* [Bytes To Human Readable Size](#bytes-to-human-readable-size) 
 
 
 ---
@@ -279,6 +280,11 @@ echo $rgb;
 ```php
 $hex = Recipe::rgb2hex("rgb(123,123,123)");
 // outputs: #7b7b7b
+```
+### Color Name to HEX
+```php
+$hex = Recipe::colorNameToHex('red');
+// outputs: #FF0000
 ```
 ### Generate Random Password
 ```php
