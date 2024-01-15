@@ -1405,4 +1405,46 @@ class Recipe
 
         return round($size, $precision).' '.['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'][$i];
     }
+
+    /**
+    *Converts numbers to Hebrew numerals 
+    *
+    * @param int any number between 1 and 500 
+    *
+    * @return hebrew numeral
+    */
+    public static function numToHebrew($num) {
+    $hebrew_numerals = explode(" ", "א ב ג ד ה ו ז ח ט ");
+    $tens = array("", "י", "כ", "ל", "מ", "נ", "ס", "ע", "פ", "צ");
+    $hundreds = array("", "ק", "ר", "ש", "ת");
+
+    $hebrew = "";
+
+    // Handle special cases for 15 and 16
+    if ($num == 15) {
+        return "ט״ו";
+    }
+    if ($num == 16) {
+        return "ט״ז";
+    }
+
+    // Calculate hundreds
+    while ($num >= 100) {
+        $hebrew .= $hundreds[intval($num / 100)];
+        $num %= 100;
+    }
+
+    // Calculate tens
+    if ($num >= 10) {
+        $hebrew .= $tens[intval($num / 10)];
+        $num %= 10;
+    }
+
+    // Calculate ones
+    if ($num > 0) {
+        $hebrew .= $hebrew_numerals[$num - 1];
+    }
+
+    return $hebrew;
+}
 }
